@@ -1,14 +1,14 @@
 /**
  * 
  */
-package com.rs.webretail.b2c.estore.dao.impl;
+package com.rsinc.webretail.b2c.estore.dao.impl;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.rs.webretail.b2c.estore.dao.UserDao;
+import com.rsinc.webretail.b2c.estore.dao.UserDao;
 
 /**
  * @author Roshan Titus

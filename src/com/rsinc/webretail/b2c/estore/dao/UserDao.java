@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.rs.webretail.b2c.estore.dao;
+package com.rsinc.webretail.b2c.estore.dao;
 
 import java.util.List;
 

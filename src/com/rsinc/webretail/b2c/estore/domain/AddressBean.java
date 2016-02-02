@@ -1,18 +1,18 @@
 /**
  * 
  */
-package com.rs.webretail.b2c.estore.domain;
+package com.rsinc.webretail.b2c.estore.domain;
 
 /**
  * @author Roshan Titus
  *
  */
-public class RoleBean extends BaseBean {
+public class AddressBean extends BaseBean {
 
 	/**
 	 * 
 	 */
-	public RoleBean() {
+	public AddressBean() {
 		// TODO Auto-generated constructor stub
 	}
 

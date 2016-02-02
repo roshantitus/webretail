@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.rs.webretail.b2c.estore.domain;
+package com.rsinc.webretail.b2c.estore.domain;
 
 import java.util.Date;
 

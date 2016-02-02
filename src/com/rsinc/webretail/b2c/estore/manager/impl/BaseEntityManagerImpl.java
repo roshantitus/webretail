@@ -1,18 +1,18 @@
 /**
  * 
  */
-package com.rs.webretail.b2c.estore.domain;
+package com.rsinc.webretail.b2c.estore.manager.impl;
 
 /**
  * @author Roshan Titus
  *
  */
-public class AddressBean extends BaseBean {
+public class BaseEntityManagerImpl {
 
 	/**
 	 * 
 	 */
-	public AddressBean() {
+	public BaseEntityManagerImpl() {
 		// TODO Auto-generated constructor stub
 	}
 
