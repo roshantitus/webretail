@@ -3,14 +3,19 @@
  */
 package com.rsinc.webretail.b2c.estore.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author Roshan Titus
  *
  */
-public class BaseBean {
+public class BaseBean implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -302972352018750735L;
 	private Long createdBy;
 	private Date createdDate;
 	private Long updatedBy;

@@ -12,6 +12,10 @@ import java.util.List;
  */
 public class UserBean extends BaseBean {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -438375391659822777L;
 	private Long userId;
 	private PartyBean party;
 	private AuthenticationBean authentication;
