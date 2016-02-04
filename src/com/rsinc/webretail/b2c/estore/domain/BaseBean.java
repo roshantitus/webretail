@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author Roshan Titus
+ * @author Roshan Titus 
  *
  */
 public class BaseBean implements Serializable{
@@ -51,10 +51,10 @@ public class BaseBean implements Serializable{
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
 	}
-	public int getRecordVersionNo() {
+	public Integer getRecordVersionNo() {
 		return recordVersionNo;
 	}
-	public void setRecordVersionNo(int recordVersionNo) {
+	public void setRecordVersionNo(Integer recordVersionNo) {
 		this.recordVersionNo = recordVersionNo;
 	}
 	public Boolean getDeletedYN() {

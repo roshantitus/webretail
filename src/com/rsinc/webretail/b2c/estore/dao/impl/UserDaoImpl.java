@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContext;
 import com.rsinc.webretail.b2c.estore.dao.UserDao;
 
 /**
- * @author Roshan Titus
+ * @author Roshan Titus 
  *
  */
 public class UserDaoImpl<T> extends BaseDaoImpl<T> implements UserDao<T>{

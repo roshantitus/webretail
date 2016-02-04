@@ -7,7 +7,7 @@ import java.util.List;
 
 
 /**
- * @author Roshan Titus
+ * @author Roshan Titus 
  *
  */
 public class UserBean extends BaseBean {

@@ -4,7 +4,7 @@
 package com.rsinc.webretail.b2c.estore.domain;
 
 /**
- * @author Roshan Titus
+ * @author Roshan Titus 
  *
  */
 public class AuthenticationBean extends BaseBean {

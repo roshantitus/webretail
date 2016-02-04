@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
 import com.rsinc.webretail.b2c.estore.dao.BaseDao;
 
 /**
- * @author Roshan Titus
+ * @author Roshan Titus 
  *
  */
 public abstract class BaseDaoImpl<T> implements BaseDao<T> {
