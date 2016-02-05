@@ -16,7 +16,7 @@ import com.rsinc.webretail.b2c.estore.dao.UserDao;
  */
 public class UserDaoImpl<T> extends BaseDaoImpl<T> implements UserDao<T>{
 
-	@PersistenceContext(unitName="shop_ds")
+	@PersistenceContext
 	private EntityManager entityManager;
 	
 	@Override

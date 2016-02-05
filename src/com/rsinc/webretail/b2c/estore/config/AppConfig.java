@@ -13,14 +13,14 @@ import org.springframework.context.annotation.Import;
  *
  */
 @Configuration
-@Import(DatabaseConfig.class)
+@Import(PersistenceJPAConfig.class)
 public class AppConfig {
 
 	@Inject
-	DatabaseConfig dataConfig;
+	PersistenceJPAConfig dataConfig;
 	
 //	@Bean
-//    public MyBean myBean() {
-//        // instantiate, configure and return bean ...
+//    public UserDao<T> userDao() {
+//        
 //    }
 }

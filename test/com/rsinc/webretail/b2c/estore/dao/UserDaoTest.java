@@ -5,11 +5,12 @@ package com.rsinc.webretail.b2c.estore.dao;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.rsinc.webretail.b2c.estore.config.AppConfig;
-import com.rsinc.webretail.b2c.estore.config.DatabaseConfig;
+import com.rsinc.webretail.b2c.estore.domain.UserBean;
 
 import junit.framework.Assert;
 
@@ -18,12 +19,24 @@ import junit.framework.Assert;
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes={AppConfig.class, DatabaseConfig.class})
+@ContextConfiguration(classes={AppConfig.class})
 public class UserDaoTest {
 
+	@Autowired
+	private UserDao<UserBean> userDao;
+	
 	@Test
-	public void testDummy()
+	public void testCreate()
 	{
-		Assert.fail("Not implemented!");
+		UserBean userBean = getUser();
+		userDao.create(userBean);
+	}
+
+	/**
+	 * @return
+	 */
+	private UserBean getUser() {
+		UserBean userBean = new UserBean();
+		return userBean;
 	}
 }

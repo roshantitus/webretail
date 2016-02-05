@@ -3,6 +3,8 @@
  */
 package com.rsinc.webretail.b2c.estore.manager.impl;
 
+import javax.inject.Inject;
+
 import com.rsinc.webretail.b2c.estore.dao.BaseDao;
 import com.rsinc.webretail.b2c.estore.dao.UserDao;
 import com.rsinc.webretail.b2c.estore.domain.UserBean;
@@ -20,6 +22,7 @@ public class UserEntityManagerImpl extends BaseEntityManagerImpl<UserBean> imple
 	/**
 	 * 
 	 */
+	@Inject
 	private UserDao<UserBean> userDao;
 	
 	public UserEntityManagerImpl() {
