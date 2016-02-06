@@ -5,6 +5,7 @@ package com.rsinc.webretail.b2c.estore.config;
 
 import javax.inject.Inject;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -13,11 +14,12 @@ import org.springframework.context.annotation.Import;
  *
  */
 @Configuration
-@Import(PersistenceJPAConfig.class)
+@Import(DataConfig.class)
+@ComponentScan({ "com.rsinc.webretail.b2c.estore.manager" })
 public class AppConfig {
 
 	@Inject
-	PersistenceJPAConfig dataConfig;
+	DataConfig dataConfig;
 	
 //	@Bean
 //    public UserDao<T> userDao() {

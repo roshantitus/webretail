@@ -13,5 +13,5 @@ import org.springframework.stereotype.Service;
 public interface EStoreUserService extends EStoreService{
 
 	//UserBean registerUser(UserBean user);
-
+	//void addItemsToCart(items);
 }

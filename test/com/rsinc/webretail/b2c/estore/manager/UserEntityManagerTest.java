@@ -1,7 +1,10 @@
 /**
  * 
  */
-package com.rsinc.webretail.b2c.estore.dao;
+package com.rsinc.webretail.b2c.estore.manager;
+
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.fail;
 
 import javax.transaction.Transactional;
 
@@ -14,8 +17,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.rsinc.webretail.b2c.estore.config.AppConfig;
 import com.rsinc.webretail.b2c.estore.domain.UserBean;
 
-import static junit.framework.Assert.*;
-
 /**
  * @author Roshan Titus
  *
@@ -23,17 +24,17 @@ import static junit.framework.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={AppConfig.class})
 @Transactional
-public class UserDaoTest {
+public class UserEntityManagerTest {
 
 	@Autowired
-	private UserDao<UserBean> userDao;
+	private UserEntityManager userEntityManager;
 	
 	@Test
-	public void testCreate()
+	public void testCreateUser()
 	{
 		try {
 			UserBean userBean = getUser();
-			userDao.create(userBean);
+			userEntityManager.create(userBean);
 			
 			assertNotNull(userBean.getUserId());
 			System.out.println(userBean.getUserId());
@@ -42,14 +43,9 @@ public class UserDaoTest {
 			fail(e.getMessage());
 		}
 	}
-
-	/**
-	 * @return
-	 */
+	
 	private UserBean getUser() {
 		UserBean userBean = new UserBean();
-		userBean.setStatus("NEW");
-		userBean.setLocaleCode("en_US");
 		return userBean;
-	}
+	}	
 }
