@@ -14,23 +14,33 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.rsinc.webretail.b2c.estore.config.AppConfig;
 import com.rsinc.webretail.b2c.estore.domain.UserBean;
 
+import static junit.framework.Assert.*;
+
 /**
  * @author Roshan Titus
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={AppConfig.class})
+@Transactional
 public class UserDaoTest {
 
 	@Autowired
 	private UserDao<UserBean> userDao;
 	
 	@Test
-	@Transactional
 	public void testCreate()
 	{
-		UserBean userBean = getUser();
-		userDao.create(userBean);
+		try {
+			UserBean userBean = getUser();
+			userDao.create(userBean);
+			
+			assertNotNull(userBean.getUserId());
+			System.out.println(userBean.getUserId());
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
 	}
 
 	/**
@@ -38,6 +48,8 @@ public class UserDaoTest {
 	 */
 	private UserBean getUser() {
 		UserBean userBean = new UserBean();
+		userBean.setStatus("NEW");
+		userBean.setLocaleCode("en_US");
 		return userBean;
 	}
 }

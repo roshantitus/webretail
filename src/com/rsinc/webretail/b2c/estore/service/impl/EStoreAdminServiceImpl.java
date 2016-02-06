@@ -16,7 +16,7 @@ import com.rsinc.webretail.b2c.estore.service.EStoreAdminService;
  */
 @Service
 @Transactional
-public class EStoreAdminServiceImpl implements EStoreAdminService {
+public class EStoreAdminServiceImpl extends EStoreServiceImpl implements EStoreAdminService {
 
 	@Autowired
 	private UserEntityManager userEntityManager;

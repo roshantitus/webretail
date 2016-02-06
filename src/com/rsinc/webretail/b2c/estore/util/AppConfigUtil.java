@@ -1,9 +1,11 @@
 /**
  * 
  */
-package com.rsinc.webretail.b2c.estore.config;
+package com.rsinc.webretail.b2c.estore.util;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.rsinc.webretail.b2c.estore.config.AppConfig;
 
 /**
  * @author Roshan Titus

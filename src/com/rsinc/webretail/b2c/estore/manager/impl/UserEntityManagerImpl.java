@@ -70,9 +70,9 @@ public class UserEntityManagerImpl extends BaseEntityManagerImpl<UserBean> imple
 		{
 			userBean.setRewardPoints(Constants.ZERO);
 		}
-		if(null == userBean.getLocale())
+		if(null == userBean.getLocaleCode())
 		{
-			userBean.setLocale(Constants.DEFAULT_LOCALE);
+			userBean.setLocaleCode(Constants.DEFAULT_LOCALE);
 		}	
 		if(null == userBean.getSubscribedForNewsLetterYN())
 		{
@@ -91,10 +91,10 @@ public class UserEntityManagerImpl extends BaseEntityManagerImpl<UserBean> imple
 		{
 			throw new IllegalArgumentException("UserBean object cannot be null"); 
 		}	
-		if(null == userBean.getParty())
-		{
-			throw new IllegalArgumentException("Party object in UserBean cannot be null"); 
-		}
+//		if(null == userBean.getParty())
+//		{
+//			throw new IllegalArgumentException("Party object in UserBean cannot be null"); 
+//		}
 		super.validateForCreate(userBean);
 	}
 

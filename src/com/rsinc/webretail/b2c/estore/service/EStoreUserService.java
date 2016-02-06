@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
-public interface EStoreUserService {
+public interface EStoreUserService extends EStoreService{
+
+	//UserBean registerUser(UserBean user);
 
 }
