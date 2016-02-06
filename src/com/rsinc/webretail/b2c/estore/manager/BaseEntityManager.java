@@ -3,6 +3,8 @@
  */
 package com.rsinc.webretail.b2c.estore.manager;
 
+import org.springframework.stereotype.Component;
+
 import com.rsinc.webretail.b2c.estore.dao.BaseDao;
 import com.rsinc.webretail.b2c.estore.domain.BaseBean;
 import com.rsinc.webretail.b2c.estore.exception.BeanValidationException;
@@ -11,6 +13,7 @@ import com.rsinc.webretail.b2c.estore.exception.BeanValidationException;
  * @author Roshan Titus
  *
  */
+@Component
 public interface BaseEntityManager <T extends BaseBean> {
 
 	BaseDao<T> getDao();

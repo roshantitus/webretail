@@ -5,6 +5,8 @@ package com.rsinc.webretail.b2c.estore.manager.impl;
 
 import javax.inject.Inject;
 
+import org.springframework.stereotype.Component;
+
 import com.rsinc.webretail.b2c.estore.dao.BaseDao;
 import com.rsinc.webretail.b2c.estore.dao.UserDao;
 import com.rsinc.webretail.b2c.estore.domain.UserBean;
@@ -17,6 +19,7 @@ import com.rsinc.webretail.b2c.estore.util.Constants;
  * @author Roshan Titus 
  *
  */
+@Component
 public class UserEntityManagerImpl extends BaseEntityManagerImpl<UserBean> implements UserEntityManager {
 
 	/**

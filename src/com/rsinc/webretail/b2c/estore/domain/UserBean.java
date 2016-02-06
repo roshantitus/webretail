@@ -5,18 +5,20 @@ package com.rsinc.webretail.b2c.estore.domain;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+
 
 /**
  * @author Roshan Titus 
  *
  */
+@Entity
 public class UserBean extends BaseBean {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -438375391659822777L;
-	private Long userId;
 	private PartyBean party;
 	private AuthenticationBean authentication;
 	private String status;
@@ -30,14 +32,6 @@ public class UserBean extends BaseBean {
 	public UserBean() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	public Long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
 	}
 
 	public PartyBean getParty() {

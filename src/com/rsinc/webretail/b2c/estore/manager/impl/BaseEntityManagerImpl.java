@@ -5,6 +5,8 @@ package com.rsinc.webretail.b2c.estore.manager.impl;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+
 import com.rsinc.webretail.b2c.estore.dao.BaseDao;
 import com.rsinc.webretail.b2c.estore.domain.BaseBean;
 import com.rsinc.webretail.b2c.estore.exception.BeanValidationException;
@@ -16,6 +18,7 @@ import com.rsinc.webretail.b2c.estore.util.SecurityUtils;
  * @author Roshan Titus 
  *
  */
+@Component
 public abstract class BaseEntityManagerImpl <T extends BaseBean> implements BaseEntityManager <T> {
 
 	/**

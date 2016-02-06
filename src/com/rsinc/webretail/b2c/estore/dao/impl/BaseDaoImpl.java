@@ -8,12 +8,15 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 
+import org.springframework.stereotype.Repository;
+
 import com.rsinc.webretail.b2c.estore.dao.BaseDao;
 
 /**
  * @author Roshan Titus 
  *
  */
+@Repository
 public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
 	public abstract EntityManager getEntityManager();

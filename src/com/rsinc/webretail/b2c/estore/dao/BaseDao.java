@@ -6,10 +6,13 @@ package com.rsinc.webretail.b2c.estore.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 /**
  * @author Roshan Titus 
  *
  */
+@Repository
 public interface BaseDao<T> {
 
 	public T create(T t);

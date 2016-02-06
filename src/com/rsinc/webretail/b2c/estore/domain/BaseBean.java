@@ -6,27 +6,46 @@ package com.rsinc.webretail.b2c.estore.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
 /**
  * @author Roshan Titus 
  *
  */
-public class BaseBean implements Serializable{
+@MappedSuperclass
+public abstract class BaseBean implements Serializable{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -302972352018750735L;
-	private Long createdBy;
-	private Date createdDate;
-	private Long updatedBy;
-	private Date updatedDate;
-	private Integer recordVersionNo;
-	private Boolean deletedYN;
+	
+	@Id
+	protected Long id;
+	protected Long createdBy;
+	protected Date createdDate;
+	protected Long updatedBy;
+	protected Date updatedDate;
+	protected Integer recordVersionNo;
+	protected Boolean deletedYN;
 	
 	public BaseBean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
 	public Long getCreatedBy() {
 		return createdBy;
 	}

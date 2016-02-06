@@ -3,6 +3,8 @@
  */
 package com.rsinc.webretail.b2c.estore.dao;
 
+import javax.transaction.Transactional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.rsinc.webretail.b2c.estore.config.AppConfig;
 import com.rsinc.webretail.b2c.estore.domain.UserBean;
-
-import junit.framework.Assert;
 
 /**
  * @author Roshan Titus
@@ -26,6 +26,7 @@ public class UserDaoTest {
 	private UserDao<UserBean> userDao;
 	
 	@Test
+	@Transactional
 	public void testCreate()
 	{
 		UserBean userBean = getUser();

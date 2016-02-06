@@ -32,7 +32,7 @@ import com.google.common.base.Preconditions;
 @Configuration
 @EnableTransactionManagement
 @PropertySource({ "classpath:persistence-mysql.properties" })
-@ComponentScan({ "com.rsinc.webretail.b2c.estore.dao" })
+@ComponentScan({ "com.rsinc.webretail.b2c.estore.dao.impl" })
 public class PersistenceJPAConfig{
 
 	
