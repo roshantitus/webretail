@@ -8,6 +8,6 @@ package com.rsinc.webretail.b2c.estore.domain.enums;
  *
  */
 public enum UserStatus {
-	NEW
+	NEW, ACTIVE, LOCKED, DISABLED
 
 }

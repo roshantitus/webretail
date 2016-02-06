@@ -3,6 +3,11 @@
  */
 package com.rsinc.webretail.b2c.estore.dao;
 
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.fail;
+
+import java.util.Date;
+
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -13,8 +18,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.rsinc.webretail.b2c.estore.config.AppConfig;
 import com.rsinc.webretail.b2c.estore.domain.UserBean;
-
-import static junit.framework.Assert.*;
+import com.rsinc.webretail.b2c.estore.util.Constants;
+import com.rsinc.webretail.b2c.estore.util.SecurityUtils;
 
 /**
  * @author Roshan Titus
@@ -50,6 +55,12 @@ public class GenericDaoTest {
 		UserBean userBean = new UserBean();
 		userBean.setStatus("NEW");
 		userBean.setLocaleCode("en_US");
+		userBean.setCreatedBy(SecurityUtils.getLoggedInUserId());
+		userBean.setCreatedDate(new Date());
+		userBean.setUpdatedBy(SecurityUtils.getLoggedInUserId());
+		userBean.setUpdatedDate(new Date());
+		userBean.setRecordVersionNo(Constants.ZERO);
+		userBean.setDeletedYN(Constants.False);
 		return userBean;
 	}
 }

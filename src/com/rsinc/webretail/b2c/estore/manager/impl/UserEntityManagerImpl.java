@@ -3,6 +3,8 @@
  */
 package com.rsinc.webretail.b2c.estore.manager.impl;
 
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
@@ -20,6 +22,7 @@ import com.rsinc.webretail.b2c.estore.util.Constants;
  *
  */
 @Component
+@TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class UserEntityManagerImpl extends BaseEntityManagerImpl<UserBean> implements UserEntityManager {
 
 	/**

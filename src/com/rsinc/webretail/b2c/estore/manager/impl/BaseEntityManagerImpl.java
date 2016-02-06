@@ -5,6 +5,9 @@ package com.rsinc.webretail.b2c.estore.manager.impl;
 
 import java.util.Date;
 
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+
 import org.springframework.stereotype.Component;
 
 import com.rsinc.webretail.b2c.estore.dao.BaseDao;
@@ -19,6 +22,7 @@ import com.rsinc.webretail.b2c.estore.util.SecurityUtils;
  *
  */
 @Component
+@TransactionAttribute(TransactionAttributeType.MANDATORY)
 public abstract class BaseEntityManagerImpl <T extends BaseBean> implements BaseEntityManager <T> {
 
 	/**
