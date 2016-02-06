@@ -35,21 +35,15 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 	
 	@Override
 	public T create(T baseBean) {
-		if(null == baseBean)
-		{
-			throw new IllegalArgumentException("BaseBean object is null"); 
-		}		
-		setDefaultValues(baseBean);
+		
 		validateForCreate(baseBean);
+		setDefaultValues(baseBean);		
 		return getDao().create(baseBean);
 	}
 
 	@Override
 	public T update(T baseBean) {
-		if(null == baseBean)
-		{
-			throw new IllegalArgumentException("BaseBean object is null"); 
-		}	
+	
 		validateForUpdate(baseBean);
 		return (T)getDao().update(baseBean);
 	}
@@ -57,24 +51,23 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 
 	@Override
 	public void delete(T baseBean) {
-		if(null == baseBean)
-		{
-			throw new IllegalArgumentException("BaseBean object is null"); 
-		}	
+
 		validateForDelete(baseBean);
+		getDao().delete(baseBean);
 	}	
 
+	public abstract void deleteById(Object id);
+	
 	@Override
-	public void deleteById(Object id) {
+	public void deleteById(Class<T> type, Object id){
 		
-	}	
+		validateForId(id);
+		getDao().delete(type, id);
+	}
 	
 	@Override
 	public void setDefaultValues(T baseBean) {
-		if(null == baseBean)
-		{
-			throw new IllegalArgumentException("BaseBean object is null"); 
-		}			
+	
 		if(null == baseBean.getCreatedBy())
 		{
 			baseBean.setCreatedBy(SecurityUtils.getLoggedInUserId());
@@ -112,9 +105,8 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 		if(null == baseBean)
 		{
 			throw new IllegalArgumentException("BaseBean object cannot be null"); 
-		}			
+		}	
 	}
-
 	
 	@Override
 	public void validateForUpdate(T baseBean) throws BeanValidationException{
@@ -122,7 +114,11 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 		if(null == baseBean)
 		{
 			throw new IllegalArgumentException("BaseBean object is null"); 
-		}			
+		}
+		if(null == baseBean.key())
+		{
+			throw new IllegalArgumentException("Id cannot be null for update"); 
+		}		
 	}
 
 	@Override
@@ -131,7 +127,26 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 		if(null == baseBean)
 		{
 			throw new IllegalArgumentException("BaseBean object is null"); 
+		}		
+		if(null == baseBean.key())
+		{
+			throw new IllegalArgumentException("Id cannot be null for delete"); 
+		}			
+	}
+	
+	private void validateForId(Object id) throws BeanValidationException{
+		if(null == id)
+		{
+			throw new IllegalArgumentException("Id cannot be null for delete"); 
 		}			
 	}
 
+	@Override
+	public T load(Class<T> type, Object id){
+		
+		validateForId(id);		
+		return getDao().find(type, id);
+	}
+
+	public abstract T loadById(Object id);
 }

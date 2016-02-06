@@ -20,9 +20,9 @@ public abstract class BaseBean implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -302972352018750735L;
-	
+
 	//The ID field in MappedSuperclass. 
-	//Getters and Setters and mapping for this field will be created only in the subclasses.
+	//Getters and Setters and mapping for this field will be created only in the subclasses.	
 	protected Long id;
 	protected Long createdBy;
 	protected Date createdDate;
@@ -33,6 +33,10 @@ public abstract class BaseBean implements Serializable{
 	
 	public BaseBean() {
 		super();
+	}
+
+	public Long key() {
+		return id;
 	}
 
 	@Column(name = "created_by")	

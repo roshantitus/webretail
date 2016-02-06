@@ -32,36 +32,7 @@ public class UserEntityManagerImpl extends BaseEntityManagerImpl<UserBean> imple
 	private UserDao<UserBean> userDao;
 	
 	public UserEntityManagerImpl() {
-		// TODO Auto-generated constructor stub
 	}
-
-	/* (non-Javadoc)
-	 * @see com.rsinc.webretail.b2c.estore.manager.BaseEntityManager#create(com.rsinc.webretail.b2c.estore.domain.UserBean)
-	 */
-	@Override
-	public UserBean create(UserBean userBean) {
-		
-		return super.create(userBean);
-	}
-
-	/* (non-Javadoc)
-	 * @see com.rsinc.webretail.b2c.estore.manager.BaseEntityManager#update(com.rsinc.webretail.b2c.estore.domain.UserBean)
-	 */
-	@Override
-	public UserBean update(UserBean userBean) {
-		
-		return super.update(userBean);
-	}
-
-	/* (non-Javadoc)
-	 * @see com.rsinc.webretail.b2c.estore.manager.BaseEntityManager#delete(java.lang.Class, java.lang.Object)
-	 */
-	@Override
-	public void delete(UserBean userBean) {
-		super.delete(userBean);
-
-	}
-
 	
 	@Override
 	public void setDefaultValues(UserBean userBean) {
@@ -108,5 +79,17 @@ public class UserEntityManagerImpl extends BaseEntityManagerImpl<UserBean> imple
 
 	public void setUserDao(UserDao<UserBean> userDao) {
 		this.userDao = userDao;
+	}
+	
+	@Override
+	public UserBean loadById(Object id){
+
+		return load(UserBean.class, id);
+	}
+
+	@Override
+	public void deleteById(Object id){
+		
+		deleteById(UserBean.class, id);
 	}
 }

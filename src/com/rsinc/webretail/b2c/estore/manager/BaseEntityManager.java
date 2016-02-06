@@ -21,11 +21,16 @@ public interface BaseEntityManager <T extends BaseBean> {
 	T create(T t);
 	T update(T t);
 	void delete(T t);
+	void deleteById(Object id);	
+	void deleteById(Class<T> type, Object id);
+	
 	void setDefaultValues(T t);
 
 	void validateForCreate(T t) throws BeanValidationException;
 	void validateForUpdate(T t) throws BeanValidationException;
 	void validateForDelete(T t) throws BeanValidationException;
 	
-	void deleteById(Object id);
+	T load(Class<T> type, Object id);
+	
+	T loadById(Object id);
 }

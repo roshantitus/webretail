@@ -55,6 +55,11 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 		Object ref = getEntityManager().getReference(type, id);
 		getEntityManager().remove(ref);
 	}
+	
+	@Override
+	public void delete(T t){
+		getEntityManager().remove(t);
+	}
 
 	/* (non-Javadoc)
 	 * @see com.rs.webretail.b2c.estore.dao.BaseDao#find(java.lang.Class, java.lang.Object)
