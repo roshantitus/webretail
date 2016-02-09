@@ -24,7 +24,7 @@ public class UserBean extends BaseBean {
 	 */
 	private static final long serialVersionUID = -438375391659822777L;
 	
-//	private PartyBean party;
+	private PartyBean party;
 //	private AuthenticationBean authentication;
 	private String status;
 	private String localeCode;
@@ -50,14 +50,14 @@ public class UserBean extends BaseBean {
 		this.id = id;
 	}
 	
-//	public PartyBean getParty() {
-//		return party;
-//	}
-//
-//	public void setParty(PartyBean party) {
-//		this.party = party;
-//	}
-//
+	public PartyBean getParty() {
+		return party;
+	}
+
+	public void setParty(PartyBean party) {
+		this.party = party;
+	}
+
 //	public AuthenticationBean getAuthentication() {
 //		return authentication;
 //	}
