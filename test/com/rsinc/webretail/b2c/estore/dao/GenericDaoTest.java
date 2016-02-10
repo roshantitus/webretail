@@ -17,6 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.rsinc.webretail.b2c.estore.config.AppConfig;
+import com.rsinc.webretail.b2c.estore.domain.PartyBean;
 import com.rsinc.webretail.b2c.estore.domain.UserBean;
 import com.rsinc.webretail.b2c.estore.util.Constants;
 import com.rsinc.webretail.b2c.estore.util.SecurityUtils;
@@ -29,6 +30,8 @@ import com.rsinc.webretail.b2c.estore.util.SecurityUtils;
 @ContextConfiguration(classes={AppConfig.class})
 @Transactional
 public class GenericDaoTest {
+	
+	private static final String PARTY_EMAIL_ID = "roshantitus@gmail.com";
 
 	@Autowired
 	private UserDao<UserBean> userDao;
@@ -61,6 +64,15 @@ public class GenericDaoTest {
 		userBean.setUpdatedDate(new Date());
 		userBean.setRecordVersionNo(Constants.ZERO);
 		userBean.setDeletedYN(Constants.False);
+		PartyBean party = new PartyBean();
+		party.setEmail(PARTY_EMAIL_ID);
+		party.setCreatedBy(SecurityUtils.getLoggedInUserId());
+		party.setCreatedDate(new Date());
+		party.setUpdatedBy(SecurityUtils.getLoggedInUserId());
+		party.setUpdatedDate(new Date());
+		party.setRecordVersionNo(Constants.ZERO);
+		party.setDeletedYN(Constants.False);		
+		userBean.setParty(party);
 		return userBean;
 	}
 }

@@ -17,6 +17,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.rsinc.webretail.b2c.estore.config.AppConfig;
+import com.rsinc.webretail.b2c.estore.domain.AddressBean;
+import com.rsinc.webretail.b2c.estore.domain.PartyBean;
 import com.rsinc.webretail.b2c.estore.domain.UserBean;
 import com.rsinc.webretail.b2c.estore.domain.enums.UserStatus;
 
@@ -28,9 +30,26 @@ import com.rsinc.webretail.b2c.estore.domain.enums.UserStatus;
 @ContextConfiguration(classes={AppConfig.class})
 public class UserEntityManagerTest {
 
+	/**
+	 * 
+	 */
+	private static final String PARTY_ADDRESS_STATE = "Kerala";
+	private static final String PARTY_ADDRESS_STATE_NEW = "Karnataka";
+	/**
+	 * 
+	 */
+	private static final String PARTY_EMAIL_ID = "roshantitus@gmail.com";
+	private static final String PARTY_EMAIL_ID_NEW = "susankoruthu@gmail.com";
+	
 	@Autowired
 	private UserEntityManager userEntityManager;
 		
+	@Autowired
+	private PartyEntityManager partyEntityManager;
+	
+	@Autowired
+	private AddressEntityManager addressEntityManager;	
+	
 	@Test
 	//Execute method without transaction
 	public void testCreateUserWithoutTransaction()
@@ -56,7 +75,27 @@ public class UserEntityManagerTest {
 			UserBean userBean = userEntityManager.create(getUser());
 			
 			assertNotNull(userBean.getUserId());
-			System.out.println(userBean.getUserId());
+			assertNotNull(userBean.getParty());
+			assertNotNull(userBean.getParty().getPartyId());
+			assertNotNull(userBean.getParty().getPartyAddress());
+			assertNotNull(userBean.getParty().getPartyAddress().getAddressId());
+			
+			Long userId = userBean.getUserId();
+			UserBean userBeanFromDB = userEntityManager.loadById(userId);
+			assertNotNull(userBeanFromDB);
+			
+			Long partyId = userBean.getParty().getPartyId();			
+			PartyBean partyBeanFromDB = partyEntityManager.loadById(partyId);
+			assertNotNull(partyBeanFromDB);
+			
+			Long addressId = userBean.getParty().getPartyAddress().getAddressId();
+			AddressBean partyAddressBeanFromDB = addressEntityManager.loadById(addressId);
+			assertNotNull(partyAddressBeanFromDB);
+			
+			System.out.println("userBean.getUserId():" + userBeanFromDB.getUserId());
+			System.out.println("userBean.getParty().getPartyId():" + userBeanFromDB.getParty().getPartyId());
+			System.out.println("userBean.getParty().getPartyAddress().getAddressId():" + userBeanFromDB.getParty().getPartyAddress().getAddressId());
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail(e.getMessage());
@@ -69,8 +108,26 @@ public class UserEntityManagerTest {
 	public void testLoadUser()
 	{
 		try {
-			UserBean userBean = userEntityManager.create(getUser());
-			assertNotNull(userEntityManager.loadById(userBean.getUserId()));
+			UserBean userBeanFromDB = userEntityManager.loadById((userEntityManager.create(getUser())).getUserId());
+			assertNotNull(userBeanFromDB);
+			assertNotNull(userBeanFromDB.getUserId());
+			assertNotNull(userBeanFromDB.getParty());
+			assertNotNull(userBeanFromDB.getParty().getPartyId());
+			assertNotNull(userBeanFromDB.getParty().getPartyAddress());
+			assertNotNull(userBeanFromDB.getParty().getPartyAddress().getAddressId());			
+			
+			Long partyId = userBeanFromDB.getParty().getPartyId();			
+			PartyBean partyBeanFromDB = partyEntityManager.loadById(partyId);
+			assertNotNull(partyBeanFromDB);
+			
+			Long addressId = userBeanFromDB.getParty().getPartyAddress().getAddressId();
+			AddressBean partyAddressBeanFromDB = addressEntityManager.loadById(addressId);
+			assertNotNull(partyAddressBeanFromDB);
+			
+			System.out.println("userBean.getUserId():" + userBeanFromDB.getUserId());
+			System.out.println("userBean.getParty().getPartyId():" + userBeanFromDB.getParty().getPartyId());	
+			System.out.println("userBean.getParty().getPartyAddress().getAddressId():" + userBeanFromDB.getParty().getPartyAddress().getAddressId());
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail(e.getMessage());
@@ -86,16 +143,34 @@ public class UserEntityManagerTest {
 			Long userId = userEntityManager.create(getUser()).getUserId();
 			
 			//Find the user and assert status
-			UserBean userBean = userEntityManager.loadById(userId);
-			assertEquals(userBean.getStatus(), UserStatus.NEW.toString());
+			UserBean userBeanFromDB = userEntityManager.loadById(userId);
+			assertNotNull(userBeanFromDB);
+			assertNotNull(userBeanFromDB.getParty());			
+			assertEquals(userBeanFromDB.getStatus(), UserStatus.NEW.toString());
+			assertEquals(userBeanFromDB.getParty().getEmail(), PARTY_EMAIL_ID);
+			assertEquals(userBeanFromDB.getParty().getPartyAddress().getState(), PARTY_ADDRESS_STATE);
 			
-			//Update the status
-			userBean.setStatus(UserStatus.ACTIVE.toString());			
-			userEntityManager.update(userBean);
+			Long partyId = userBeanFromDB.getParty().getPartyId();
+			PartyBean partyBeanFromDB = partyEntityManager.loadById(partyId);
+			assertNotNull(partyBeanFromDB);
+			
+			Long addressId = userBeanFromDB.getParty().getPartyAddress().getAddressId();
+			AddressBean partyAddressBeanFromDB = addressEntityManager.loadById(addressId);
+			assertNotNull(partyAddressBeanFromDB);
+			
+			//Update the fields
+			userBeanFromDB.setStatus(UserStatus.ACTIVE.toString());
+			userBeanFromDB.getParty().setEmail(PARTY_EMAIL_ID_NEW);
+			userBeanFromDB.getParty().getPartyAddress().setState(PARTY_ADDRESS_STATE_NEW);
+			userEntityManager.update(userBeanFromDB);
 			
 			//fetch the user again and check status
-			assertEquals(userEntityManager.loadById(userId).getStatus(), UserStatus.ACTIVE.toString());
-			System.out.println(userBean.getStatus());
+			UserBean userBeanFromDBAfterUpdate = userEntityManager.loadById(userId);
+			assertNotNull(userBeanFromDBAfterUpdate);
+			assertNotNull(userBeanFromDBAfterUpdate.getParty());
+			assertEquals(userBeanFromDBAfterUpdate.getStatus(), UserStatus.ACTIVE.toString());
+			assertEquals(userBeanFromDBAfterUpdate.getParty().getEmail(), PARTY_EMAIL_ID_NEW);
+			assertEquals(userBeanFromDBAfterUpdate.getParty().getPartyAddress().getState(), PARTY_ADDRESS_STATE_NEW);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -112,13 +187,24 @@ public class UserEntityManagerTest {
 			Long userId = userEntityManager.create(getUser()).getUserId();
 			
 			//Check whether the user exists
-			UserBean user = userEntityManager.loadById(userId);
-			assertNotNull(user);
+			UserBean userBeanFromDB = userEntityManager.loadById(userId);
+			assertNotNull(userBeanFromDB);
+			assertNotNull(userBeanFromDB.getParty());
 			
-			//delete the user by id
-			userEntityManager.delete(user);
+			Long partyId = userBeanFromDB.getParty().getPartyId();			
+			PartyBean partyBeanFromDB = partyEntityManager.loadById(partyId);
+			assertNotNull(partyBeanFromDB);
+			
+			Long addressId = userBeanFromDB.getParty().getPartyAddress().getAddressId();
+			AddressBean partyAddressBeanFromDB = addressEntityManager.loadById(addressId);
+			assertNotNull(partyAddressBeanFromDB);
+			
+			//delete the user
+			userEntityManager.delete(userBeanFromDB);
 			
 			assertTrue(null == userEntityManager.loadById(userId));
+			assertTrue(null == partyEntityManager.loadById(partyId));
+			assertTrue(null == addressEntityManager.loadById(addressId));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -135,12 +221,24 @@ public class UserEntityManagerTest {
 			Long userId = userEntityManager.create(getUser()).getUserId();
 			
 			//Check whether the user exists
-			assertNotNull(userEntityManager.loadById(userId));
+			UserBean userBeanFromDB = userEntityManager.loadById(userId);
+			assertNotNull(userBeanFromDB);
+			assertNotNull(userBeanFromDB.getParty());
+			
+			Long partyId = userBeanFromDB.getParty().getPartyId();			
+			PartyBean partyBeanFromDB = partyEntityManager.loadById(partyId);
+			assertNotNull(partyBeanFromDB);
+			
+			Long addressId = userBeanFromDB.getParty().getPartyAddress().getAddressId();
+			AddressBean partyAddressBeanFromDB = addressEntityManager.loadById(addressId);
+			assertNotNull(partyAddressBeanFromDB);
 			
 			//delete the user by id
 			userEntityManager.deleteById(userId);
 			
 			assertTrue(null == userEntityManager.loadById(userId));
+			assertTrue(null == partyEntityManager.loadById(partyId));
+			assertTrue(null == addressEntityManager.loadById(addressId));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -148,7 +246,61 @@ public class UserEntityManagerTest {
 		}
 	}		
 	
+	@Test
+	@Transactional
+	public void testCreateUserWithoutParty()
+	{
+		try {
+			userEntityManager.create(getUserWithoutParty());
+		} catch (Exception e) {
+			assertTrue(e instanceof java.lang.IllegalArgumentException);
+			assertEquals(e.getMessage(), "Party object cannot be null");
+		}
+	}	
+	
+	@Test
+	@Transactional
+	public void testCreateUserWithoutPartyAddress()
+	{
+		try {
+			UserBean userBean = userEntityManager.create(getUserWithoutPartyAddress());
+			
+			assertNotNull(userBean.getUserId());
+			assertNotNull(userBean.getParty());
+			assertNotNull(userBean.getParty().getPartyId());
+			
+			Long partyId = userBean.getParty().getPartyId();			
+			PartyBean partyBeanFromDB = partyEntityManager.loadById(partyId);
+			assertNotNull(partyBeanFromDB);
+			
+			System.out.println("userBean.getUserId():" + userBean.getUserId());
+			System.out.println("userBean.getParty().getPartyId():" + userBean.getParty().getPartyId());
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+	}	
+	
 	private UserBean getUser() {
+		UserBean userBean = new UserBean();
+		PartyBean party = new PartyBean();
+		party.setEmail(PARTY_EMAIL_ID);
+		AddressBean partyAddress = new AddressBean();
+		partyAddress.setState(PARTY_ADDRESS_STATE);
+		party.setPartyAddress(partyAddress);
+		userBean.setParty(party);
+		return userBean;
+	}
+	
+	private UserBean getUserWithoutPartyAddress() {
+		UserBean userBean = new UserBean();
+		PartyBean party = new PartyBean();
+		party.setEmail(PARTY_EMAIL_ID);
+		userBean.setParty(party);
+		return userBean;
+	}
+	
+	private UserBean getUserWithoutParty() {
 		UserBean userBean = new UserBean();
 		return userBean;
 	}	

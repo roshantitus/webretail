@@ -14,6 +14,7 @@ import com.rsinc.webretail.b2c.estore.dao.UserDao;
 import com.rsinc.webretail.b2c.estore.domain.UserBean;
 import com.rsinc.webretail.b2c.estore.domain.enums.UserStatus;
 import com.rsinc.webretail.b2c.estore.exception.BeanValidationException;
+import com.rsinc.webretail.b2c.estore.manager.PartyEntityManager;
 import com.rsinc.webretail.b2c.estore.manager.UserEntityManager;
 import com.rsinc.webretail.b2c.estore.util.Constants;
 
@@ -31,15 +32,15 @@ public class UserEntityManagerImpl extends BaseEntityManagerImpl<UserBean> imple
 	@Inject
 	private UserDao<UserBean> userDao;
 	
+	@Inject
+	private PartyEntityManager partyEntityManager;
+	
 	public UserEntityManagerImpl() {
 	}
 	
 	@Override
 	public void setDefaultValues(UserBean userBean) {
-		if(null == userBean)
-		{
-			throw new IllegalArgumentException("BaseBean object is null"); 
-		}			
+	
 		if(null == userBean.getRewardPoints())
 		{
 			userBean.setRewardPoints(Constants.ZERO);
@@ -56,6 +57,7 @@ public class UserEntityManagerImpl extends BaseEntityManagerImpl<UserBean> imple
 		{
 			userBean.setStatus(UserStatus.NEW.toString());
 		}		
+		partyEntityManager.setDefaultValues(userBean.getParty());
 		super.setDefaultValues(userBean);
 	}
 
@@ -64,11 +66,8 @@ public class UserEntityManagerImpl extends BaseEntityManagerImpl<UserBean> imple
 		if(null == userBean)
 		{
 			throw new IllegalArgumentException("UserBean object cannot be null"); 
-		}	
-//		if(null == userBean.getParty())
-//		{
-//			throw new IllegalArgumentException("Party object in UserBean cannot be null"); 
-//		}
+		}			
+		partyEntityManager.validateForCreate(userBean.getParty());
 		super.validateForCreate(userBean);
 	}
 

@@ -3,11 +3,15 @@
  */
 package com.rsinc.webretail.b2c.estore.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -16,6 +20,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
+//@NamedQueries({@NamedQuery(name="findByUsername", query=""), })
 @Table(name="USER")
 public class UserBean extends BaseBean {
 
@@ -24,6 +29,7 @@ public class UserBean extends BaseBean {
 	 */
 	private static final long serialVersionUID = -438375391659822777L;
 	
+
 	private PartyBean party;
 //	private AuthenticationBean authentication;
 	private String status;
@@ -50,6 +56,8 @@ public class UserBean extends BaseBean {
 		this.id = id;
 	}
 	
+	@OneToOne(optional=false, fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @JoinColumn(name="PARTY_ID", unique=true, nullable=false, updatable=true)	
 	public PartyBean getParty() {
 		return party;
 	}

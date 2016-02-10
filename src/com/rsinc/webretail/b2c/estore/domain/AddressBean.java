@@ -4,14 +4,18 @@
 package com.rsinc.webretail.b2c.estore.domain;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author Roshan Titus 
  *
  */
+@Entity
+@Table(name="ADDRESS")
 public class AddressBean extends BaseBean {
 
 	/**
@@ -46,7 +50,7 @@ public class AddressBean extends BaseBean {
 		this.id = id;
 	}
 
-
+	@Column(name = "address_line1")
 	public String getAddressLine1() {
 		return addressLine1;
 	}
@@ -56,7 +60,7 @@ public class AddressBean extends BaseBean {
 		this.addressLine1 = addressLine1;
 	}
 
-
+	@Column(name = "address_line2")
 	public String getAddressLine2() {
 		return addressLine2;
 	}
@@ -66,7 +70,7 @@ public class AddressBean extends BaseBean {
 		this.addressLine2 = addressLine2;
 	}
 
-
+	@Column(name = "landmark")
 	public String getLandmark() {
 		return landmark;
 	}
@@ -76,7 +80,7 @@ public class AddressBean extends BaseBean {
 		this.landmark = landmark;
 	}
 
-
+	@Column(name = "city")
 	public String getCity() {
 		return city;
 	}
@@ -86,7 +90,7 @@ public class AddressBean extends BaseBean {
 		this.city = city;
 	}
 
-
+	@Column(name = "zip_code")
 	public String getZipCode() {
 		return zipCode;
 	}
@@ -96,7 +100,7 @@ public class AddressBean extends BaseBean {
 		this.zipCode = zipCode;
 	}
 
-
+	@Column(name = "state")
 	public String getState() {
 		return state;
 	}
@@ -106,7 +110,7 @@ public class AddressBean extends BaseBean {
 		this.state = state;
 	}
 
-
+	@Column(name = "country")
 	public String getCountry() {
 		return country;
 	}
