@@ -9,7 +9,7 @@ import com.rsinc.webretail.b2c.estore.domain.UserBean;
  * @author Roshan Titus
  *
  */
-public class SecurityUtils {
+public class SecurityContextUtils {
 
 	public static UserBean getLoggedInUser() {
 		// TODO Auto-generated method stub

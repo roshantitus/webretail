@@ -20,7 +20,7 @@ import com.rsinc.webretail.b2c.estore.config.AppConfig;
 import com.rsinc.webretail.b2c.estore.domain.PartyBean;
 import com.rsinc.webretail.b2c.estore.domain.UserBean;
 import com.rsinc.webretail.b2c.estore.util.Constants;
-import com.rsinc.webretail.b2c.estore.util.SecurityUtils;
+import com.rsinc.webretail.b2c.estore.util.SecurityContextUtils;
 
 /**
  * @author Roshan Titus
@@ -58,17 +58,17 @@ public class GenericDaoTest {
 		UserBean userBean = new UserBean();
 		userBean.setStatus("NEW");
 		userBean.setLocaleCode("en_US");
-		userBean.setCreatedBy(SecurityUtils.getLoggedInUserId());
+		userBean.setCreatedBy(SecurityContextUtils.getLoggedInUserId());
 		userBean.setCreatedDate(new Date());
-		userBean.setUpdatedBy(SecurityUtils.getLoggedInUserId());
+		userBean.setUpdatedBy(SecurityContextUtils.getLoggedInUserId());
 		userBean.setUpdatedDate(new Date());
 		userBean.setRecordVersionNo(Constants.ZERO);
 		userBean.setDeletedYN(Constants.False);
 		PartyBean party = new PartyBean();
 		party.setEmail(PARTY_EMAIL_ID);
-		party.setCreatedBy(SecurityUtils.getLoggedInUserId());
+		party.setCreatedBy(SecurityContextUtils.getLoggedInUserId());
 		party.setCreatedDate(new Date());
-		party.setUpdatedBy(SecurityUtils.getLoggedInUserId());
+		party.setUpdatedBy(SecurityContextUtils.getLoggedInUserId());
 		party.setUpdatedDate(new Date());
 		party.setRecordVersionNo(Constants.ZERO);
 		party.setDeletedYN(Constants.False);		

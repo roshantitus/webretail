@@ -15,7 +15,7 @@ import com.rsinc.webretail.b2c.estore.domain.BaseBean;
 import com.rsinc.webretail.b2c.estore.exception.BeanValidationException;
 import com.rsinc.webretail.b2c.estore.manager.BaseEntityManager;
 import com.rsinc.webretail.b2c.estore.util.Constants;
-import com.rsinc.webretail.b2c.estore.util.SecurityUtils;
+import com.rsinc.webretail.b2c.estore.util.SecurityContextUtils;
 
 /**
  * @author Roshan Titus 
@@ -70,7 +70,7 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 	
 		if(null == baseBean.getCreatedBy())
 		{
-			baseBean.setCreatedBy(SecurityUtils.getLoggedInUserId());
+			baseBean.setCreatedBy(SecurityContextUtils.getLoggedInUserId());
 		}
 		
 		if(null == baseBean.getCreatedDate())
@@ -90,7 +90,7 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 		
 		if(null == baseBean.getUpdatedBy())
 		{			
-			baseBean.setUpdatedBy(SecurityUtils.getLoggedInUserId());
+			baseBean.setUpdatedBy(SecurityContextUtils.getLoggedInUserId());
 		}
 		
 		if(null == baseBean.getUpdatedDate())
