@@ -44,7 +44,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 	 */
 	@Override
 	public T update(T t) {
-		return (T) getEntityManager().merge(t);
+		return getEntityManager().merge(t);
 	}
 
 	/* (non-Javadoc)
@@ -66,12 +66,13 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 	 */
 	@Override
 	public T find(Class<T> type, Object id) {
-		return(T) getEntityManager().find(type, id);
+		return getEntityManager().find(type, id);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.rs.webretail.b2c.estore.dao.BaseDao#findWithNamedQuery(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> findWithNamedQuery(String queryName) {
 		return getEntityManager().createNamedQuery(queryName).getResultList();

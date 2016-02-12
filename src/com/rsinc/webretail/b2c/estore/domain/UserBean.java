@@ -3,6 +3,8 @@
  */
 package com.rsinc.webretail.b2c.estore.domain;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +22,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
+@Access(AccessType.PROPERTY)
 //@NamedQueries({@NamedQuery(name="findByUsername", query=""), })
 @Table(name="USER")
 public class UserBean extends BaseBean {
@@ -134,5 +137,12 @@ public class UserBean extends BaseBean {
 		this.subscribedForNewsLetterYN = subscribedForNewsLetterYN;
 	}
 
-	
+//	@Transient
+//	public String getEmail() {
+//		return party.getEmail();
+//	}
+//
+//	public void setEmail(String email) {
+//		this.party.setEmail(email);
+//	}	
 }

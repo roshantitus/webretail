@@ -11,7 +11,7 @@ import com.rsinc.webretail.b2c.estore.config.AppConfig;
  * @author Roshan Titus
  *
  */
-public class AppConfigUtil {
+public class AppConfigUtils {
 	
 	private static AnnotationConfigApplicationContext ctx = null;
 	
@@ -22,7 +22,9 @@ public class AppConfigUtil {
 		ctx.refresh();
 	}
 	
-	public static Object getBean(Class className)
+	private AppConfigUtils(){}
+	
+	public static <T> Object getBean(Class<T> className)
 	{
 		return ctx.getBean(className);
 	}
