@@ -9,8 +9,14 @@ import java.util.Map;
  * @author Roshan Titus
  *
  */
-public class Message {
+public class MailMessage {
 	
+	public static enum Type {
+        PLAIN,
+        HTML
+    };
+    private Type type = Type.PLAIN;
+    
     /**
      * From address
      */
@@ -131,6 +137,16 @@ public class Message {
     public void setMessage(String message)
     {
         this.message = message;
-    }	
+    }
+
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}	
+    
+    
 
 }
