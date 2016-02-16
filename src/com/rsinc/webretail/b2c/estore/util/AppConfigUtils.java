@@ -15,12 +15,12 @@ public class AppConfigUtils {
 	
 	private static AnnotationConfigApplicationContext ctx = null;
 	
-	static
-	{
-		ctx = new AnnotationConfigApplicationContext();
-		ctx.register(AppConfig.class);
-		ctx.refresh();
-	}
+//	static
+//	{
+//		ctx = new AnnotationConfigApplicationContext();
+//		ctx.register(AppConfig.class);
+//		ctx.refresh();
+//	}
 	
 	private AppConfigUtils(){}
 	

@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import com.rsinc.webretail.b2c.estore.dao.GenericDaoTest;
+import com.rsinc.webretail.b2c.estore.email.MailManagerTest;
 import com.rsinc.webretail.b2c.estore.manager.UserEntityManagerTest;
 
 /**
@@ -16,7 +17,8 @@ import com.rsinc.webretail.b2c.estore.manager.UserEntityManagerTest;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 	GenericDaoTest.class,
-	UserEntityManagerTest.class
+	UserEntityManagerTest.class,
+	MailManagerTest.class
 })
 public class EStoreTestSuite {
 

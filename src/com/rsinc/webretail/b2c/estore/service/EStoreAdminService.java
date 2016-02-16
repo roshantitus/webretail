@@ -3,7 +3,11 @@
  */
 package com.rsinc.webretail.b2c.estore.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
+
+import com.rsinc.webretail.b2c.estore.domain.User;
 
 /**
  * @author Roshan Titus
@@ -12,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface EStoreAdminService extends EStoreService{
 
-	//List<UserBean> getAllUsers();
+	List<User> getAllUsers();
 	
 	//ProductBean addProduct(ProductBean product);
 	//CategoryBean addCategory(CategoryBean category);

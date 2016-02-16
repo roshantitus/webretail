@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.rsinc.webretail.b2c.estore.dao.AddressDao;
 import com.rsinc.webretail.b2c.estore.dao.BaseDao;
-import com.rsinc.webretail.b2c.estore.domain.AddressBean;
+import com.rsinc.webretail.b2c.estore.entity.AddressBean;
 import com.rsinc.webretail.b2c.estore.exception.BeanValidationException;
 import com.rsinc.webretail.b2c.estore.manager.AddressEntityManager;
 

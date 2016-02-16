@@ -11,7 +11,7 @@ import javax.ejb.TransactionAttributeType;
 import org.springframework.stereotype.Component;
 
 import com.rsinc.webretail.b2c.estore.dao.BaseDao;
-import com.rsinc.webretail.b2c.estore.domain.BaseBean;
+import com.rsinc.webretail.b2c.estore.entity.BaseBean;
 import com.rsinc.webretail.b2c.estore.exception.BeanValidationException;
 import com.rsinc.webretail.b2c.estore.manager.BaseEntityManager;
 import com.rsinc.webretail.b2c.estore.util.Constants;

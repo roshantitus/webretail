@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 
-import com.rsinc.webretail.b2c.estore.domain.UserBean;
+import com.rsinc.webretail.b2c.estore.entity.UserBean;
 import com.rsinc.webretail.b2c.estore.util.SecurityContextUtils;
 
 /**

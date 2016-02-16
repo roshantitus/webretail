@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 import com.rsinc.webretail.b2c.estore.dao.BaseDao;
 import com.rsinc.webretail.b2c.estore.dao.UserDao;
-import com.rsinc.webretail.b2c.estore.domain.UserBean;
-import com.rsinc.webretail.b2c.estore.domain.enums.UserStatus;
+import com.rsinc.webretail.b2c.estore.entity.UserBean;
+import com.rsinc.webretail.b2c.estore.entity.enums.UserStatus;
 import com.rsinc.webretail.b2c.estore.exception.BeanValidationException;
 import com.rsinc.webretail.b2c.estore.manager.PartyEntityManager;
 import com.rsinc.webretail.b2c.estore.manager.UserEntityManager;

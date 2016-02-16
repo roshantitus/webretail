@@ -32,6 +32,7 @@
 		<artifactId>javaee-api</artifactId>
 		<version>${javaee-api.version}</version>
 	</dependency> 
+	
 	<dependency>
 	  	<groupId>org.springframework</groupId>
 	  	<artifactId>spring-core</artifactId>
@@ -39,8 +40,8 @@
 	</dependency>
 	<dependency>
 		<groupId>org.springframework</groupId>
-		<artifactId>spring-support</artifactId>
-		<version>2.0.8</version>
+		<artifactId>spring-context-support</artifactId>
+		<version>${org.springframework.version}</version>
 	</dependency>	
 	<dependency>
 	  	<groupId>org.springframework</groupId>
@@ -57,7 +58,11 @@
 		<artifactId>spring-orm</artifactId>
 		<version>${org.springframework.version}</version>
 	</dependency>
-		  	
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>${org.springframework.version}</version>
+    </dependency>		  	
     <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-web</artifactId>
@@ -98,14 +103,34 @@
 		<artifactId>guava</artifactId>
 		<version>${guava.version}</version>
 	</dependency>	
+	
+<dependency>
+	<groupId>commons-fileupload</groupId>
+	<artifactId>commons-fileupload</artifactId>
+	<version>1.3.1</version>
+</dependency>
+
+<dependency>
+	<groupId>org.apache.commons</groupId>
+	<artifactId>commons-dbcp2</artifactId>
+	<version>2.1.1</version>
+</dependency>
+	
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.5.0</version>
+</dependency>	
   </dependencies>
+  
   
 	<properties>
 	
 		<com.rsinc.webretail.version>0.0.1-SNAPSHOT</com.rsinc.webretail.version>
+		<sonar.host.url>http://localhost:9000/sonar</sonar.host.url>
 		
 		<!-- Spring -->
-		<org.springframework.version>4.2.4.RELEASE</org.springframework.version>
+		<org.springframework.version>4.2.3.RELEASE</org.springframework.version>
 		<org.springframework.security.version>4.0.3.RELEASE</org.springframework.security.version>
 
 		<!-- persistence -->

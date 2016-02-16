@@ -124,7 +124,7 @@ public class MailManager{
      *            name value pair for all the parameters in the template
      * @return actual notification message
      */
-    public String getMessage(String templateId, Map<String, String> model)
+    public String getMessage(String templateId, Map<String, Object> model)
     {
         String text = VelocityEngineUtils.mergeTemplateIntoString(
                 velocityEngine, templateId, model);

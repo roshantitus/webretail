@@ -5,7 +5,7 @@ package com.rsinc.webretail.b2c.estore.manager;
 
 import org.springframework.stereotype.Component;
 
-import com.rsinc.webretail.b2c.estore.domain.UserBean;
+import com.rsinc.webretail.b2c.estore.entity.UserBean;
 
 /**
  * @author Roshan Titus

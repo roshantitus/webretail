@@ -3,7 +3,7 @@
  */
 package com.rsinc.webretail.b2c.estore.manager;
 
-import com.rsinc.webretail.b2c.estore.domain.AddressBean;
+import com.rsinc.webretail.b2c.estore.entity.AddressBean;
 
 /**
  * @author Roshan Titus

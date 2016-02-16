@@ -3,7 +3,7 @@
  */
 package com.rsinc.webretail.b2c.estore.persistance;
 
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
 
 /**
  * @author Roshan Titus

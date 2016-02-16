@@ -43,7 +43,7 @@ public class DataConfig{
    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
       LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
       em.setDataSource(dataSource());
-      em.setPackagesToScan(new String[] { "com.rsinc.webretail.b2c.estore.domain" });
+      em.setPackagesToScan(new String[] { "com.rsinc.webretail.b2c.estore.entity" });
  
       JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
       em.setJpaVendorAdapter(vendorAdapter);

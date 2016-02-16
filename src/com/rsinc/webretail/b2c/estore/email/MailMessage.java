@@ -40,7 +40,7 @@ public class MailMessage {
     /**
      * Name value pair for the variables in the template.
      */
-    private Map<String, String> model;
+    private Map<String, Object> model;
 
     /**
      * Value for the subject
@@ -103,12 +103,12 @@ public class MailMessage {
         this.templateId = templateId;
     }
 
-    public Map<String, String> getModel()
+    public Map<String, Object> getModel()
     {
         return model;
     }
 
-    public void setModel(Map<String, String> model)
+    public void setModel(Map<String, Object> model)
     {
         this.model = model;
     }

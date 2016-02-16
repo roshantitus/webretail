@@ -3,7 +3,7 @@
  */
 package com.rsinc.webretail.b2c.estore.manager;
 
-import com.rsinc.webretail.b2c.estore.domain.PartyBean;
+import com.rsinc.webretail.b2c.estore.entity.PartyBean;
 
 /**
  * @author Roshan Titus

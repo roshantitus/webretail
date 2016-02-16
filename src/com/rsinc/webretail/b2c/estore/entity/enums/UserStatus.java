@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.rsinc.webretail.b2c.estore.domain.enums;
+package com.rsinc.webretail.b2c.estore.entity.enums;
 
 /**
  * @author Roshan Titus

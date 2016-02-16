@@ -17,10 +17,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.rsinc.webretail.b2c.estore.config.AppConfig;
-import com.rsinc.webretail.b2c.estore.domain.AddressBean;
-import com.rsinc.webretail.b2c.estore.domain.PartyBean;
-import com.rsinc.webretail.b2c.estore.domain.UserBean;
-import com.rsinc.webretail.b2c.estore.domain.enums.UserStatus;
+import com.rsinc.webretail.b2c.estore.entity.AddressBean;
+import com.rsinc.webretail.b2c.estore.entity.PartyBean;
+import com.rsinc.webretail.b2c.estore.entity.UserBean;
+import com.rsinc.webretail.b2c.estore.entity.enums.UserStatus;
 
 /**
  * @author Roshan Titus
