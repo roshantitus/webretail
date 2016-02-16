@@ -8,6 +8,8 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * @author Roshan Titus 
@@ -48,6 +50,7 @@ public abstract class BaseBean implements Serializable{
 	}
 	
 	@Column(name = "created_date")	
+	@Temporal(TemporalType.TIMESTAMP)
 	public Calendar getCreatedDate() {
 		return createdDate;
 	}
@@ -64,6 +67,7 @@ public abstract class BaseBean implements Serializable{
 	}
 	
 	@Column(name = "updated_date")	
+	@Temporal(TemporalType.TIMESTAMP)
 	public Calendar getUpdatedDate() {
 		return updatedDate;
 	}

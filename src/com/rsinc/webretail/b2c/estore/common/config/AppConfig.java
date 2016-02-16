@@ -33,11 +33,6 @@ public class AppConfig {
 
 	@Inject
 	DataConfig dataConfig;
-	   
-//	@Bean
-//    public UserDao<T> userDao() {
-//        
-//    }
 	
 	@Bean
     public JavaMailSender mailSender() {

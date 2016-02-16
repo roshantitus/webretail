@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * @author Roshan Titus 
@@ -142,6 +144,7 @@ public class PartyBean extends BaseBean {
 		this.gender = gender;
 	}
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date_of_birth")
 	public Calendar getDateOfBirth() {
 		return dateOfBirth;
