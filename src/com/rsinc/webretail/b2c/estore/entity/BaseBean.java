@@ -4,7 +4,7 @@
 package com.rsinc.webretail.b2c.estore.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
@@ -25,9 +25,9 @@ public abstract class BaseBean implements Serializable{
 	//Getters and Setters and mapping for this field will be created only in the subclasses.	
 	protected Long id;
 	protected Long createdBy;
-	protected Date createdDate;
+	protected Calendar createdDate;
 	protected Long updatedBy;
-	protected Date updatedDate;
+	protected Calendar updatedDate;
 	protected Integer recordVersionNo;
 	protected Boolean deletedYN;
 	
@@ -48,10 +48,10 @@ public abstract class BaseBean implements Serializable{
 	}
 	
 	@Column(name = "created_date")	
-	public Date getCreatedDate() {
+	public Calendar getCreatedDate() {
 		return createdDate;
 	}
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(Calendar createdDate) {
 		this.createdDate = createdDate;
 	}
 	
@@ -64,10 +64,10 @@ public abstract class BaseBean implements Serializable{
 	}
 	
 	@Column(name = "updated_date")	
-	public Date getUpdatedDate() {
+	public Calendar getUpdatedDate() {
 		return updatedDate;
 	}
-	public void setUpdatedDate(Date updatedDate) {
+	public void setUpdatedDate(Calendar updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 	

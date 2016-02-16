@@ -3,6 +3,8 @@
  */
 package com.rsinc.webretail.b2c.estore.manager.impl;
 
+import java.util.List;
+
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
@@ -75,10 +77,6 @@ public class UserEntityManagerImpl extends BaseEntityManagerImpl<UserBean> imple
 	public BaseDao<UserBean> getDao() {
 		return userDao;
 	}
-
-	public void setUserDao(UserDao<UserBean> userDao) {
-		this.userDao = userDao;
-	}
 	
 	@Override
 	public UserBean loadById(Object id){
@@ -90,5 +88,13 @@ public class UserEntityManagerImpl extends BaseEntityManagerImpl<UserBean> imple
 	public void deleteById(Object id){
 		
 		deleteById(UserBean.class, id);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.manager.impl.BaseEntityManagerImpl#findAll(java.lang.Class)
+	 */
+	@Override
+	public List<UserBean> findAll() {
+		return getDao().findAll(UserBean.class);
 	}
 }

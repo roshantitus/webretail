@@ -3,10 +3,12 @@
  */
 package com.rsinc.webretail.b2c.estore.dao.impl;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -85,6 +87,14 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 	public List<T> findWithNamedQuery(String queryName, Map<String, Object> params) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<T> findAll(Class<T> entityClass) {
+		
+		//Class<T> entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+		Query query = getEntityManager().createQuery("from " + entityClass.getName());
+	    return query.getResultList();
 	}
 
 }

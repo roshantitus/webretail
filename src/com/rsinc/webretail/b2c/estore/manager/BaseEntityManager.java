@@ -3,6 +3,8 @@
  */
 package com.rsinc.webretail.b2c.estore.manager;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.rsinc.webretail.b2c.estore.dao.BaseDao;
@@ -31,6 +33,8 @@ public interface BaseEntityManager <T extends BaseBean> {
 	void validateForDelete(T t) throws BeanValidationException;
 	
 	T load(Class<T> type, Object id);
+	
+	List<T> findAll();
 	
 	T loadById(Object id);
 }

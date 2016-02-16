@@ -8,6 +8,8 @@ import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.fail;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -132,6 +134,34 @@ public class UserEntityManagerTest {
 			e.printStackTrace();
 			fail(e.getMessage());
 		}
+	}
+	
+	@Test
+	@Transactional
+	public void testFindAllUsers()
+	{
+		try {
+			UserBean userBeanFromDB1 = userEntityManager.loadById((userEntityManager.create(getUser())).getUserId());
+			assertNotNull(userBeanFromDB1);
+			assertNotNull(userBeanFromDB1.getUserId());
+			assertNotNull(userBeanFromDB1.getParty());
+			assertNotNull(userBeanFromDB1.getParty().getPartyId());
+			assertNotNull(userBeanFromDB1.getParty().getPartyAddress());
+			assertNotNull(userBeanFromDB1.getParty().getPartyAddress().getAddressId());	
+			
+			UserBean userBeanFromDB2 = userEntityManager.loadById((userEntityManager.create(getUserWithoutPartyAddress())).getUserId());
+			assertNotNull(userBeanFromDB2);
+			assertNotNull(userBeanFromDB2.getUserId());
+			assertNotNull(userBeanFromDB2.getParty());
+			assertNotNull(userBeanFromDB2.getParty().getPartyId());
+			
+			List<UserBean> userBeanList = userEntityManager.findAll();
+			assertEquals(userBeanList.size(), 3);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e.getMessage());
+		}			
 	}
 	
 	@Test
@@ -280,6 +310,37 @@ public class UserEntityManagerTest {
 			fail(e.getMessage());
 		}
 	}	
+	
+//	@Test
+//	@Transactional
+//	public void testSetDefaultValues()
+//	{
+//		try {
+//			UserBean userBeanFromDB = userEntityManager.loadById((userEntityManager.create(getUser())).getUserId());
+//			assertNotNull(userBeanFromDB);
+//			assertNotNull(userBeanFromDB.getUserId());
+//			assertNotNull(userBeanFromDB.getParty());
+//			assertNotNull(userBeanFromDB.getParty().getPartyId());
+//			assertNotNull(userBeanFromDB.getParty().getPartyAddress());
+//			assertNotNull(userBeanFromDB.getParty().getPartyAddress().getAddressId());			
+//			
+//			Long partyId = userBeanFromDB.getParty().getPartyId();			
+//			PartyBean partyBeanFromDB = partyEntityManager.loadById(partyId);
+//			assertNotNull(partyBeanFromDB);
+//			
+//			Long addressId = userBeanFromDB.getParty().getPartyAddress().getAddressId();
+//			AddressBean partyAddressBeanFromDB = addressEntityManager.loadById(addressId);
+//			assertNotNull(partyAddressBeanFromDB);
+//			
+//			System.out.println("userBean.getUserId():" + userBeanFromDB.getUserId());
+//			System.out.println("userBean.getParty().getPartyId():" + userBeanFromDB.getParty().getPartyId());	
+//			System.out.println("userBean.getParty().getPartyAddress().getAddressId():" + userBeanFromDB.getParty().getPartyAddress().getAddressId());
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			fail(e.getMessage());
+//		}
+//	}	
 	
 	private UserBean getUser() {
 		UserBean userBean = new UserBean();

@@ -3,7 +3,8 @@
  */
 package com.rsinc.webretail.b2c.estore.manager.impl;
 
-import java.util.Date;
+import java.util.Calendar;
+import java.util.List;
 
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -75,7 +76,7 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 		
 		if(null == baseBean.getCreatedDate())
 		{		
-			baseBean.setCreatedDate(new Date());
+			baseBean.setCreatedDate(Calendar.getInstance());
 		}
 		
 		if(null == baseBean.getDeletedYN())
@@ -95,7 +96,7 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 		
 		if(null == baseBean.getUpdatedDate())
 		{		
-			baseBean.setUpdatedDate(new Date());
+			baseBean.setUpdatedDate(Calendar.getInstance());
 		}
 	}
 
@@ -149,4 +150,9 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 	}
 
 	public abstract T loadById(Object id);
+
+	@Override
+	public abstract List<T> findAll();
+	
+	
 }

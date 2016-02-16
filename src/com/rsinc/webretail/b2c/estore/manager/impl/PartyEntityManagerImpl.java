@@ -3,6 +3,8 @@
  */
 package com.rsinc.webretail.b2c.estore.manager.impl;
 
+import java.util.List;
+
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
@@ -76,6 +78,14 @@ public class PartyEntityManagerImpl extends BaseEntityManagerImpl<PartyBean> imp
 	@Override
 	public PartyBean loadById(Object id) {
 		return load(PartyBean.class, id);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.manager.impl.BaseEntityManagerImpl#findAll()
+	 */
+	@Override
+	public List<PartyBean> findAll() {
+		return getDao().findAll(PartyBean.class);
 	}
 
 }

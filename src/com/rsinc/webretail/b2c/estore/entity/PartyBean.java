@@ -3,7 +3,7 @@
  */
 package com.rsinc.webretail.b2c.estore.entity;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -38,7 +38,7 @@ public class PartyBean extends BaseBean {
 	private String cellPhoneNumber;
 	private AddressBean partyAddress;
 	private String gender;
-	private Date dateOfBirth;
+	private Calendar dateOfBirth;
 //	private UserBean user;
 	
 	/**
@@ -143,11 +143,11 @@ public class PartyBean extends BaseBean {
 	}
 
 	@Column(name = "date_of_birth")
-	public Date getDateOfBirth() {
+	public Calendar getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(Calendar dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 

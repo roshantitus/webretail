@@ -3,6 +3,8 @@
  */
 package com.rsinc.webretail.b2c.estore.manager.impl;
 
+import java.util.List;
+
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
@@ -66,5 +68,13 @@ public class AddressEntityManagerImpl extends BaseEntityManagerImpl<AddressBean>
 	public void deleteById(Object id){
 		
 		deleteById(AddressBean.class, id);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.manager.impl.BaseEntityManagerImpl#findAll()
+	 */
+	@Override
+	public List<AddressBean> findAll() {
+		return getDao().findAll(AddressBean.class);
 	}
 }

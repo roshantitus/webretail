@@ -6,6 +6,7 @@ package com.rsinc.webretail.b2c.estore.dao;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.fail;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.transaction.Transactional;
@@ -59,17 +60,17 @@ public class GenericDaoTest {
 		userBean.setStatus("NEW");
 		userBean.setLocaleCode("en_US");
 		userBean.setCreatedBy(SecurityContextUtils.getLoggedInUserId());
-		userBean.setCreatedDate(new Date());
+		userBean.setCreatedDate(Calendar.getInstance());
 		userBean.setUpdatedBy(SecurityContextUtils.getLoggedInUserId());
-		userBean.setUpdatedDate(new Date());
+		userBean.setUpdatedDate(Calendar.getInstance());
 		userBean.setRecordVersionNo(Constants.ZERO);
 		userBean.setDeletedYN(Constants.False);
 		PartyBean party = new PartyBean();
 		party.setEmail(PARTY_EMAIL_ID);
 		party.setCreatedBy(SecurityContextUtils.getLoggedInUserId());
-		party.setCreatedDate(new Date());
+		party.setCreatedDate(Calendar.getInstance());
 		party.setUpdatedBy(SecurityContextUtils.getLoggedInUserId());
-		party.setUpdatedDate(new Date());
+		party.setUpdatedDate(Calendar.getInstance());
 		party.setRecordVersionNo(Constants.ZERO);
 		party.setDeletedYN(Constants.False);		
 		userBean.setParty(party);
