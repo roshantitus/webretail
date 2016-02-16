@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rsinc.webretail.b2c.estore.domain.User;
-import com.rsinc.webretail.b2c.estore.service.EStoreAdminService;
+import com.rsinc.webretail.b2c.estore.business.model.User;
+import com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService;
 
 /**
  * @author Roshan Titus
