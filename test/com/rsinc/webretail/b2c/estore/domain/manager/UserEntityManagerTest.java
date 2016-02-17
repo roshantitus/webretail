@@ -159,7 +159,7 @@ public class UserEntityManagerTest {
 			assertNotNull(userBeanFromDB2.getParty().getPartyId());
 			
 			List<UserBean> userBeanList = userEntityManager.findAll();
-			assertEquals(userBeanList.size(), 3);
+			assertEquals(userBeanList.size(), 2);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
