@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.rsinc.webretail.b2c.estore.data;
+package com.rsinc.webretail.b2c.estore.common.pool;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 

@@ -23,4 +23,6 @@ public interface BaseDao<T> {
 	List<T> findWithNamedQuery(String queryName);
 	List<T> findWithNamedQuery(String queryName, Map<String, Object> params);
 	List<T> findAll(Class<T> type);
+	List<T> bulkCreate(List<T> entities);
+	List<T> bulkUdate(List<T> entities);
 }

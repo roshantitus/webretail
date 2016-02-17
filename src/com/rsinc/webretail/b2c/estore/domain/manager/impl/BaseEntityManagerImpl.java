@@ -153,6 +153,24 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 
 	@Override
 	public abstract List<T> findAll();
-	
-	
+
+	@Override
+	public List<T> bulkCreate(List<T> entities) {
+		for(T baseBean : entities)
+		{
+			validateForCreate(baseBean);
+			setDefaultValues(baseBean);				
+		}
+		return getDao().bulkCreate(entities);
+	}
+
+	@Override
+	public List<T> bulkUdate(List<T> entities) {
+		for(T baseBean : entities)
+		{
+			validateForUpdate(baseBean);		
+		}
+		return getDao().bulkUdate(entities);
+	}
+		
 }

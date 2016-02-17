@@ -3,7 +3,6 @@
  */
 package com.rsinc.webretail.b2c.estore.data.dao.impl;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +11,7 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
+import com.rsinc.webretail.b2c.estore.common.util.Constants;
 import com.rsinc.webretail.b2c.estore.data.dao.BaseDao;
 
 /**
@@ -95,6 +95,36 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 		//Class<T> entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 		Query query = getEntityManager().createQuery("from " + entityClass.getName());
 	    return query.getResultList();
+	}
+
+	@Override
+	public List<T> bulkCreate(List<T> entities) {
+		  int i = 0;
+		  for (T t : entities) {
+			getEntityManager().persist(t);
+		    i++;
+		    if (i % Constants.BATCH_SIZE == 0) {
+		    	// Flush a batch of inserts and release memory.
+		    	getEntityManager().flush();
+		    	getEntityManager().clear();
+		    }
+		  }
+		  return entities;
+	}
+
+	@Override
+	public List<T> bulkUdate(List<T> entities) {
+		  int i = 0;
+		  for (T t : entities) {
+			getEntityManager().merge(t);
+		    i++;
+		    if (i % Constants.BATCH_SIZE == 0) {
+		    	// Flush a batch of inserts and release memory.
+		    	getEntityManager().flush();
+		    	getEntityManager().clear();
+		    }
+		  }
+		  return entities;
 	}
 
 }

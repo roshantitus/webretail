@@ -23,7 +23,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.google.common.base.Preconditions;
-import com.rsinc.webretail.b2c.estore.data.PoolableDataSource;
+import com.rsinc.webretail.b2c.estore.common.pool.PoolableDataSource;
 
 /**
  * @author Roshan Titus
@@ -77,9 +77,11 @@ public class DataConfig{
  
    final Properties additionalProperties() {
        final Properties hibernateProperties = new Properties();
-       //hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+       hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
        hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
-       // hibernateProperties.setProperty("hibernate.globally_quoted_identifiers", "true");
+       hibernateProperties.setProperty("hibernate.globally_quoted_identifiers", env.getProperty("hibernate.globally_quoted_identifiers"));
+       hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+       hibernateProperties.setProperty("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
        return hibernateProperties;
    }
 }

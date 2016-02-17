@@ -15,6 +15,7 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+      
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
         <version>${maven-war-plugin.version}</version>
@@ -23,10 +24,41 @@
           <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
       </plugin>
+      
+<!-- 	  <plugin> -->
+<!--          <artifactId>maven-antrun-plugin</artifactId> -->
+<!--          <version>1.8</version> -->
+<!--          <executions> -->
+<!--              <execution> -->
+<!--                  <phase>process-classes</phase> -->
+<!--                  <configuration> -->
+<!--                      <target> -->
+<!--                          ANT Task definition -->
+<!--                          <java classname="com.rsinc.webretail.b2c.estore.common.tools.JpaSchemaExport" -->
+<!--                              fork="true" failonerror="true"> -->
+<!--                              <arg value="${persistenceUnitName}" /> -->
+<!--                              <arg value="resources/schema-create.sql" /> -->
+<!--                              reference to the passed-in classpath reference -->
+<!--                              <classpath refid="maven.compile.classpath" /> -->
+<!--                          </java> -->
+<!--                      </target> -->
+<!--                  </configuration> -->
+<!--                  <goals> -->
+<!--                      <goal>run</goal> -->
+<!--                  </goals>                  -->
+<!--              </execution> -->
+<!--          </executions> -->
+<!--       </plugin>       -->
+      
     </plugins>
   </build>
   
   <dependencies>
+<dependency>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-antrun-plugin</artifactId>
+	<version>1.8</version>
+</dependency>
   
 	<dependency>
 		<groupId>javax</groupId>
@@ -127,6 +159,7 @@
   
 	<properties>
 	
+		<persistenceUnitName>PersistenceUnit</persistenceUnitName>
 		<com.rsinc.webretail.version>0.0.1-SNAPSHOT</com.rsinc.webretail.version>
 		<sonar.host.url>http://localhost:9000/sonar</sonar.host.url>
 		

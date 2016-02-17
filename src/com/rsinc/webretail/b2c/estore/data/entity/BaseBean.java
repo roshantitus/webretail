@@ -11,6 +11,9 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 /**
  * @author Roshan Titus 
  *
@@ -93,27 +96,23 @@ public abstract class BaseBean implements Serializable{
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+        HashCodeBuilder hcbuilder = new HashCodeBuilder(17, 37);
+        hcbuilder = hcbuilder.append(this.key());
+        return hcbuilder.toHashCode();
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BaseBean other = (BaseBean) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+	public boolean equals(Object target) {
+		
+        if (null == target || !(target.getClass() == getClass()))
+        {
+            return false;
+        }
+        BaseBean bean  = (BaseBean) target;
+
+        EqualsBuilder equalsBuilder = new EqualsBuilder();		
+        equalsBuilder = equalsBuilder.append(this.key(), bean.key());
+        return equalsBuilder.isEquals();
 	}
 
 	@Override

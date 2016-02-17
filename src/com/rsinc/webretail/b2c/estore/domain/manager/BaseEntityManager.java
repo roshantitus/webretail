@@ -37,4 +37,7 @@ public interface BaseEntityManager <T extends BaseBean> {
 	List<T> findAll();
 	
 	T loadById(Object id);
+	
+	List<T> bulkCreate(List<T> entities);
+	List<T> bulkUdate(List<T> entities);	
 }
