@@ -60,6 +60,32 @@
 	<version>1.8</version>
 </dependency>
   
+        <!-- logging interface -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <!-- Binding for Log4J -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        
+        <!-- Log4j API and Core implementation required for binding -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+          
 	<dependency>
 		<groupId>javax</groupId>
 		<artifactId>javaee-api</artifactId>
@@ -154,6 +180,18 @@
     <artifactId>jackson-databind</artifactId>
     <version>2.5.0</version>
 </dependency>	
+
+<dependency>
+	<groupId>javax.servlet.jsp.jstl</groupId>
+	<artifactId>javax.servlet.jsp.jstl-api</artifactId>
+	<version>1.2.1</version>
+</dependency>
+
+    <dependency>
+        <groupId>taglibs</groupId>
+        <artifactId>standard</artifactId>
+        <version>1.1.2</version>
+    </dependency>
   </dependencies>
   
   
@@ -163,6 +201,9 @@
 		<com.rsinc.webretail.version>0.0.1-SNAPSHOT</com.rsinc.webretail.version>
 		<sonar.host.url>http://localhost:9000/sonar</sonar.host.url>
 		
+        <slf4j.version>1.7.16</slf4j.version>
+        <log4j.version>2.5</log4j.version>
+        		
 		<!-- Spring -->
 		<org.springframework.version>4.2.3.RELEASE</org.springframework.version>
 		<org.springframework.security.version>4.0.3.RELEASE</org.springframework.security.version>

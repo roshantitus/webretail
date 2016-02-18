@@ -4,10 +4,6 @@ package com.rsinc.webretail.b2c.estore.common.logging;
 
 import java.io.Serializable;
 
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-
 import com.rsinc.webretail.b2c.estore.common.util.SecurityContextUtils;
 import com.rsinc.webretail.b2c.estore.data.entity.UserBean;
 
@@ -25,15 +21,15 @@ public class Logger implements Serializable
 	private static final long serialVersionUID = -163974832619490911L;
 	
 	// Common logger interface
-    public transient Log log = null;
+    public transient org.slf4j.Logger log = null;
 
 
-    private Logger(Log log)
+    private Logger(org.slf4j.Logger log)
     {
         this.log = log;
     }
 
-    protected static Logger getInstance(Log log)
+    protected static Logger getInstance(org.slf4j.Logger log)
     {
         Logger logger = new Logger(log);
         return logger;
@@ -52,10 +48,6 @@ public class Logger implements Serializable
         return log.isErrorEnabled();
     }
 
-    public boolean isFatalEnabled()
-    {
-        return log.isFatalEnabled();
-    }
 
     public boolean isInfoEnabled()
     {
@@ -76,194 +68,129 @@ public class Logger implements Serializable
      * Logging methods
      */
     
-    public void trace(HttpSession session, Object message)
-    {
-        if (null != session)
-        {        
-            trace(session, message, true);
-        }
-        else
-        {
-            log.trace(message);
-        }        
+    public void trace(Object message)
+    {       
+        trace(message, true);      
     }
 
-    public void trace(HttpSession session, Object message, boolean appendScontext)
+    public void trace(Object message, Throwable t)
     {
-        if (appendScontext)
-        {
-            String msg = getExtenedMessage(session, String.valueOf(message));
-            log.trace(msg);
-        } 
-        else
-        {
-            log.trace(message);
-        }
-    }
-
-    public void trace(HttpSession session, Object message, Throwable t)
-    {
-        String msg = getExtenedMessage(session, String.valueOf(message));
+        String msg = getExtenedMessage(String.valueOf(message));
         log.trace(msg, t);
     }
 
-    public void debug(HttpSession session, Object message)
+    public void debug(Object message)
     {
-        if (null != session)
-        {        
-            debug(session, message, true);
-        }
-        else
-        {
-            log.debug(message);
-        }          
+    	debug(message, true);         
     }
 
-    public void debug(HttpSession session, Object message, boolean appendScontext)
+    public void debug(Object message, Throwable t)
+    {
+        String msg = getExtenedMessage(String.valueOf(message));
+        log.debug(msg, t);
+    }
+
+    public void info(Object message)
+    {
+        info(message, true);       
+    }
+
+    public void info(Object message, Throwable t)
+    {
+        String msg = getExtenedMessage(String.valueOf(message));
+        log.info(msg, t);
+    }
+
+    public void warn(Object message)
+    {      
+        warn(message, true);     
+    }
+
+    public void warn(Object message, Throwable t)
+    {
+        String msg = getExtenedMessage(String.valueOf(message));
+        log.warn(msg, t);
+    }
+
+    public void error(Object message)
+    {
+        error(message, true);          
+    }
+
+    public void error(Object message, Throwable t)
+    {
+        String msg = getExtenedMessage(String.valueOf(message));
+        log.error(msg, t);
+    }
+    
+    //Private methods
+
+    private void debug(Object message, boolean appendScontext)
     {
         if (appendScontext)
         {
-            String msg = getExtenedMessage(session, String.valueOf(message));
+            String msg = getExtenedMessage(String.valueOf(message));
             log.debug(msg);
         } 
         else
         {
-            log.debug(message);
+            log.debug(String.valueOf(message));
         }
     }
-
-    public void debug(HttpSession session, Object message, Throwable t)
-    {
-        String msg = getExtenedMessage(session, String.valueOf(message));
-        log.debug(msg, t);
-    }
-
-    public void info(HttpSession session, Object message)
-    {
-        if (null != session)
-        {        
-            info(session, message, true);
-        }
-        else
-        {
-            log.info(message);
-        }         
-    }
-
-    public void info(HttpSession session, Object message, boolean appendScontext)
+    
+    private void trace(Object message, boolean appendScontext)
     {
         if (appendScontext)
         {
-            String msg = getExtenedMessage(session, String.valueOf(message));
+            String msg = getExtenedMessage(String.valueOf(message));
+            log.trace(msg);
+        } 
+        else
+        {
+            log.trace(String.valueOf(message));
+        }
+    }    
+    
+    private void info(Object message, boolean appendScontext)
+    {
+        if (appendScontext)
+        {
+            String msg = getExtenedMessage(String.valueOf(message));
             log.info(msg);
         } 
         else
         {
-            log.info(message);
+            log.info(String.valueOf(message));
         }
     }
-
-    public void info(HttpSession session, Object message, Throwable t)
-    {
-        String msg = getExtenedMessage(session, String.valueOf(message));
-        log.info(msg, t);
-    }
-
-    public void warn(HttpSession session, Object message)
-    {
-        if (null != session)
-        {        
-            warn(session, message, true);
-        }
-        else
-        {
-            log.warn(message);
-        }          
-    }
-
-    public void warn(HttpSession session, Object message, boolean appendScontext)
+    
+    private void warn(Object message, boolean appendScontext)
     {
         if (appendScontext)
         {
-            String msg = getExtenedMessage(session, String.valueOf(message));
+            String msg = getExtenedMessage(String.valueOf(message));
             log.warn(msg);
         } 
         else
         {
-            log.warn(message);
+            log.warn(String.valueOf(message));
         }
     }
-
-    public void warn(HttpSession session, Object message, Throwable t)
-    {
-        String msg = getExtenedMessage(session, String.valueOf(message));
-        log.warn(msg, t);
-    }
-
-    public void error(HttpSession session, Object message)
-    {
-        if (null != session)
-        {        
-            error(session, message, true);
-        }
-        else
-        {
-            log.error(message);
-        }           
-    }
-
-    public void error(HttpSession session, Object message, boolean appendScontext)
+    
+    private void error(Object message, boolean appendScontext)
     {
         if (appendScontext)
         {
-            String msg = getExtenedMessage(session, String.valueOf(message));
+            String msg = getExtenedMessage(String.valueOf(message));
             log.error(msg);
         } 
         else
         {
-            log.error(message);
+            log.error(String.valueOf(message));
         }
-    }
-
-    public void error(HttpSession session, Object message, Throwable t)
-    {
-        String msg = getExtenedMessage(session, String.valueOf(message));
-        log.error(msg, t);
-    }
-
-    public void fatal(HttpSession session, Object message)
-    {
-        if (null != session)
-        {        
-            fatal(session, message, true);
-        }
-        else
-        {
-            log.fatal(message);
-        }          
-    }
-
-    public void fatal(HttpSession session, Object message, boolean appendScontext)
-    {
-        if (appendScontext)
-        {
-            String msg = getExtenedMessage(session, String.valueOf(message));
-            log.fatal(msg);
-        } 
-        else
-        {
-            log.fatal(message);
-        }
-    }
-
-    public void fatal(HttpSession session, Object message, Throwable t)
-    {
-        String msg = getExtenedMessage(session, String.valueOf(message));
-        log.fatal(msg, t);
-    }
-
-    // TODO integrate this method with Security context to get the enterprise and user info
-    public String getExtenedMessage(HttpSession session, String message)
+    }    
+    
+    private String getExtenedMessage(String message)
     {
         StringBuffer sb = new StringBuffer();
         UserBean user = SecurityContextUtils.getLoggedInUser();

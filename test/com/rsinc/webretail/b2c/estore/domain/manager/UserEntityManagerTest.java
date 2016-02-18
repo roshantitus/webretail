@@ -19,13 +19,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.rsinc.webretail.b2c.estore.common.config.AppConfig;
+import com.rsinc.webretail.b2c.estore.common.logging.Logger;
+import com.rsinc.webretail.b2c.estore.common.logging.LoggerFactory;
 import com.rsinc.webretail.b2c.estore.data.entity.AddressBean;
 import com.rsinc.webretail.b2c.estore.data.entity.PartyBean;
 import com.rsinc.webretail.b2c.estore.data.entity.UserBean;
 import com.rsinc.webretail.b2c.estore.data.entity.enums.UserStatus;
-import com.rsinc.webretail.b2c.estore.domain.manager.AddressEntityManager;
-import com.rsinc.webretail.b2c.estore.domain.manager.PartyEntityManager;
-import com.rsinc.webretail.b2c.estore.domain.manager.UserEntityManager;
 
 /**
  * @author Roshan Titus
@@ -45,6 +44,8 @@ public class UserEntityManagerTest {
 	 */
 	private static final String PARTY_EMAIL_ID = "roshantitus@gmail.com";
 	private static final String PARTY_EMAIL_ID_NEW = "susankoruthu@gmail.com";
+	
+	private static Logger logger = LoggerFactory.getLogger(UserEntityManagerTest.class);
 	
 	@Autowired
 	private UserEntityManager userEntityManager;
@@ -97,9 +98,9 @@ public class UserEntityManagerTest {
 			AddressBean partyAddressBeanFromDB = addressEntityManager.loadById(addressId);
 			assertNotNull(partyAddressBeanFromDB);
 			
-			System.out.println("userBean.getUserId():" + userBeanFromDB.getUserId());
-			System.out.println("userBean.getParty().getPartyId():" + userBeanFromDB.getParty().getPartyId());
-			System.out.println("userBean.getParty().getPartyAddress().getAddressId():" + userBeanFromDB.getParty().getPartyAddress().getAddressId());
+			logger.info("userBean.getUserId():" + userBeanFromDB.getUserId());
+			logger.info("userBean.getParty().getPartyId():" + userBeanFromDB.getParty().getPartyId());
+			logger.info("userBean.getParty().getPartyAddress().getAddressId():" + userBeanFromDB.getParty().getPartyAddress().getAddressId());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -129,9 +130,9 @@ public class UserEntityManagerTest {
 			AddressBean partyAddressBeanFromDB = addressEntityManager.loadById(addressId);
 			assertNotNull(partyAddressBeanFromDB);
 			
-			System.out.println("userBean.getUserId():" + userBeanFromDB.getUserId());
-			System.out.println("userBean.getParty().getPartyId():" + userBeanFromDB.getParty().getPartyId());	
-			System.out.println("userBean.getParty().getPartyAddress().getAddressId():" + userBeanFromDB.getParty().getPartyAddress().getAddressId());
+			logger.info("userBean.getUserId():" + userBeanFromDB.getUserId());
+			logger.info("userBean.getParty().getPartyId():" + userBeanFromDB.getParty().getPartyId());	
+			logger.info("userBean.getParty().getPartyAddress().getAddressId():" + userBeanFromDB.getParty().getPartyAddress().getAddressId());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -306,8 +307,8 @@ public class UserEntityManagerTest {
 			PartyBean partyBeanFromDB = partyEntityManager.loadById(partyId);
 			assertNotNull(partyBeanFromDB);
 			
-			System.out.println("userBean.getUserId():" + userBean.getUserId());
-			System.out.println("userBean.getParty().getPartyId():" + userBean.getParty().getPartyId());
+			logger.info("userBean.getUserId():" + userBean.getUserId());
+			logger.info("userBean.getParty().getPartyId():" + userBean.getParty().getPartyId());
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail(e.getMessage());
@@ -335,9 +336,9 @@ public class UserEntityManagerTest {
 //			AddressBean partyAddressBeanFromDB = addressEntityManager.loadById(addressId);
 //			assertNotNull(partyAddressBeanFromDB);
 //			
-//			System.out.println("userBean.getUserId():" + userBeanFromDB.getUserId());
-//			System.out.println("userBean.getParty().getPartyId():" + userBeanFromDB.getParty().getPartyId());	
-//			System.out.println("userBean.getParty().getPartyAddress().getAddressId():" + userBeanFromDB.getParty().getPartyAddress().getAddressId());
+//			logger.info("userBean.getUserId():" + userBeanFromDB.getUserId());
+//			logger.info("userBean.getParty().getPartyId():" + userBeanFromDB.getParty().getPartyId());	
+//			logger.info("userBean.getParty().getPartyAddress().getAddressId():" + userBeanFromDB.getParty().getPartyAddress().getAddressId());
 //			
 //		} catch (Exception e) {
 //			e.printStackTrace();

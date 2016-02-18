@@ -17,9 +17,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.rsinc.webretail.b2c.estore.common.config.AppConfig;
+import com.rsinc.webretail.b2c.estore.common.logging.Logger;
+import com.rsinc.webretail.b2c.estore.common.logging.LoggerFactory;
 import com.rsinc.webretail.b2c.estore.common.util.Constants;
 import com.rsinc.webretail.b2c.estore.common.util.SecurityContextUtils;
-import com.rsinc.webretail.b2c.estore.data.dao.UserDao;
 import com.rsinc.webretail.b2c.estore.data.entity.PartyBean;
 import com.rsinc.webretail.b2c.estore.data.entity.UserBean;
 
@@ -34,6 +35,9 @@ public class GenericDaoTest {
 	
 	private static final String PARTY_EMAIL_ID = "roshantitus@gmail.com";
 
+	//@InjectLogger 
+	private static Logger logger = LoggerFactory.getLogger(GenericDaoTest.class);
+	
 	@Autowired
 	private UserDao<UserBean> userDao;
 	
@@ -45,7 +49,7 @@ public class GenericDaoTest {
 			userDao.create(userBean);
 			
 			assertNotNull(userBean.getUserId());
-			System.out.println(userBean.getUserId());
+			logger.info(userBean.getUserId());
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail(e.getMessage());

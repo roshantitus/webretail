@@ -24,4 +24,6 @@ public class Constants {
 	
 	public static final Long SYSTEM_USER = new Long(-99);
 	public static final Integer BATCH_SIZE = 0;
+	
+    public static final String DEFAULT_ERROR_VIEW = "errorPage";
 }

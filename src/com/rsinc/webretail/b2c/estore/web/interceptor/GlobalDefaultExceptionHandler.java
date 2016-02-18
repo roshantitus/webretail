@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rsinc.webretail.b2c.estore.common.util.Constants;
+
 /**
  * @author Roshan Titus
  *
  */
 @ControllerAdvice
 public class GlobalDefaultExceptionHandler {
-
-    public static final String DEFAULT_ERROR_VIEW = "errorPage";
 
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
@@ -33,7 +33,7 @@ public class GlobalDefaultExceptionHandler {
         ModelAndView mav = new ModelAndView();
         mav.addObject("exception", e);
         mav.addObject("url", req.getRequestURL());
-        mav.setViewName(DEFAULT_ERROR_VIEW);
+        mav.setViewName(Constants.DEFAULT_ERROR_VIEW);
         return mav;
     }
 

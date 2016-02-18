@@ -22,7 +22,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 @Configuration
 @Import(AppConfig.class)
-@ComponentScan(basePackages = { "com.rsinc.webretail.b2c.estore.web.controller" })
+@ComponentScan(basePackages = { "com.rsinc.webretail.b2c.estore.web.controller", "com.rsinc.webretail.b2c.estore.common.logging" })
 public class WebConfig  extends WebMvcConfigurerAdapter{
 
     @Override

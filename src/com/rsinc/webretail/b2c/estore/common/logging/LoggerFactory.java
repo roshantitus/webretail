@@ -5,8 +5,6 @@ package com.rsinc.webretail.b2c.estore.common.logging;
 import java.io.Serializable;
 import java.util.WeakHashMap;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * 
@@ -53,7 +51,7 @@ public class LoggerFactory implements Serializable
         Logger logger = instances.get(name);
         if (null == logger)
         {
-            Log instance = LogFactory.getLog(name);
+        	org.slf4j.Logger instance = org.slf4j.LoggerFactory.getLogger(name);
             logger = Logger.getInstance(instance);
             synchronized (lock)
             {
@@ -73,8 +71,10 @@ public class LoggerFactory implements Serializable
         instances.clear();
     }
 
-    public String toString()
-    {
-        return null;
-    }
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+    
 }
