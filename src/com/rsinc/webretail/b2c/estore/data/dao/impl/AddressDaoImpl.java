@@ -3,9 +3,6 @@
  */
 package com.rsinc.webretail.b2c.estore.data.dao.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.springframework.stereotype.Repository;
 
 import com.rsinc.webretail.b2c.estore.data.dao.AddressDao;
@@ -16,13 +13,5 @@ import com.rsinc.webretail.b2c.estore.data.dao.AddressDao;
  */
 @Repository
 public class AddressDaoImpl<T> extends BaseDaoImpl<T> implements AddressDao<T>{
-
-	@PersistenceContext
-	private EntityManager entityManager;
-	
-	@Override
-	public EntityManager getEntityManager() {
-		return entityManager;
-	}
 
 }

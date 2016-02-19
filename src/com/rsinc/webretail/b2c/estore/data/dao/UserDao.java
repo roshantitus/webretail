@@ -3,8 +3,6 @@
  */
 package com.rsinc.webretail.b2c.estore.data.dao;
 
-import java.util.List;
-
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,5 +12,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserDao<UserBean> extends BaseDao<UserBean> {
 
-	List<UserBean> fetchAllUsers();
 }

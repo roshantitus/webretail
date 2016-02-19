@@ -6,7 +6,9 @@ package com.rsinc.webretail.b2c.estore.common.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.rsinc.webretail.b2c.estore.business.model.Category;
 import com.rsinc.webretail.b2c.estore.business.model.User;
+import com.rsinc.webretail.b2c.estore.data.entity.CategoryBean;
 import com.rsinc.webretail.b2c.estore.data.entity.UserBean;
 
 /**
@@ -58,6 +60,42 @@ public class EntityConversionUtils {
 			}
 		}		
 		return userList;
+	}
+
+	/**
+	 * @param findAll
+	 * @return
+	 */
+	public static List<Category> convertCategoryBean2Category(List<CategoryBean> categoryBeanList) {
+		
+		List<Category> categoryList = null;
+		if(null != categoryBeanList)
+		{
+			categoryList = new ArrayList<Category>();
+			for(CategoryBean categoryBean : categoryBeanList)
+			{
+				categoryList.add(convertCategoryBean2Category(categoryBean));
+			}			
+		}
+		return categoryList;
+	}
+
+	/**
+	 * @param categoryBean
+	 * @return
+	 */
+	private static Category convertCategoryBean2Category(
+			CategoryBean categoryBean) {
+		
+		Category category = null;
+		if(null != categoryBean)
+		{
+			category = new Category();
+			category.setCategoryId(categoryBean.getCategoryId());
+			category.setCategoryName(categoryBean.getCategoryName());
+			category.setCategoryDescription(categoryBean.getCategoryDescription());
+		}
+		return category;
 	}
 
 }

@@ -20,7 +20,7 @@ import com.rsinc.webretail.b2c.estore.domain.manager.UserEntityManager;
  */
 @Service
 @Transactional
-public class EStoreAdminServiceImpl extends EStoreServiceImpl implements EStoreAdminService {
+public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements EStoreAdminService {
 
 	@Autowired
 	private UserEntityManager userEntityManager;
@@ -32,7 +32,14 @@ public class EStoreAdminServiceImpl extends EStoreServiceImpl implements EStoreA
 	@Override
 	public List<User> getAllUsers() {
 
-		return EntityConversionUtils.convertUserBean2User(userEntityManager.findAll());
+		return EntityConversionUtils.convertUserBean2User(getUserEntityManager().findAll());
 	}
+
+
+	public UserEntityManager getUserEntityManager() {
+		return userEntityManager;
+	}
+	
+	
 	
 }

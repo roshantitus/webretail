@@ -3,11 +3,6 @@
  */
 package com.rsinc.webretail.b2c.estore.data.dao.impl;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.springframework.stereotype.Repository;
 
 import com.rsinc.webretail.b2c.estore.data.dao.UserDao;
@@ -18,18 +13,5 @@ import com.rsinc.webretail.b2c.estore.data.dao.UserDao;
  */
 @Repository
 public class UserDaoImpl<T> extends BaseDaoImpl<T> implements UserDao<T>{
-
-	@PersistenceContext
-	private EntityManager entityManager;
-	
-	@Override
-	public EntityManager getEntityManager() {
-		return entityManager;
-	}
-
-	@Override
-	public List<T> fetchAllUsers() {
-		return findWithNamedQuery("");
-	}
 
 }

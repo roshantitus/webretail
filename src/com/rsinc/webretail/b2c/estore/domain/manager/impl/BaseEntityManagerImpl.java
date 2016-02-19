@@ -107,6 +107,10 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 		{
 			throw new IllegalArgumentException("BaseBean object cannot be null"); 
 		}	
+		if(null != baseBean.key())
+		{
+			throw new IllegalArgumentException("Id should be null for create"); 
+		}
 	}
 	
 	@Override

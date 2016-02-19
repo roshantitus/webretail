@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
@@ -21,13 +22,20 @@ import com.rsinc.webretail.b2c.estore.data.dao.BaseDao;
 @Repository
 public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
-	public abstract EntityManager getEntityManager();
-	
+
+	@PersistenceContext
+	private EntityManager entityManager;
+
 	/**
 	 * 
 	 */
 	public BaseDaoImpl() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	
+	public EntityManager getEntityManager() {
+		return entityManager;
 	}
 
 	/* (non-Javadoc)
