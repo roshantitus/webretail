@@ -3,6 +3,8 @@
  */
 package com.rsinc.webretail.b2c.estore.web.controller;
 
+import java.util.Locale;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
     @RequestMapping(value="/")
-    public String index() {
+    public String index(Locale locale) {
         return "index";
     }
 }

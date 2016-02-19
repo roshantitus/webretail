@@ -3,16 +3,15 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Error Page</title>
+	<title><spring:message code="errorPage.title"/></title>
 </head>
 <body>
-    <h1>Error Page</h1>
-    <p>Application has encountered an error. Please contact support on ...</p>
-    Failed URL: ${url}
-    Exception:  ${exception.message}
+    <h1><spring:message code="errorPage.header"/></h1>
+    <p><spring:message code="errorPage.message"/></p>
+    <spring:message code="errorPage.failedURL"/> ${url}
+    <spring:message code="errorPage.exception"/>  ${exception.message}
         <c:forEach items="${exception.stackTrace}" var="ste"> 
            ${ste} 
     	</c:forEach>
-
 </body>
 </html>

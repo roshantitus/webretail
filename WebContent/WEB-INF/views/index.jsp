@@ -3,9 +3,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>WebRetail</title>
+<title><spring:message code="index.title"/></title>
 </head>
 <body>
-<H1>Welcome to retail web</H1>
+<H1><spring:message code="index.header"/></H1>
 </body>
 </html>
