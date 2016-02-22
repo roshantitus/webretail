@@ -49,13 +49,13 @@ public class AddressEntityManagerImpl extends BaseEntityManagerImpl<AddressBean>
 	}
 	
 	@Override
-	public AddressBean loadById(Object id)  throws RetrievalFailureSystemException, RecordNotFoundException{
+	public AddressBean loadById(Object id)  throws RetrievalFailureSystemException, RecordNotFoundException, ValidationException{
 
 		return load(AddressBean.class, id);
 	}
 
 	@Override
-	public void deleteById(Object id) throws PersistanceFailureSystemException, RecordNotFoundException{
+	public void deleteById(Object id) throws PersistanceFailureSystemException, RecordNotFoundException, ValidationException{
 		
 		deleteById(AddressBean.class, id);
 	}

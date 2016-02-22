@@ -57,7 +57,7 @@ public class PartyEntityManagerImpl extends BaseEntityManagerImpl<PartyBean> imp
 	 * @see com.rsinc.webretail.b2c.estore.domain.manager.impl.BaseEntityManagerImpl#deleteById(java.lang.Object)
 	 */
 	@Override
-	public void deleteById(Object id)  throws PersistanceFailureSystemException, RecordNotFoundException{
+	public void deleteById(Object id)  throws PersistanceFailureSystemException, RecordNotFoundException, ValidationException{
 		deleteById(PartyBean.class, id);
 		
 	}
@@ -66,7 +66,7 @@ public class PartyEntityManagerImpl extends BaseEntityManagerImpl<PartyBean> imp
 	 * @see com.rsinc.webretail.b2c.estore.domain.manager.impl.BaseEntityManagerImpl#loadById(java.lang.Object)
 	 */
 	@Override
-	public PartyBean loadById(Object id)  throws RetrievalFailureSystemException, RecordNotFoundException{
+	public PartyBean loadById(Object id)  throws RetrievalFailureSystemException, RecordNotFoundException, ValidationException{
 		return load(PartyBean.class, id);
 	}
 

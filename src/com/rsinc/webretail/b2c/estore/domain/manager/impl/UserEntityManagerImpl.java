@@ -70,13 +70,13 @@ public class UserEntityManagerImpl extends BaseEntityManagerImpl<UserBean> imple
 	}
 	
 	@Override
-	public UserBean loadById(Object id) throws RetrievalFailureSystemException, RecordNotFoundException{
+	public UserBean loadById(Object id) throws RetrievalFailureSystemException, RecordNotFoundException, ValidationException{
 
 		return load(UserBean.class, id);
 	}
 
 	@Override
-	public void deleteById(Object id) throws PersistanceFailureSystemException, RecordNotFoundException{
+	public void deleteById(Object id) throws PersistanceFailureSystemException, RecordNotFoundException, ValidationException{
 		
 		deleteById(UserBean.class, id);
 	}

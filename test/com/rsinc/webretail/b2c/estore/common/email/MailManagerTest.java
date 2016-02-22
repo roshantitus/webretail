@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.rsinc.webretail.b2c.estore.common.config.AppConfig;
 import com.rsinc.webretail.b2c.estore.common.email.MailManager;
 import com.rsinc.webretail.b2c.estore.common.email.MailMessage;
+import com.rsinc.webretail.b2c.estore.common.exception.system.EmailDeliveryFailureSystemException;
 
 /**
  * @author Roshan Titus
@@ -46,7 +47,7 @@ public class MailManagerTest {
 			mailMessage.setSubject("testSendMessageWithPlainText");
 			mailManager.sendMessage(mailMessage );
 			
-		} catch (Exception e) {
+		} catch (EmailDeliveryFailureSystemException e) {
 			
 			e.printStackTrace();
 			fail(e.getMessage());			

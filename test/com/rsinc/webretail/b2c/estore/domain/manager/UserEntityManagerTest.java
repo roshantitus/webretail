@@ -17,8 +17,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.IllegalTransactionStateException;
 
 import com.rsinc.webretail.b2c.estore.common.config.AppConfig;
+import com.rsinc.webretail.b2c.estore.common.exception.application.RecordNotFoundException;
+import com.rsinc.webretail.b2c.estore.common.exception.system.RetrievalFailureSystemException;
 import com.rsinc.webretail.b2c.estore.common.logging.Logger;
 import com.rsinc.webretail.b2c.estore.common.logging.LoggerFactory;
 import com.rsinc.webretail.b2c.estore.data.entity.AddressBean;
@@ -67,9 +70,12 @@ public class UserEntityManagerTest {
 			fail("create() should be called in a transaction context");
 			
 
-		} catch (Exception e) {
-			assertTrue(e instanceof org.springframework.transaction.IllegalTransactionStateException);
+		} catch (IllegalTransactionStateException e) {
 			assertEquals(e.getMessage(), "No existing transaction found for transaction marked with propagation 'mandatory'");
+		}
+		catch(Exception e)
+		{
+			fail("Error while creating user");
 		}
 	}
 	
@@ -236,9 +242,34 @@ public class UserEntityManagerTest {
 			//delete the user
 			userEntityManager.delete(userBeanFromDB);
 			
-			assertTrue(null == userEntityManager.loadById(userId));
-			assertTrue(null == partyEntityManager.loadById(partyId));
-			assertTrue(null == addressEntityManager.loadById(addressId));
+			try {
+				userEntityManager.loadById(userId);
+				fail("Should have thrown exception");
+			} catch (RecordNotFoundException e) {
+				
+			} catch (RetrievalFailureSystemException e) {
+				fail("Error whil Deleting user");
+			}			
+			
+			
+			try {
+				partyEntityManager.loadById(partyId);
+				fail("Should have thrown exception");
+			} catch (RecordNotFoundException e) {
+				
+			} catch (RetrievalFailureSystemException e) {
+				fail("Error whil Deleting user");
+			}	
+			
+			
+			try {
+				addressEntityManager.loadById(addressId);
+				fail("Should have thrown exception");
+			} catch (RecordNotFoundException e) {
+				
+			} catch (RetrievalFailureSystemException e) {
+				fail("Error whil Deleting user");
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -270,9 +301,34 @@ public class UserEntityManagerTest {
 			//delete the user by id
 			userEntityManager.deleteById(userId);
 			
-			assertTrue(null == userEntityManager.loadById(userId));
-			assertTrue(null == partyEntityManager.loadById(partyId));
-			assertTrue(null == addressEntityManager.loadById(addressId));
+			try {
+				userEntityManager.loadById(userId);
+				fail("Should have thrown exception");
+			} catch (RecordNotFoundException e) {
+				
+			} catch (RetrievalFailureSystemException e) {
+				fail("Error whil Deleting user");
+			}			
+			
+			
+			try {
+				partyEntityManager.loadById(partyId);
+				fail("Should have thrown exception");
+			} catch (RecordNotFoundException e) {
+				
+			} catch (RetrievalFailureSystemException e) {
+				fail("Error whil Deleting user");
+			}	
+			
+			
+			try {
+				addressEntityManager.loadById(addressId);
+				fail("Should have thrown exception");
+			} catch (RecordNotFoundException e) {
+				
+			} catch (RetrievalFailureSystemException e) {
+				fail("Error whil Deleting user");
+			}	
 			
 		} catch (Exception e) {
 			e.printStackTrace();
