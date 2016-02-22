@@ -8,13 +8,19 @@ import java.util.List;
 
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
-import com.rsinc.webretail.b2c.estore.common.exception.BeanValidationException;
+import com.rsinc.webretail.b2c.estore.common.exception.application.RecordAlreadyExistsException;
+import com.rsinc.webretail.b2c.estore.common.exception.application.RecordNotFoundException;
+import com.rsinc.webretail.b2c.estore.common.exception.application.ValidationException;
+import com.rsinc.webretail.b2c.estore.common.exception.system.PersistanceFailureSystemException;
+import com.rsinc.webretail.b2c.estore.common.exception.system.RetrievalFailureSystemException;
 import com.rsinc.webretail.b2c.estore.common.util.Constants;
 import com.rsinc.webretail.b2c.estore.common.util.SecurityContextUtils;
-import com.rsinc.webretail.b2c.estore.data.dao.BaseDao;
+import com.rsinc.webretail.b2c.estore.data.dao.PersistanceDao;
+import com.rsinc.webretail.b2c.estore.data.dao.QueryDao;
 import com.rsinc.webretail.b2c.estore.data.entity.BaseBean;
 import com.rsinc.webretail.b2c.estore.domain.manager.BaseEntityManager;
 
@@ -26,44 +32,61 @@ import com.rsinc.webretail.b2c.estore.domain.manager.BaseEntityManager;
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 public abstract class BaseEntityManagerImpl <T extends BaseBean> implements BaseEntityManager <T> {
 
+	@Inject
+	private PersistanceDao<T> persistanceDao;
+	
+	@Inject
+	private QueryDao queryDao;
+	
 	/**
 	 * 
 	 */
 	public BaseEntityManagerImpl() {
 	}
+	
+	
 
-	public abstract BaseDao<T> getDao();
+	public QueryDao getQueryDao() {
+		return queryDao;
+	}
+
+
+
+	@Override
+	public PersistanceDao<T> getPersistanceDao() {
+		return persistanceDao;
+	}
 	
 	@Override
-	public T create(T baseBean) {
+	public T create(T baseBean)  throws PersistanceFailureSystemException, RecordAlreadyExistsException{
 		
 		validateForCreate(baseBean);
 		setDefaultValues(baseBean);		
-		return getDao().create(baseBean);
+		return getPersistanceDao().create(baseBean);
 	}
 
 	@Override
-	public T update(T baseBean) {
+	public T update(T baseBean)  throws PersistanceFailureSystemException{
 	
 		validateForUpdate(baseBean);
-		return (T)getDao().update(baseBean);
+		return (T)getPersistanceDao().update(baseBean);
 	}
 	
 
 	@Override
-	public void delete(T baseBean) {
+	public void delete(T baseBean)  throws PersistanceFailureSystemException{
 
 		validateForDelete(baseBean);
-		getDao().delete(baseBean);
+		getPersistanceDao().delete(baseBean);
 	}	
 
-	public abstract void deleteById(Object id);
+	public abstract void deleteById(Object id) throws PersistanceFailureSystemException, RecordNotFoundException;
 	
 	@Override
-	public void deleteById(Class<T> type, Object id){
+	public void deleteById(Class<T> type, Object id) throws PersistanceFailureSystemException, RecordNotFoundException{
 		
 		validateForId(id);
-		getDao().delete(type, id);
+		getPersistanceDao().delete(type, id);
 	}
 	
 	@Override
@@ -101,8 +124,8 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 	}
 
 	@Override
-	public void validateForCreate(T baseBean) throws BeanValidationException{
-		// TODO validate and throw BeanValidationException
+	public void validateForCreate(T baseBean) throws ValidationException{
+		// TODO validate and throw ValidationException
 		if(null == baseBean)
 		{
 			throw new IllegalArgumentException("BaseBean object cannot be null"); 
@@ -114,7 +137,7 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 	}
 	
 	@Override
-	public void validateForUpdate(T baseBean) throws BeanValidationException{
+	public void validateForUpdate(T baseBean) throws ValidationException{
 		// TODO Auto-generated method stub
 		if(null == baseBean)
 		{
@@ -127,7 +150,7 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 	}
 
 	@Override
-	public void validateForDelete(T baseBean) throws BeanValidationException{
+	public void validateForDelete(T baseBean) throws ValidationException{
 		// TODO Auto-generated method stub
 		if(null == baseBean)
 		{
@@ -139,7 +162,7 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 		}			
 	}
 	
-	private void validateForId(Object id) throws BeanValidationException{
+	private void validateForId(Object id) throws ValidationException{
 		if(null == id)
 		{
 			throw new IllegalArgumentException("Id cannot be null for delete"); 
@@ -147,34 +170,34 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 	}
 
 	@Override
-	public T load(Class<T> type, Object id){
+	public T load(Class<T> type, Object id) throws RetrievalFailureSystemException, RecordNotFoundException{
 		
 		validateForId(id);		
-		return getDao().find(type, id);
+		return getPersistanceDao().find(type, id);
 	}
 
-	public abstract T loadById(Object id);
+	public abstract T loadById(Object id) throws RetrievalFailureSystemException, RecordNotFoundException;
 
 	@Override
-	public abstract List<T> findAll();
+	public abstract List<T> findAll() throws RetrievalFailureSystemException;
 
 	@Override
-	public List<T> bulkCreate(List<T> entities) {
+	public List<T> bulkCreate(List<T> entities)  throws PersistanceFailureSystemException, RecordAlreadyExistsException{
 		for(T baseBean : entities)
 		{
 			validateForCreate(baseBean);
 			setDefaultValues(baseBean);				
 		}
-		return getDao().bulkCreate(entities);
+		return getPersistanceDao().bulkCreate(entities);
 	}
 
 	@Override
-	public List<T> bulkUdate(List<T> entities) {
+	public List<T> bulkUdate(List<T> entities)  throws PersistanceFailureSystemException{
 		for(T baseBean : entities)
 		{
 			validateForUpdate(baseBean);		
 		}
-		return getDao().bulkUdate(entities);
+		return getPersistanceDao().bulkUdate(entities);
 	}
 		
 }

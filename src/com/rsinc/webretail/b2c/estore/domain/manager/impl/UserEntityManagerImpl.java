@@ -11,10 +11,11 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
-import com.rsinc.webretail.b2c.estore.common.exception.BeanValidationException;
+import com.rsinc.webretail.b2c.estore.common.exception.application.RecordNotFoundException;
+import com.rsinc.webretail.b2c.estore.common.exception.application.ValidationException;
+import com.rsinc.webretail.b2c.estore.common.exception.system.PersistanceFailureSystemException;
+import com.rsinc.webretail.b2c.estore.common.exception.system.RetrievalFailureSystemException;
 import com.rsinc.webretail.b2c.estore.common.util.Constants;
-import com.rsinc.webretail.b2c.estore.data.dao.BaseDao;
-import com.rsinc.webretail.b2c.estore.data.dao.UserDao;
 import com.rsinc.webretail.b2c.estore.data.entity.UserBean;
 import com.rsinc.webretail.b2c.estore.data.entity.enums.UserStatus;
 import com.rsinc.webretail.b2c.estore.domain.manager.PartyEntityManager;
@@ -28,11 +29,6 @@ import com.rsinc.webretail.b2c.estore.domain.manager.UserEntityManager;
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class UserEntityManagerImpl extends BaseEntityManagerImpl<UserBean> implements UserEntityManager {
 
-	/**
-	 * 
-	 */
-	@Inject
-	private UserDao<UserBean> userDao;
 	
 	@Inject
 	private PartyEntityManager partyEntityManager;
@@ -64,7 +60,7 @@ public class UserEntityManagerImpl extends BaseEntityManagerImpl<UserBean> imple
 	}
 
 	@Override
-	public void validateForCreate(UserBean userBean) throws BeanValidationException {
+	public void validateForCreate(UserBean userBean) throws ValidationException {
 		if(null == userBean)
 		{
 			throw new IllegalArgumentException("UserBean object cannot be null"); 
@@ -72,20 +68,15 @@ public class UserEntityManagerImpl extends BaseEntityManagerImpl<UserBean> imple
 		partyEntityManager.validateForCreate(userBean.getParty());
 		super.validateForCreate(userBean);
 	}
-
-	@Override
-	public BaseDao<UserBean> getDao() {
-		return userDao;
-	}
 	
 	@Override
-	public UserBean loadById(Object id){
+	public UserBean loadById(Object id) throws RetrievalFailureSystemException, RecordNotFoundException{
 
 		return load(UserBean.class, id);
 	}
 
 	@Override
-	public void deleteById(Object id){
+	public void deleteById(Object id) throws PersistanceFailureSystemException, RecordNotFoundException{
 		
 		deleteById(UserBean.class, id);
 	}
@@ -94,7 +85,7 @@ public class UserEntityManagerImpl extends BaseEntityManagerImpl<UserBean> imple
 	 * @see com.rsinc.webretail.b2c.estore.domain.manager.impl.BaseEntityManagerImpl#findAll(java.lang.Class)
 	 */
 	@Override
-	public List<UserBean> findAll() {
-		return getDao().findAll(UserBean.class);
+	public List<UserBean> findAll()  throws RetrievalFailureSystemException{
+		return getPersistanceDao().findAll(UserBean.class);
 	}
 }

@@ -6,6 +6,8 @@ package com.rsinc.webretail.b2c.estore.business.service;
 import java.util.List;
 
 import com.rsinc.webretail.b2c.estore.business.model.Category;
+import com.rsinc.webretail.b2c.estore.common.exception.application.ApplicationException;
+import com.rsinc.webretail.b2c.estore.common.exception.system.SystemException;
 
 /**
  * @author Roshan Titus
@@ -13,8 +15,8 @@ import com.rsinc.webretail.b2c.estore.business.model.Category;
  */
 public interface EStoreService {
 	
-	List<Category> getAllCategories();
+	List<Category> getAllCategories() throws ApplicationException, SystemException;
 	
-	//List<Product> getAllProducts();	
+	//List<Product> getAllProducts() throws ApplicationException, SystemException;	
 
 }

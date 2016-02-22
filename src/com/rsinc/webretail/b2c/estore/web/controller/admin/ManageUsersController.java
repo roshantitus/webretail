@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.rsinc.webretail.b2c.estore.business.model.User;
 import com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService;
+import com.rsinc.webretail.b2c.estore.common.exception.application.ApplicationException;
+import com.rsinc.webretail.b2c.estore.common.exception.system.SystemException;
 import com.rsinc.webretail.b2c.estore.common.logging.Logger;
 import com.rsinc.webretail.b2c.estore.common.logging.LoggerFactory;
 import com.rsinc.webretail.b2c.estore.common.util.Constants;
@@ -26,25 +28,27 @@ import com.rsinc.webretail.b2c.estore.common.util.Constants;
  *
  */
 @Controller
-public class UserController {
+public class ManageUsersController {
 
 	@Autowired
 	private EStoreAdminService eStoreAdminService;
 	
 //	@InjectLogger
-	private static Logger logger = LoggerFactory.getLogger(UserController.class);
+	private static Logger logger = LoggerFactory.getLogger(ManageUsersController.class);
 	
     /**
     * Rest web service
+     * @throws SystemException 
+     * @throws ApplicationException 
     */
     @RequestMapping(value = "/admin/usersList", method = RequestMethod.GET)
-    public @ResponseBody List<User> getAllUsers() {
+    public @ResponseBody List<User> getAllUsers() throws ApplicationException, SystemException {
     	logger.info("getAllUsers()");
         return eStoreAdminService.getAllUsers();
     }
     
-    @ExceptionHandler(Exception.class)
-    public ModelAndView handleError(HttpServletRequest req, Exception exception) {
+    @ExceptionHandler(ApplicationException.class)
+    public ModelAndView handleApplicationException(HttpServletRequest req, Exception exception) {
       logger.error("Request: " + req.getRequestURL() + " raised " + exception);
 
       ModelAndView mav = new ModelAndView();
@@ -54,4 +58,14 @@ public class UserController {
       return mav;
     }    
 
+    @ExceptionHandler(SystemException.class)
+    public ModelAndView handleSystemException(HttpServletRequest req, Exception exception) {
+      logger.error("Request: " + req.getRequestURL() + " raised " + exception);
+
+      ModelAndView mav = new ModelAndView();
+      mav.addObject("exception", exception);
+      mav.addObject("url", req.getRequestURL());
+      mav.setViewName(Constants.DEFAULT_ERROR_VIEW);
+      return mav;
+    }     
 }

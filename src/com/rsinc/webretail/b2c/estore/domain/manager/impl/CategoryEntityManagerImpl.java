@@ -7,12 +7,12 @@ import java.util.List;
 
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
-import com.rsinc.webretail.b2c.estore.data.dao.BaseDao;
-import com.rsinc.webretail.b2c.estore.data.dao.CategoryDao;
+import com.rsinc.webretail.b2c.estore.common.exception.application.RecordNotFoundException;
+import com.rsinc.webretail.b2c.estore.common.exception.system.PersistanceFailureSystemException;
+import com.rsinc.webretail.b2c.estore.common.exception.system.RetrievalFailureSystemException;
 import com.rsinc.webretail.b2c.estore.data.entity.CategoryBean;
 import com.rsinc.webretail.b2c.estore.domain.manager.CategoryEntityManager;
 
@@ -24,23 +24,11 @@ import com.rsinc.webretail.b2c.estore.domain.manager.CategoryEntityManager;
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class CategoryEntityManagerImpl extends BaseEntityManagerImpl<CategoryBean> implements CategoryEntityManager{
 
-	@Inject
-	private CategoryDao<CategoryBean> categoryDao;
-
-	/* (non-Javadoc)
-	 * @see com.rsinc.webretail.b2c.estore.domain.manager.BaseEntityManager#getDao()
-	 */
-	@Override
-	public BaseDao<CategoryBean> getDao() {
-		// TODO implement method functionality
-		return categoryDao;
-	}
-
 	/* (non-Javadoc)
 	 * @see com.rsinc.webretail.b2c.estore.domain.manager.impl.BaseEntityManagerImpl#deleteById(java.lang.Object)
 	 */
 	@Override
-	public void deleteById(Object id) {
+	public void deleteById(Object id)  throws PersistanceFailureSystemException, RecordNotFoundException{
 		deleteById(CategoryBean.class, id);
 		
 	}
@@ -49,7 +37,7 @@ public class CategoryEntityManagerImpl extends BaseEntityManagerImpl<CategoryBea
 	 * @see com.rsinc.webretail.b2c.estore.domain.manager.impl.BaseEntityManagerImpl#loadById(java.lang.Object)
 	 */
 	@Override
-	public CategoryBean loadById(Object id) {
+	public CategoryBean loadById(Object id)  throws RetrievalFailureSystemException, RecordNotFoundException{
 		// TODO implement method functionality
 		return load(CategoryBean.class, id);
 	}
@@ -58,9 +46,9 @@ public class CategoryEntityManagerImpl extends BaseEntityManagerImpl<CategoryBea
 	 * @see com.rsinc.webretail.b2c.estore.domain.manager.impl.BaseEntityManagerImpl#findAll()
 	 */
 	@Override
-	public List<CategoryBean> findAll() {
+	public List<CategoryBean> findAll()  throws RetrievalFailureSystemException{
 		// TODO implement method functionality
-		return getDao().findAll(CategoryBean.class);
+		return getPersistanceDao().findAll(CategoryBean.class);
 	}
 
 	

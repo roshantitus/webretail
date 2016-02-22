@@ -8,6 +8,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.rsinc.webretail.b2c.estore.business.model.User;
+import com.rsinc.webretail.b2c.estore.common.exception.application.ApplicationException;
+import com.rsinc.webretail.b2c.estore.common.exception.system.SystemException;
 
 /**
  * @author Roshan Titus
@@ -16,16 +18,16 @@ import com.rsinc.webretail.b2c.estore.business.model.User;
 @Service
 public interface EStoreAdminService extends EStoreService{
 
-	List<User> getAllUsers();
+	List<User> getAllUsers() throws ApplicationException, SystemException;
 	
-	//ProductBean addProduct(ProductBean product);
-	//CategoryBean addCategory(CategoryBean category);
+	//ProductBean addProduct(ProductBean product) throws ApplicationException, SystemException;
+	//CategoryBean addCategory(CategoryBean category) throws ApplicationException, SystemException;
 	
-	//void deleteProduct(ProductBean product);
-	//void deleteCategory(CategoryBean category);
-	//void deleteUser(UserBean user);
+	//void deleteProduct(ProductBean product) throws ApplicationException, SystemException;
+	//void deleteCategory(CategoryBean category) throws ApplicationException, SystemException;
+	//void deleteUser(UserBean user) throws ApplicationException, SystemException;
 	
-	//void updateProduct(ProductBean product);
-	//void updateCategory(CategoryBean category);
+	//void updateProduct(ProductBean product) throws ApplicationException, SystemException;
+	//void updateCategory(CategoryBean category) throws ApplicationException, SystemException;
 	
 }

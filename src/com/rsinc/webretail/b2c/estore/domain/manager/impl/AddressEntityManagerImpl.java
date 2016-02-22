@@ -7,13 +7,13 @@ import java.util.List;
 
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
-import com.rsinc.webretail.b2c.estore.common.exception.BeanValidationException;
-import com.rsinc.webretail.b2c.estore.data.dao.AddressDao;
-import com.rsinc.webretail.b2c.estore.data.dao.BaseDao;
+import com.rsinc.webretail.b2c.estore.common.exception.application.RecordNotFoundException;
+import com.rsinc.webretail.b2c.estore.common.exception.application.ValidationException;
+import com.rsinc.webretail.b2c.estore.common.exception.system.PersistanceFailureSystemException;
+import com.rsinc.webretail.b2c.estore.common.exception.system.RetrievalFailureSystemException;
 import com.rsinc.webretail.b2c.estore.data.entity.AddressBean;
 import com.rsinc.webretail.b2c.estore.domain.manager.AddressEntityManager;
 
@@ -28,8 +28,7 @@ public class AddressEntityManagerImpl extends BaseEntityManagerImpl<AddressBean>
 	/**
 	 * 
 	 */
-	@Inject
-	private AddressDao<AddressBean> addressDao;
+
 	
 	public AddressEntityManagerImpl() {
 	}
@@ -41,31 +40,22 @@ public class AddressEntityManagerImpl extends BaseEntityManagerImpl<AddressBean>
 	}
 
 	@Override
-	public void validateForCreate(AddressBean addressBean) throws BeanValidationException {
+	public void validateForCreate(AddressBean addressBean) throws ValidationException {
 		if(null == addressBean)
 		{
 			throw new IllegalArgumentException("AddressBean object cannot be null"); 
 		}			
 		super.validateForCreate(addressBean);
 	}
-
-	@Override
-	public BaseDao<AddressBean> getDao() {
-		return addressDao;
-	}
-
-	public void setAddressDao(AddressDao<AddressBean> addressDao) {
-		this.addressDao = addressDao;
-	}
 	
 	@Override
-	public AddressBean loadById(Object id){
+	public AddressBean loadById(Object id)  throws RetrievalFailureSystemException, RecordNotFoundException{
 
 		return load(AddressBean.class, id);
 	}
 
 	@Override
-	public void deleteById(Object id){
+	public void deleteById(Object id) throws PersistanceFailureSystemException, RecordNotFoundException{
 		
 		deleteById(AddressBean.class, id);
 	}
@@ -74,7 +64,7 @@ public class AddressEntityManagerImpl extends BaseEntityManagerImpl<AddressBean>
 	 * @see com.rsinc.webretail.b2c.estore.domain.manager.impl.BaseEntityManagerImpl#findAll()
 	 */
 	@Override
-	public List<AddressBean> findAll() {
-		return getDao().findAll(AddressBean.class);
+	public List<AddressBean> findAll()  throws RetrievalFailureSystemException{
+		return getPersistanceDao().findAll(AddressBean.class);
 	}
 }

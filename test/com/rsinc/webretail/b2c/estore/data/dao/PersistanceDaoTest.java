@@ -31,22 +31,22 @@ import com.rsinc.webretail.b2c.estore.data.entity.UserBean;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={AppConfig.class})
 @Transactional
-public class GenericDaoTest {
+public class PersistanceDaoTest {
 	
 	private static final String PARTY_EMAIL_ID = "roshantitus@gmail.com";
 
 	//@InjectLogger 
-	private static Logger logger = LoggerFactory.getLogger(GenericDaoTest.class);
+	private static Logger logger = LoggerFactory.getLogger(PersistanceDaoTest.class);
 	
 	@Autowired
-	private UserDao<UserBean> userDao;
+	private PersistanceDao persistanceDao;
 	
 	@Test
 	public void testCreateUser()
 	{
 		try {
 			UserBean userBean = getUser();
-			userDao.create(userBean);
+			persistanceDao.create(userBean);
 			
 			assertNotNull(userBean.getUserId());
 			logger.info(userBean.getUserId());

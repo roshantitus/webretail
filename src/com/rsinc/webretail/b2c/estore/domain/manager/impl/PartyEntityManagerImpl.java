@@ -11,9 +11,10 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
-import com.rsinc.webretail.b2c.estore.common.exception.BeanValidationException;
-import com.rsinc.webretail.b2c.estore.data.dao.BaseDao;
-import com.rsinc.webretail.b2c.estore.data.dao.PartyDao;
+import com.rsinc.webretail.b2c.estore.common.exception.application.RecordNotFoundException;
+import com.rsinc.webretail.b2c.estore.common.exception.application.ValidationException;
+import com.rsinc.webretail.b2c.estore.common.exception.system.PersistanceFailureSystemException;
+import com.rsinc.webretail.b2c.estore.common.exception.system.RetrievalFailureSystemException;
 import com.rsinc.webretail.b2c.estore.data.entity.PartyBean;
 import com.rsinc.webretail.b2c.estore.domain.manager.AddressEntityManager;
 import com.rsinc.webretail.b2c.estore.domain.manager.PartyEntityManager;
@@ -25,9 +26,6 @@ import com.rsinc.webretail.b2c.estore.domain.manager.PartyEntityManager;
 @Component
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class PartyEntityManagerImpl extends BaseEntityManagerImpl<PartyBean> implements PartyEntityManager{
-
-	@Inject
-	private PartyDao<PartyBean> partyDao;
 	
 	@Inject
 	private AddressEntityManager addressEntityManager;
@@ -43,7 +41,7 @@ public class PartyEntityManagerImpl extends BaseEntityManagerImpl<PartyBean> imp
 	}
 	
 	@Override
-	public void validateForCreate(PartyBean partyBean) throws BeanValidationException {
+	public void validateForCreate(PartyBean partyBean) throws ValidationException {
 		if(null == partyBean)
 		{
 			throw new IllegalArgumentException("Party object cannot be null"); 
@@ -54,20 +52,12 @@ public class PartyEntityManagerImpl extends BaseEntityManagerImpl<PartyBean> imp
 		}
 		super.validateForCreate(partyBean);
 	}	
-	
-	/* (non-Javadoc)
-	 * @see com.rsinc.webretail.b2c.estore.domain.manager.impl.BaseEntityManagerImpl#getDao()
-	 */
-	@Override
-	public BaseDao<PartyBean> getDao() {
-		return partyDao;
-	}
 
 	/* (non-Javadoc)
 	 * @see com.rsinc.webretail.b2c.estore.domain.manager.impl.BaseEntityManagerImpl#deleteById(java.lang.Object)
 	 */
 	@Override
-	public void deleteById(Object id) {
+	public void deleteById(Object id)  throws PersistanceFailureSystemException, RecordNotFoundException{
 		deleteById(PartyBean.class, id);
 		
 	}
@@ -76,7 +66,7 @@ public class PartyEntityManagerImpl extends BaseEntityManagerImpl<PartyBean> imp
 	 * @see com.rsinc.webretail.b2c.estore.domain.manager.impl.BaseEntityManagerImpl#loadById(java.lang.Object)
 	 */
 	@Override
-	public PartyBean loadById(Object id) {
+	public PartyBean loadById(Object id)  throws RetrievalFailureSystemException, RecordNotFoundException{
 		return load(PartyBean.class, id);
 	}
 
@@ -84,8 +74,8 @@ public class PartyEntityManagerImpl extends BaseEntityManagerImpl<PartyBean> imp
 	 * @see com.rsinc.webretail.b2c.estore.domain.manager.impl.BaseEntityManagerImpl#findAll()
 	 */
 	@Override
-	public List<PartyBean> findAll() {
-		return getDao().findAll(PartyBean.class);
+	public List<PartyBean> findAll()  throws RetrievalFailureSystemException{
+		return getPersistanceDao().findAll(PartyBean.class);
 	}
 
 }

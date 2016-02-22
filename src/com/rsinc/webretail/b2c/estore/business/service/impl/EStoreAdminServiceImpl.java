@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.rsinc.webretail.b2c.estore.business.model.User;
 import com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService;
+import com.rsinc.webretail.b2c.estore.common.exception.application.ApplicationException;
+import com.rsinc.webretail.b2c.estore.common.exception.system.SystemException;
 import com.rsinc.webretail.b2c.estore.common.util.EntityConversionUtils;
 import com.rsinc.webretail.b2c.estore.domain.manager.UserEntityManager;
 
@@ -30,7 +32,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllUsers()
 	 */
 	@Override
-	public List<User> getAllUsers() {
+	public List<User> getAllUsers() throws ApplicationException, SystemException{
 
 		return EntityConversionUtils.convertUserBean2User(getUserEntityManager().findAll());
 	}
