@@ -3,12 +3,13 @@
  */
 package com.rsinc.webretail.b2c.estore.data.dao;
 
-import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.fail;
 
 import java.util.Calendar;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -25,6 +26,7 @@ import com.rsinc.webretail.b2c.estore.common.util.Constants;
 import com.rsinc.webretail.b2c.estore.common.util.SecurityContextUtils;
 import com.rsinc.webretail.b2c.estore.data.entity.PartyBean;
 import com.rsinc.webretail.b2c.estore.data.entity.UserBean;
+import com.rsinc.webretail.b2c.estore.data.entity.enums.UserStatus;
 
 /**
  * @author Roshan Titus
@@ -125,13 +127,59 @@ public class QueryDaoTest {
 			fail(e.getMessage());
 		}
 	}	
+	
+	@Test
+	public void testQueryForMap()
+	{
+		try {
+			UserBean userBean = getUser();
+			persistanceDao.create(userBean);
+			
+			assertNotNull(userBean.getUserId());
+			logger.info(userBean.getUserId());
+
+			Map<String, Object> userMap = queryDao.queryForMap("select * from user where user_id = ?", new Object[]{userBean.getUserId()});
+			assertNotNull(userMap);
+			assertEquals(userMap.get("user_id"), userBean.getUserId());
+			assertEquals(userMap.get("status"), UserStatus.NEW.toString());
+			assertEquals(userMap.get("deleted_yn"), Boolean.FALSE);
+			assertEquals(userMap.get("reward_points"), Constants.ZERO);		
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+	}	
+	
+//	@Test
+//	public void testQueryForBean()
+//	{
+//		try {
+//			UserBean userBean = getUser();
+//			persistanceDao.create(userBean);
+//			
+//			assertNotNull(userBean.getUserId());
+//			logger.info(userBean.getUserId());
+//
+//			UserBean userBeanFromDB = queryDao.queryForBean("select * from user where user_id = ?", new Object[]{userBean.getUserId()}, UserBean.class);
+//			assertNotNull(userBeanFromDB);
+//			assertEquals(userBeanFromDB.getUserId(), userBean.getUserId());
+//			assertEquals(userBeanFromDB.getStatus(), userBean.getStatus());
+//			assertEquals(userBeanFromDB.getDeletedYN(), userBean.getDeletedYN());
+//			assertEquals(userBeanFromDB.getRewardPoints(), userBean.getRewardPoints());		
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			fail(e.getMessage());
+//		}
+//	}		
 
 	/**
 	 * @return
 	 */
 	private UserBean getUser() {
 		UserBean userBean = new UserBean();
-		userBean.setStatus("NEW");
+		userBean.setStatus(UserStatus.NEW.toString());
 		userBean.setLocaleCode(Constants.DEFAULT_LOCALE);
 		userBean.setRewardPoints(Constants.ZERO);
 		userBean.setCreatedBy(SecurityContextUtils.getLoggedInUserId());

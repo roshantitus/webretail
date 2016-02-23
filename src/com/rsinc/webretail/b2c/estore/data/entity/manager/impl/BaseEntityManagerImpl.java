@@ -202,7 +202,97 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 	public abstract T loadById(Object id) throws RetrievalFailureSystemException, RecordNotFoundException, ValidationException;
 
 	public abstract List<T> findAll() throws RetrievalFailureSystemException;
-	
+
+	@Override
+	public List<T> findAll(Class<T> type)
+			throws RetrievalFailureSystemException {
+
+		return getPersistanceDao().findAll(type);
+	}
+
+
+
+	@Override
+	public List<T> findWithNamedQuery(String queryName)
+			throws RetrievalFailureSystemException {
+
+		return getPersistanceDao().findWithNamedQuery(queryName);
+	}
+
+
+
+	@Override
+	public List<T> findWithNamedQuery(String queryName,
+			Map<String, Object> params) throws RetrievalFailureSystemException {
+		
+		return getPersistanceDao().findWithNamedQuery(queryName, params);
+	}
+
+
+
+	@Override
+	public List<T> findWithNamedQuery(String namedQueryName, List params)
+			throws RetrievalFailureSystemException {
+		
+		return getPersistanceDao().findWithNamedQuery(namedQueryName, params);
+	}
+
+
+
+	@Override
+	public List<T> findWithNamedQuery(String queryName, int resultLimit)
+			throws RetrievalFailureSystemException {
+		
+		return getPersistanceDao().findWithNamedQuery(queryName, resultLimit);
+	}
+
+
+
+	@Override
+	public List<T> findWithNamedQuery(String namedQueryName, Map params,
+			int resultLimit) throws RetrievalFailureSystemException {
+		
+		return getPersistanceDao().findWithNamedQuery(namedQueryName, params,
+				resultLimit);
+	}
+
+
+
+	@Override
+	public List<T> findWithNamedQuery(String namedQueryName, List params,
+			int resultLimit) throws RetrievalFailureSystemException {
+		
+		return getPersistanceDao().findWithNamedQuery(namedQueryName, params,
+				resultLimit);
+	}
+
+
+
+	@Override
+	public List findByNativeQuery(String sql, Class type)
+			throws RetrievalFailureSystemException {
+		
+		return getPersistanceDao().findByNativeQuery(sql, type);
+	}
+
+
+
+	@Override
+	public List findByNativeQuery(String sql, Class type, List params)
+			throws RetrievalFailureSystemException {
+		
+		return getPersistanceDao().findByNativeQuery(sql, type, params);
+	}
+
+
+
+	@Override
+	public List findByNativeQuery(String sql, Class type, List params,
+			int resultLimit) throws RetrievalFailureSystemException {
+		
+		return getPersistanceDao().findByNativeQuery(sql, type, params, resultLimit);
+	}
+
 	
 	//Query methods
 
