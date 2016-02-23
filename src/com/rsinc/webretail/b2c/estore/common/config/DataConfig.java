@@ -5,10 +5,10 @@ package com.rsinc.webretail.b2c.estore.common.config;
 
 import java.util.Properties;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -36,7 +36,7 @@ import com.rsinc.webretail.b2c.estore.common.pool.PoolableDataSource;
 public class DataConfig{
 
 	
-   @Autowired
+   @Inject
    private Environment env; 
     
    @Bean

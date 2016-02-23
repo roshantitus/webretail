@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.rsinc.webretail.b2c.estore.domain.manager;
+package com.rsinc.webretail.b2c.estore.data.entity.manager;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -10,11 +10,11 @@ import static junit.framework.Assert.fail;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.IllegalTransactionStateException;
@@ -50,13 +50,13 @@ public class UserEntityManagerTest {
 	
 	private static Logger logger = LoggerFactory.getLogger(UserEntityManagerTest.class);
 	
-	@Autowired
+	@Inject
 	private UserEntityManager userEntityManager;
 		
-	@Autowired
+	@Inject
 	private PartyEntityManager partyEntityManager;
 	
-	@Autowired
+	@Inject
 	private AddressEntityManager addressEntityManager;	
 	
 	@Test

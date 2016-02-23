@@ -5,7 +5,8 @@ package com.rsinc.webretail.b2c.estore.business.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +15,7 @@ import com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService;
 import com.rsinc.webretail.b2c.estore.common.exception.application.ApplicationException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.SystemException;
 import com.rsinc.webretail.b2c.estore.common.util.EntityConversionUtils;
-import com.rsinc.webretail.b2c.estore.domain.manager.UserEntityManager;
+import com.rsinc.webretail.b2c.estore.data.entity.manager.UserEntityManager;
 
 /**
  * @author Roshan Titus
@@ -24,7 +25,7 @@ import com.rsinc.webretail.b2c.estore.domain.manager.UserEntityManager;
 @Transactional
 public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements EStoreAdminService {
 
-	@Autowired
+	@Inject
 	private UserEntityManager userEntityManager;
 	
 

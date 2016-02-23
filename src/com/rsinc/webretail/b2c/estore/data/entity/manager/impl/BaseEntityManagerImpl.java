@@ -1,15 +1,17 @@
 /**
  * 
  */
-package com.rsinc.webretail.b2c.estore.domain.manager.impl;
+package com.rsinc.webretail.b2c.estore.data.entity.manager.impl;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import com.rsinc.webretail.b2c.estore.common.exception.application.RecordAlreadyExistsException;
@@ -22,7 +24,7 @@ import com.rsinc.webretail.b2c.estore.common.util.SecurityContextUtils;
 import com.rsinc.webretail.b2c.estore.data.dao.PersistanceDao;
 import com.rsinc.webretail.b2c.estore.data.dao.QueryDao;
 import com.rsinc.webretail.b2c.estore.data.entity.BaseBean;
-import com.rsinc.webretail.b2c.estore.domain.manager.BaseEntityManager;
+import com.rsinc.webretail.b2c.estore.data.entity.manager.BaseEntityManager;
 
 /**
  * @author Roshan Titus 
@@ -198,6 +200,102 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 			validateForUpdate(baseBean);		
 		}
 		return getPersistanceDao().bulkUdate(entities);
+	}
+
+
+
+	@Override
+	public <E> List<E> queryForList(String query, Class<E> clazz)
+			throws RetrievalFailureSystemException {		
+		return queryDao.queryForList(query, clazz);
+	}
+
+
+
+	@Override
+	public <E> List<E> queryForList(String query, Object[] args, Class<E> clazz)
+			throws RetrievalFailureSystemException {
+		return queryDao.queryForList(query, args, clazz);
+	}
+
+
+
+	@Override
+	public <E> List<E> queryForList(String query, RowMapper<E> mapper)
+			throws RetrievalFailureSystemException {
+		return queryDao.queryForList(query, mapper);
+	}
+
+
+
+	@Override
+	public <E> List<E> queryForList(String query, Object[] args,
+			RowMapper<E> mapper) throws RetrievalFailureSystemException {
+		return queryDao.queryForList(query, args, mapper);
+	}
+
+
+
+	@Override
+	public <E> List<E> queryForBeanList(String query, Object[] args,
+			Class<E> clazz) throws RetrievalFailureSystemException {
+		return queryDao.queryForBeanList(query, args, clazz);
+	}
+
+
+
+	@Override
+	public <E> E queryForBean(String query, Object[] args, Class<E> clazz)
+			throws RetrievalFailureSystemException {
+		return queryDao.queryForBean(query, args, clazz);
+	}
+
+
+
+	@Override
+	public <E> E queryForObject(String query, Object[] args, Class<E> clazz)
+			throws RetrievalFailureSystemException {
+		return queryDao.queryForObject(query, args, clazz);
+	}
+
+
+
+	@Override
+	public <E> E queryForObject(String query, RowMapper<E> mapper)
+			throws RetrievalFailureSystemException {
+		return queryDao.queryForObject(query, mapper);
+	}
+
+
+
+	@Override
+	public <E> E queryForObject(String query, Object[] args, RowMapper<E> mapper)
+			throws RetrievalFailureSystemException {
+		return queryDao.queryForObject(query, args, mapper);
+	}
+
+
+
+	@Override
+	public Map<String, Object> queryForMap(String query, Object[] args)
+			throws RetrievalFailureSystemException {
+		return queryDao.queryForMap(query, args);
+	}
+
+
+
+	@Override
+	public List<Map<String, Object>> queryForList(String query)
+			throws RetrievalFailureSystemException {
+		return queryDao.queryForList(query);
+	}
+
+
+
+	@Override
+	public List<Map<String, Object>> queryForList(String query, Object[] args)
+			throws RetrievalFailureSystemException {
+		return queryDao.queryForList(query, args);
 	}
 		
 }

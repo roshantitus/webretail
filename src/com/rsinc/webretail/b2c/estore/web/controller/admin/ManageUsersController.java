@@ -5,9 +5,9 @@ package com.rsinc.webretail.b2c.estore.web.controller.admin;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +30,7 @@ import com.rsinc.webretail.b2c.estore.common.util.Constants;
 @Controller
 public class ManageUsersController {
 
-	@Autowired
+	@Inject
 	private EStoreAdminService eStoreAdminService;
 	
 //	@InjectLogger

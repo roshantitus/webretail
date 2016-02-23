@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.rsinc.webretail.b2c.estore.domain.manager.impl;
+package com.rsinc.webretail.b2c.estore.data.entity.manager.impl;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ import com.rsinc.webretail.b2c.estore.common.exception.application.ValidationExc
 import com.rsinc.webretail.b2c.estore.common.exception.system.PersistanceFailureSystemException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.RetrievalFailureSystemException;
 import com.rsinc.webretail.b2c.estore.data.entity.PartyBean;
-import com.rsinc.webretail.b2c.estore.domain.manager.AddressEntityManager;
-import com.rsinc.webretail.b2c.estore.domain.manager.PartyEntityManager;
+import com.rsinc.webretail.b2c.estore.data.entity.manager.AddressEntityManager;
+import com.rsinc.webretail.b2c.estore.data.entity.manager.PartyEntityManager;
 
 /**
  * @author Roshan Titus
@@ -54,7 +54,7 @@ public class PartyEntityManagerImpl extends BaseEntityManagerImpl<PartyBean> imp
 	}	
 
 	/* (non-Javadoc)
-	 * @see com.rsinc.webretail.b2c.estore.domain.manager.impl.BaseEntityManagerImpl#deleteById(java.lang.Object)
+	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.impl.BaseEntityManagerImpl#deleteById(java.lang.Object)
 	 */
 	@Override
 	public void deleteById(Object id)  throws PersistanceFailureSystemException, RecordNotFoundException, ValidationException{
@@ -63,7 +63,7 @@ public class PartyEntityManagerImpl extends BaseEntityManagerImpl<PartyBean> imp
 	}
 
 	/* (non-Javadoc)
-	 * @see com.rsinc.webretail.b2c.estore.domain.manager.impl.BaseEntityManagerImpl#loadById(java.lang.Object)
+	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.impl.BaseEntityManagerImpl#loadById(java.lang.Object)
 	 */
 	@Override
 	public PartyBean loadById(Object id)  throws RetrievalFailureSystemException, RecordNotFoundException, ValidationException{
@@ -71,7 +71,7 @@ public class PartyEntityManagerImpl extends BaseEntityManagerImpl<PartyBean> imp
 	}
 
 	/* (non-Javadoc)
-	 * @see com.rsinc.webretail.b2c.estore.domain.manager.impl.BaseEntityManagerImpl#findAll()
+	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.impl.BaseEntityManagerImpl#findAll()
 	 */
 	@Override
 	public List<PartyBean> findAll()  throws RetrievalFailureSystemException{

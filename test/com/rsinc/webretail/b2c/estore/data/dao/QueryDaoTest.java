@@ -4,6 +4,8 @@
 package com.rsinc.webretail.b2c.estore.data.dao;
 
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.fail;
 
 import java.util.Calendar;
@@ -31,18 +33,21 @@ import com.rsinc.webretail.b2c.estore.data.entity.UserBean;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={AppConfig.class})
 @Transactional
-public class PersistanceDaoTest {
+public class QueryDaoTest {
 	
 	private static final String PARTY_EMAIL_ID = "roshantitus@gmail.com";
-
+	
 	//@InjectLogger 
-	private static Logger logger = LoggerFactory.getLogger(PersistanceDaoTest.class);
+	private static Logger logger = LoggerFactory.getLogger(QueryDaoTest.class);
 	
 	@Inject
 	private PersistanceDao persistanceDao;
-	
+		
+	@Inject
+	private QueryDao queryDao;	
+
 	@Test
-	public void testCreateUser()
+	public void testQueryForString()
 	{
 		try {
 			UserBean userBean = getUser();
@@ -50,11 +55,76 @@ public class PersistanceDaoTest {
 			
 			assertNotNull(userBean.getUserId());
 			logger.info(userBean.getUserId());
+
+			String localeCode = queryDao.queryForObject("select locale_code from user where user_id = ?", new Object[]{userBean.getUserId()}, String.class);
+			assertNotNull(localeCode);
+			assertEquals(localeCode, Constants.DEFAULT_LOCALE);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail(e.getMessage());
 		}
 	}
+	
+	@Test
+	public void testQueryForInteger()
+	{
+		try {
+			UserBean userBean = getUser();
+			persistanceDao.create(userBean);
+			
+			assertNotNull(userBean.getUserId());
+			logger.info(userBean.getUserId());
+
+			Integer rewardPoints = queryDao.queryForObject("select reward_points from user where user_id = ?", new Object[]{userBean.getUserId()}, Integer.class);
+			assertNotNull(rewardPoints);
+			assertEquals(rewardPoints, Constants.ZERO);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+	}	
+	
+	@Test
+	public void testQueryForLong()
+	{
+		try {
+			UserBean userBean = getUser();
+			persistanceDao.create(userBean);
+			
+			assertNotNull(userBean.getUserId());
+			logger.info(userBean.getUserId());
+
+			Long partyId = queryDao.queryForObject("select party_id from user where user_id = ?", new Object[]{userBean.getUserId()}, Long.class);
+			assertNotNull(partyId);
+			assertTrue(partyId > 0);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+	}	
+	
+	@Test
+	public void testQueryForBoolean()
+	{
+		try {
+			UserBean userBean = getUser();
+			persistanceDao.create(userBean);
+			
+			assertNotNull(userBean.getUserId());
+			logger.info(userBean.getUserId());
+
+			Boolean deletedYN = queryDao.queryForObject("select deleted_yn from user where user_id = ?", new Object[]{userBean.getUserId()}, Boolean.class);
+			assertNotNull(deletedYN);
+			assertEquals(deletedYN, Boolean.FALSE);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+	}	
 
 	/**
 	 * @return
@@ -62,7 +132,8 @@ public class PersistanceDaoTest {
 	private UserBean getUser() {
 		UserBean userBean = new UserBean();
 		userBean.setStatus("NEW");
-		userBean.setLocaleCode("en_US");
+		userBean.setLocaleCode(Constants.DEFAULT_LOCALE);
+		userBean.setRewardPoints(Constants.ZERO);
 		userBean.setCreatedBy(SecurityContextUtils.getLoggedInUserId());
 		userBean.setCreatedDate(Calendar.getInstance());
 		userBean.setUpdatedBy(SecurityContextUtils.getLoggedInUserId());
@@ -79,5 +150,6 @@ public class PersistanceDaoTest {
 		party.setDeletedYN(Constants.False);		
 		userBean.setParty(party);
 		return userBean;
-	}
+	}	
+
 }

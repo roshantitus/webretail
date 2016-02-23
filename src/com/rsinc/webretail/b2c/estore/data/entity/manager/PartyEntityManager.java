@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.rsinc.webretail.b2c.estore.domain.manager;
+package com.rsinc.webretail.b2c.estore.data.entity.manager;
 
 import org.springframework.stereotype.Component;
 

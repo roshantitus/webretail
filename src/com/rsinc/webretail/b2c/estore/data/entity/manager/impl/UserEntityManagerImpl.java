@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.rsinc.webretail.b2c.estore.domain.manager.impl;
+package com.rsinc.webretail.b2c.estore.data.entity.manager.impl;
 
 import java.util.List;
 
@@ -18,8 +18,8 @@ import com.rsinc.webretail.b2c.estore.common.exception.system.RetrievalFailureSy
 import com.rsinc.webretail.b2c.estore.common.util.Constants;
 import com.rsinc.webretail.b2c.estore.data.entity.UserBean;
 import com.rsinc.webretail.b2c.estore.data.entity.enums.UserStatus;
-import com.rsinc.webretail.b2c.estore.domain.manager.PartyEntityManager;
-import com.rsinc.webretail.b2c.estore.domain.manager.UserEntityManager;
+import com.rsinc.webretail.b2c.estore.data.entity.manager.PartyEntityManager;
+import com.rsinc.webretail.b2c.estore.data.entity.manager.UserEntityManager;
 
 /**O
  * @author Roshan Titus 
@@ -82,7 +82,7 @@ public class UserEntityManagerImpl extends BaseEntityManagerImpl<UserBean> imple
 	}
 
 	/* (non-Javadoc)
-	 * @see com.rsinc.webretail.b2c.estore.domain.manager.impl.BaseEntityManagerImpl#findAll(java.lang.Class)
+	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.impl.BaseEntityManagerImpl#findAll(java.lang.Class)
 	 */
 	@Override
 	public List<UserBean> findAll()  throws RetrievalFailureSystemException{

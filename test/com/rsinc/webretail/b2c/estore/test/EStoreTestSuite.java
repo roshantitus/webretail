@@ -8,8 +8,9 @@ import org.junit.runners.Suite;
 
 import com.rsinc.webretail.b2c.estore.common.email.MailManagerTest;
 import com.rsinc.webretail.b2c.estore.data.dao.PersistanceDaoTest;
-import com.rsinc.webretail.b2c.estore.domain.manager.CategoryEntityManagerTest;
-import com.rsinc.webretail.b2c.estore.domain.manager.UserEntityManagerTest;
+import com.rsinc.webretail.b2c.estore.data.dao.QueryDaoTest;
+import com.rsinc.webretail.b2c.estore.data.entity.manager.CategoryEntityManagerTest;
+import com.rsinc.webretail.b2c.estore.data.entity.manager.UserEntityManagerTest;
 
 /**
  * @author Roshan Titus
@@ -18,6 +19,7 @@ import com.rsinc.webretail.b2c.estore.domain.manager.UserEntityManagerTest;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 	PersistanceDaoTest.class,
+	QueryDaoTest.class,
 	UserEntityManagerTest.class,
 	CategoryEntityManagerTest.class,
 	MailManagerTest.class

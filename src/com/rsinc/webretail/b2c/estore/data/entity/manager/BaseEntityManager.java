@@ -1,10 +1,12 @@
 /**
  * 
  */
-package com.rsinc.webretail.b2c.estore.domain.manager;
+package com.rsinc.webretail.b2c.estore.data.entity.manager;
 
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import com.rsinc.webretail.b2c.estore.common.exception.application.RecordAlreadyExistsException;
@@ -23,8 +25,8 @@ import com.rsinc.webretail.b2c.estore.data.entity.BaseBean;
 @Component
 public interface BaseEntityManager <T extends BaseBean> {
 
+	//ORM using JPA
 	PersistanceDao<T> getPersistanceDao();
-	QueryDao getQueryDao();
 	
 	T create(T t) throws PersistanceFailureSystemException, RecordAlreadyExistsException, ValidationException;
 	T update(T t) throws PersistanceFailureSystemException, ValidationException;
@@ -43,4 +45,20 @@ public interface BaseEntityManager <T extends BaseBean> {
 	List<T> findAll() throws RetrievalFailureSystemException;	
 	T loadById(Object id) throws RetrievalFailureSystemException, RecordNotFoundException, ValidationException;
 
+	//Simple JDBC
+	QueryDao getQueryDao();
+	
+	<E> List<E> queryForList(String query, Class<E> clazz)  throws RetrievalFailureSystemException;	 
+	<E> List<E> queryForList(String query, Object[] args, Class<E> clazz)  throws RetrievalFailureSystemException;	 
+	<E> List<E> queryForList(String query, RowMapper<E> mapper) throws RetrievalFailureSystemException;	 
+	<E> List<E> queryForList(String query, Object[] args, RowMapper<E> mapper) throws RetrievalFailureSystemException;	 
+	<E> List<E> queryForBeanList(String query, Object[] args, Class<E> clazz) throws RetrievalFailureSystemException;	 
+	<E> E queryForBean(String query, Object[] args,  Class<E> clazz) throws RetrievalFailureSystemException;	 
+	<E> E queryForObject(String query, Object[] args, Class<E> clazz) throws RetrievalFailureSystemException;	 
+	<E> E queryForObject(String query, RowMapper<E> mapper) throws RetrievalFailureSystemException;	 
+	<E> E queryForObject(String query, Object[] args,  RowMapper<E> mapper) throws RetrievalFailureSystemException;	 
+	Map<String, Object> queryForMap(String query, Object[] args) throws RetrievalFailureSystemException;	 
+	List< Map<String, Object>> queryForList(String query) throws RetrievalFailureSystemException;	 
+	List<Map<String, Object>> queryForList(String query, Object[] args) throws RetrievalFailureSystemException;
+	
 }

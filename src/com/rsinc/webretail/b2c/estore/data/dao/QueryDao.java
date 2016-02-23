@@ -18,27 +18,16 @@ import com.rsinc.webretail.b2c.estore.common.exception.system.RetrievalFailureSy
 @Repository
 public interface QueryDao {
 
-	<T> List <T> queryForList(String query, Class T)  throws RetrievalFailureSystemException;
-	 
-	<T> List <T> queryForList(String query, Object[] args, Class t)  throws RetrievalFailureSystemException;
-	 
-	<T> List <T> queryForList(String query, RowMapper<T> mapper) throws RetrievalFailureSystemException;
-	 
-	<T> List <T> queryForList(String query, Object[] args, RowMapper<T> mapper) throws RetrievalFailureSystemException;
-	 
-	<T> List <T> queryForBeanList(String query, Object[] args, Class T) throws RetrievalFailureSystemException;
-	 
-	<T> T queryForBean(String query, Object[] args,  Class T) throws RetrievalFailureSystemException;
-	 
-	<T> T queryForObject(String query, Object[] args, Class T) throws RetrievalFailureSystemException;
-	 
-	<T> T queryForObject(String query, RowMapper<T> mapper) throws RetrievalFailureSystemException;
-	 
-	<T> T queryForObject(String query, Object[] args,  RowMapper<T> mapper) throws RetrievalFailureSystemException;
-	 
-	Map<String, Object> queryForMap(String query, Object[] args) throws RetrievalFailureSystemException;
-	 
-	List< Map<String, Object>> queryForList(String query) throws RetrievalFailureSystemException;
-	 
+	<E> List<E> queryForList(String query, Class<E> clazz)  throws RetrievalFailureSystemException;	 
+	<E> List<E> queryForList(String query, Object[] args, Class<E> clazz)  throws RetrievalFailureSystemException;	 
+	<E> List<E> queryForList(String query, RowMapper<E> mapper) throws RetrievalFailureSystemException;	 
+	<E> List<E> queryForList(String query, Object[] args, RowMapper<E> mapper) throws RetrievalFailureSystemException;	 
+	<E> List<E> queryForBeanList(String query, Object[] args, Class<E> clazz) throws RetrievalFailureSystemException;	 
+	<E> E queryForBean(String query, Object[] args,  Class<E> clazz) throws RetrievalFailureSystemException;	 
+	<E> E queryForObject(String query, Object[] args, Class<E> clazz) throws RetrievalFailureSystemException;	 
+	<E> E queryForObject(String query, RowMapper<E> mapper) throws RetrievalFailureSystemException;	 
+	<E> E queryForObject(String query, Object[] args,  RowMapper<E> mapper) throws RetrievalFailureSystemException;	 
+	Map<String, Object> queryForMap(String query, Object[] args) throws RetrievalFailureSystemException;	 
+	List< Map<String, Object>> queryForList(String query) throws RetrievalFailureSystemException;	 
 	List<Map<String, Object>> queryForList(String query, Object[] args) throws RetrievalFailureSystemException;
 }

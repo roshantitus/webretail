@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.rsinc.webretail.b2c.estore.domain.manager.impl;
+package com.rsinc.webretail.b2c.estore.data.entity.manager.impl;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import com.rsinc.webretail.b2c.estore.common.exception.application.ValidationExc
 import com.rsinc.webretail.b2c.estore.common.exception.system.PersistanceFailureSystemException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.RetrievalFailureSystemException;
 import com.rsinc.webretail.b2c.estore.data.entity.AddressBean;
-import com.rsinc.webretail.b2c.estore.domain.manager.AddressEntityManager;
+import com.rsinc.webretail.b2c.estore.data.entity.manager.AddressEntityManager;
 
 /**O
  * @author Roshan Titus 
@@ -61,7 +61,7 @@ public class AddressEntityManagerImpl extends BaseEntityManagerImpl<AddressBean>
 	}
 
 	/* (non-Javadoc)
-	 * @see com.rsinc.webretail.b2c.estore.domain.manager.impl.BaseEntityManagerImpl#findAll()
+	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.impl.BaseEntityManagerImpl#findAll()
 	 */
 	@Override
 	public List<AddressBean> findAll()  throws RetrievalFailureSystemException{

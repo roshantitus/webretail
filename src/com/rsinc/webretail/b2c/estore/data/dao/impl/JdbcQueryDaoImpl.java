@@ -33,39 +33,39 @@ public class JdbcQueryDaoImpl extends JdbcDaoSupport implements QueryDao {
 		setDataSource(dataSource);
 	}	
 
-	public <T> List <T> queryForList(String query, Class T) throws RetrievalFailureSystemException{
-		return getJdbcTemplate().query(query, new BeanPropertyRowMapper(T));
+	public <E> List <E> queryForList(String query, Class<E> clazz) throws RetrievalFailureSystemException{
+		return getJdbcTemplate().queryForList(query, null, clazz);
 	}
 	 
-	public <T> List <T> queryForList(String query, Object[] args, Class t) throws RetrievalFailureSystemException{
-		return getJdbcTemplate().queryForList(query, args, t);
+	public <E> List <E> queryForList(String query, Object[] args, Class<E> clazz) throws RetrievalFailureSystemException{
+		return getJdbcTemplate().queryForList(query, args, clazz);
 	}
 	 
-	public <T> List <T> queryForList(String query, RowMapper<T> mapper) throws RetrievalFailureSystemException{
-		return getJdbcTemplate().query(query,mapper);
+	public <E> List <E> queryForList(String query, RowMapper<E> mapper) throws RetrievalFailureSystemException{
+		return getJdbcTemplate().query(query, mapper);
 	}
 	 
-	public <T> List <T> queryForList(String query, Object[] args, RowMapper<T> mapper) throws RetrievalFailureSystemException{
-	 	return getJdbcTemplate().query(query, args,mapper);
+	public <E> List <E> queryForList(String query, Object[] args, RowMapper<E> mapper) throws RetrievalFailureSystemException{
+	 	return getJdbcTemplate().query(query, args, mapper);
 	}
 	 
-	public <T> List <T> queryForBeanList(String query, Object[] args, Class T) throws RetrievalFailureSystemException{
-		return getJdbcTemplate().query(query, new BeanPropertyRowMapper(T));
+	public <E> List <E> queryForBeanList(String query, Object[] args, Class<E> clazz) throws RetrievalFailureSystemException{
+		return getJdbcTemplate().query(query, args, new BeanPropertyRowMapper<E>(clazz));
 	}
 	 
-	public <T> T queryForBean(String query, Object[] args,  Class T) throws RetrievalFailureSystemException{
-		return (T) getJdbcTemplate().queryForObject(query, args, new BeanPropertyRowMapper(T));
+	public <E> E queryForBean(String query, Object[] args,  Class<E> clazz) throws RetrievalFailureSystemException{
+		return (E) getJdbcTemplate().queryForObject(query, args, new BeanPropertyRowMapper<E>(clazz));
 	}
 	 
-	public <T> T queryForObject(String query, Object[] args, Class t) throws RetrievalFailureSystemException{
-		return (T) getJdbcTemplate().queryForObject(query, args, t);
+	public <E> E queryForObject(String query, Object[] args, Class<E> clazz) throws RetrievalFailureSystemException{
+		return (E) getJdbcTemplate().queryForObject(query, args, clazz);
 	}
 	 
-	public <T> T queryForObject(String query, RowMapper<T> mapper) throws RetrievalFailureSystemException{
+	public <E> E queryForObject(String query, RowMapper<E> mapper) throws RetrievalFailureSystemException{
 		return getJdbcTemplate().queryForObject(query, mapper);
 	}
 	 
-	public <T> T queryForObject(String query, Object[] args,  RowMapper<T> mapper) throws RetrievalFailureSystemException{
+	public <E> E queryForObject(String query, Object[] args,  RowMapper<E> mapper) throws RetrievalFailureSystemException{
 		return getJdbcTemplate().queryForObject(query, args, mapper);
 	}
 	 
