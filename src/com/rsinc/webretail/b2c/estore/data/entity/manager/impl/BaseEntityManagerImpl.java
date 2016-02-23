@@ -59,37 +59,6 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 		return persistanceDao;
 	}
 	
-	@Override
-	public T create(T baseBean)  throws PersistanceFailureSystemException, RecordAlreadyExistsException, ValidationException{
-		
-		validateForCreate(baseBean);
-		setDefaultValues(baseBean);		
-		return getPersistanceDao().create(baseBean);
-	}
-
-	@Override
-	public T update(T baseBean)  throws PersistanceFailureSystemException, ValidationException{
-	
-		validateForUpdate(baseBean);
-		return (T)getPersistanceDao().update(baseBean);
-	}
-	
-
-	@Override
-	public void delete(T baseBean)  throws PersistanceFailureSystemException, ValidationException{
-
-		validateForDelete(baseBean);
-		getPersistanceDao().delete(baseBean);
-	}	
-
-	public abstract void deleteById(Object id) throws PersistanceFailureSystemException, RecordNotFoundException, ValidationException;
-	
-	@Override
-	public void deleteById(Class<T> type, Object id) throws PersistanceFailureSystemException, RecordNotFoundException, ValidationException{
-		
-		validateForId(id);
-		getPersistanceDao().delete(type, id);
-	}
 	
 	@Override
 	public void setDefaultValues(T baseBean) {
@@ -169,19 +138,40 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 		{
 			throw new IllegalArgumentException("Id cannot be null for delete"); 
 		}			
-	}
-
+	}	
+	
 	@Override
-	public T load(Class<T> type, Object id) throws RetrievalFailureSystemException, RecordNotFoundException, ValidationException{
+	public T create(T baseBean)  throws PersistanceFailureSystemException, RecordAlreadyExistsException, ValidationException{
 		
-		validateForId(id);		
-		return getPersistanceDao().find(type, id);
+		validateForCreate(baseBean);
+		setDefaultValues(baseBean);		
+		return getPersistanceDao().create(baseBean);
 	}
 
-	public abstract T loadById(Object id) throws RetrievalFailureSystemException, RecordNotFoundException, ValidationException;
+	@Override
+	public T update(T baseBean)  throws PersistanceFailureSystemException, ValidationException{
+	
+		validateForUpdate(baseBean);
+		return (T)getPersistanceDao().update(baseBean);
+	}
+	
 
 	@Override
-	public abstract List<T> findAll() throws RetrievalFailureSystemException;
+	public void delete(T baseBean)  throws PersistanceFailureSystemException, ValidationException{
+
+		validateForDelete(baseBean);
+		getPersistanceDao().delete(baseBean);
+	}	
+
+	public abstract void deleteById(Object id) throws PersistanceFailureSystemException, RecordNotFoundException, ValidationException;
+	
+	@Override
+	public void deleteById(Class<T> type, Object id) throws PersistanceFailureSystemException, RecordNotFoundException, ValidationException{
+		
+		validateForId(id);
+		getPersistanceDao().delete(type, id);
+	}
+
 
 	@Override
 	public List<T> bulkCreate(List<T> entities)  throws PersistanceFailureSystemException, RecordAlreadyExistsException, ValidationException{
@@ -202,7 +192,19 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 		return getPersistanceDao().bulkUdate(entities);
 	}
 
+	@Override
+	public T load(Class<T> type, Object id) throws RetrievalFailureSystemException, RecordNotFoundException, ValidationException{
+		
+		validateForId(id);		
+		return getPersistanceDao().find(type, id);
+	}
 
+	public abstract T loadById(Object id) throws RetrievalFailureSystemException, RecordNotFoundException, ValidationException;
+
+	public abstract List<T> findAll() throws RetrievalFailureSystemException;
+	
+	
+	//Query methods
 
 	@Override
 	public <E> List<E> queryForList(String query, Class<E> clazz)
