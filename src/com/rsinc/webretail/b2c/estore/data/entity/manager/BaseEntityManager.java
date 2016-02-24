@@ -93,18 +93,6 @@ public interface BaseEntityManager <T extends BaseBean> {
 
 	/**
 	 * 
-	 * @param type
-	 * @param id
-	 * @throws PersistanceFailureSystemException
-	 * @throws RecordNotFoundException
-	 * @throws ValidationException
-	 */
-	void deleteById(Class<T> type, Object id)
-			throws PersistanceFailureSystemException, RecordNotFoundException,
-			ValidationException;
-
-	/**
-	 * 
 	 * @param entities
 	 * @return
 	 * @throws PersistanceFailureSystemException
@@ -127,18 +115,6 @@ public interface BaseEntityManager <T extends BaseBean> {
 
 	/**
 	 * 
-	 * @param type
-	 * @param id
-	 * @return
-	 * @throws RetrievalFailureSystemException
-	 * @throws RecordNotFoundException
-	 * @throws ValidationException
-	 */
-	T load(Class<T> type, Object id) throws RetrievalFailureSystemException,
-			RecordNotFoundException, ValidationException;
-
-	/**
-	 * 
 	 * @param id
 	 * @return
 	 * @throws RetrievalFailureSystemException
@@ -154,14 +130,6 @@ public interface BaseEntityManager <T extends BaseBean> {
 	 * @throws RetrievalFailureSystemException
 	 */
 	List<T> findAll() throws RetrievalFailureSystemException;
-	
-	/**
-	 * 
-	 * @param type
-	 * @return
-	 * @throws RetrievalFailureSystemException
-	 */
-	List<T> findAll(Class<T> type) throws RetrievalFailureSystemException;
 	
 	/**
 	 * 

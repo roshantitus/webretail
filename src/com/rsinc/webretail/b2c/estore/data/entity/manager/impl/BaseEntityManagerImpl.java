@@ -163,8 +163,7 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 
 	public abstract void deleteById(Object id) throws PersistanceFailureSystemException, RecordNotFoundException, ValidationException;
 	
-	@Override
-	public void deleteById(Class<T> type, Object id) throws PersistanceFailureSystemException, RecordNotFoundException, ValidationException{
+	protected void deleteById(Class<T> type, Object id) throws PersistanceFailureSystemException, RecordNotFoundException, ValidationException{
 		
 		validateForId(id);
 		getPersistanceDao().delete(type, id);
@@ -190,8 +189,7 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 		return getPersistanceDao().bulkUdate(entities);
 	}
 
-	@Override
-	public T load(Class<T> type, Object id) throws RetrievalFailureSystemException, RecordNotFoundException, ValidationException{
+	protected T load(Class<T> type, Object id) throws RetrievalFailureSystemException, RecordNotFoundException, ValidationException{
 		
 		validateForId(id);		
 		return getPersistanceDao().find(type, id);
@@ -201,8 +199,7 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 
 	public abstract List<T> findAll() throws RetrievalFailureSystemException;
 
-	@Override
-	public List<T> findAll(Class<T> type)
+	protected List<T> findAll(Class<T> type)
 			throws RetrievalFailureSystemException {
 
 		return getPersistanceDao().findAll(type);
