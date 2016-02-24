@@ -40,12 +40,12 @@ public abstract class BaseEStoreServiceImpl implements EStoreService {
 	}
 
 
-	public ProductEntityManager getProductEntityManager() {
+	protected ProductEntityManager getProductEntityManager() {
 		return productEntityManager;
 	}
 
 
-	public OrderEntityManager getOrderEntityManager() {
+	protected OrderEntityManager getOrderEntityManager() {
 		return orderEntityManager;
 	}
 
