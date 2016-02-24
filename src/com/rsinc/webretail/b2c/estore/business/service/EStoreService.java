@@ -15,8 +15,6 @@ import com.rsinc.webretail.b2c.estore.common.exception.system.SystemException;
  */
 public interface EStoreService {
 	
-	List<Category> getAllCategories() throws ApplicationException, SystemException;
-	
-	//List<Product> getAllProducts() throws ApplicationException, SystemException;	
+
 
 }

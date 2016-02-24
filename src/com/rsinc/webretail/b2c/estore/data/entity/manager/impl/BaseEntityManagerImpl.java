@@ -53,9 +53,7 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 	}
 
 
-
-	@Override
-	public PersistanceDao<T> getPersistanceDao() {
+	protected PersistanceDao<T> getPersistanceDao() {
 		return persistanceDao;
 	}
 	

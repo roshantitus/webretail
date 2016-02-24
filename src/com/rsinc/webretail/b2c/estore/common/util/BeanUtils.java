@@ -24,4 +24,15 @@ public class BeanUtils {
 		return null;
 	}
 
+	/**
+	 * @param categoryBean
+	 * @param categoryBeanFromDB
+	 */
+	public static void copyProperties(Object source,
+			Object target) {
+		
+		org.springframework.beans.BeanUtils.copyProperties(source, target);
+		
+	}
+
 }

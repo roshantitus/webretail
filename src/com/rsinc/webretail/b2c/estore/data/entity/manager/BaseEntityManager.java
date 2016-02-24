@@ -14,8 +14,6 @@ import com.rsinc.webretail.b2c.estore.common.exception.application.RecordNotFoun
 import com.rsinc.webretail.b2c.estore.common.exception.application.ValidationException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.PersistanceFailureSystemException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.RetrievalFailureSystemException;
-import com.rsinc.webretail.b2c.estore.data.dao.PersistanceDao;
-import com.rsinc.webretail.b2c.estore.data.dao.QueryDao;
 import com.rsinc.webretail.b2c.estore.data.entity.BaseBean;
 
 /**
@@ -26,12 +24,6 @@ import com.rsinc.webretail.b2c.estore.data.entity.BaseBean;
 public interface BaseEntityManager <T extends BaseBean> {
 
 	//ORM using JPA
-	
-	/**
-	 * 
-	 * @return
-	 */
-	PersistanceDao<T> getPersistanceDao();
 
 	/**
 	 * 
@@ -253,11 +245,6 @@ public interface BaseEntityManager <T extends BaseBean> {
 			throws RetrievalFailureSystemException;	
 
 	//Simple JDBC
-	/**
-	 * 
-	 * @return
-	 */
-	QueryDao getQueryDao();
 
 	/**
 	 * 

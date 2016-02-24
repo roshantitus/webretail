@@ -3,16 +3,13 @@
  */
 package com.rsinc.webretail.b2c.estore.business.service.impl;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
-import com.rsinc.webretail.b2c.estore.business.model.Category;
 import com.rsinc.webretail.b2c.estore.business.service.EStoreService;
-import com.rsinc.webretail.b2c.estore.common.exception.application.ApplicationException;
-import com.rsinc.webretail.b2c.estore.common.exception.system.SystemException;
-import com.rsinc.webretail.b2c.estore.common.util.EntityConversionUtils;
 import com.rsinc.webretail.b2c.estore.data.entity.manager.CategoryEntityManager;
+import com.rsinc.webretail.b2c.estore.data.entity.manager.OrderEntityManager;
+import com.rsinc.webretail.b2c.estore.data.entity.manager.ProductEntityManager;
+import com.rsinc.webretail.b2c.estore.data.entity.manager.UserEntityManager;
 
 /**
  * @author Roshan Titus
@@ -21,17 +18,35 @@ import com.rsinc.webretail.b2c.estore.data.entity.manager.CategoryEntityManager;
 public abstract class BaseEStoreServiceImpl implements EStoreService {
 
 	@Inject
+	private UserEntityManager userEntityManager;
+	
+	@Inject
 	private CategoryEntityManager categoryEntityManager;
 	
+	@Inject
+	private ProductEntityManager productEntityManager;
+	
+	@Inject
+	private OrderEntityManager orderEntityManager;	
 
-	public CategoryEntityManager getCategoryEntityManager() {
+	
+	protected UserEntityManager getUserEntityManager() {
+		return userEntityManager;
+	}	
+	
+
+	protected CategoryEntityManager getCategoryEntityManager() {
 		return categoryEntityManager;
 	}
-	
-	
-	@Override
-	public List<Category> getAllCategories()  throws ApplicationException, SystemException{
-		return EntityConversionUtils.convertCategoryBean2Category(getCategoryEntityManager().findAll());
+
+
+	public ProductEntityManager getProductEntityManager() {
+		return productEntityManager;
+	}
+
+
+	public OrderEntityManager getOrderEntityManager() {
+		return orderEntityManager;
 	}
 
 
