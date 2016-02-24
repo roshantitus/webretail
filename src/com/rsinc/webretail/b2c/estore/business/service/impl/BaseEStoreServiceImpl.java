@@ -5,6 +5,9 @@ package com.rsinc.webretail.b2c.estore.business.service.impl;
 
 import javax.inject.Inject;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.rsinc.webretail.b2c.estore.business.service.EStoreService;
 import com.rsinc.webretail.b2c.estore.data.entity.manager.CategoryEntityManager;
 import com.rsinc.webretail.b2c.estore.data.entity.manager.OrderEntityManager;
@@ -15,6 +18,8 @@ import com.rsinc.webretail.b2c.estore.data.entity.manager.UserEntityManager;
  * @author Roshan Titus
  *
  */
+@Service
+@Transactional
 public abstract class BaseEStoreServiceImpl implements EStoreService {
 
 	@Inject
