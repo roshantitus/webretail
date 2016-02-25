@@ -25,6 +25,13 @@ import com.rsinc.webretail.b2c.estore.data.entity.manager.ProductEntityManager;
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class ProductEntityManagerImpl extends BaseEntityManagerImpl<ProductBean> implements ProductEntityManager {
 
+	
+	@Override
+	public void setDefaultValues(ProductBean baseBean) {
+		// TODO implement method functionality
+		super.setDefaultValues(baseBean);
+	}
+
 	/* (non-Javadoc)
 	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.impl.BaseEntityManagerImpl#deleteById(java.lang.Object)
 	 */

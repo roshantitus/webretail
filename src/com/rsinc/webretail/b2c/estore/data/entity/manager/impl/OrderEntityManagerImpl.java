@@ -3,6 +3,7 @@
  */
 package com.rsinc.webretail.b2c.estore.data.entity.manager.impl;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.ejb.TransactionAttribute;
@@ -14,8 +15,8 @@ import com.rsinc.webretail.b2c.estore.common.exception.application.RecordNotFoun
 import com.rsinc.webretail.b2c.estore.common.exception.application.ValidationException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.PersistanceFailureSystemException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.RetrievalFailureSystemException;
-import com.rsinc.webretail.b2c.estore.data.entity.CategoryBean;
 import com.rsinc.webretail.b2c.estore.data.entity.OrderBean;
+import com.rsinc.webretail.b2c.estore.data.entity.enums.OrderStatus;
 import com.rsinc.webretail.b2c.estore.data.entity.manager.OrderEntityManager;
 
 /**
@@ -25,6 +26,22 @@ import com.rsinc.webretail.b2c.estore.data.entity.manager.OrderEntityManager;
 @Component
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class OrderEntityManagerImpl extends BaseEntityManagerImpl<OrderBean> implements OrderEntityManager {
+
+	
+	@Override
+	public void setDefaultValues(OrderBean orderBean) {
+		
+		if(null == orderBean.getOrderDate())
+		{		
+			orderBean.setOrderDate(Calendar.getInstance());
+		}
+		
+		if(null == orderBean.getOrderStatus())
+		{
+			orderBean.setOrderStatus(OrderStatus.NEW.toString());
+		}	
+		super.setDefaultValues(orderBean);
+	}
 
 	/* (non-Javadoc)
 	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.OrderEntityManager#getPendingOrders()

@@ -25,6 +25,13 @@ import com.rsinc.webretail.b2c.estore.data.entity.manager.CategoryEntityManager;
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class CategoryEntityManagerImpl extends BaseEntityManagerImpl<CategoryBean> implements CategoryEntityManager{
 
+	
+	@Override
+	public void setDefaultValues(CategoryBean baseBean) {
+		// TODO implement method functionality
+		super.setDefaultValues(baseBean);
+	}
+
 	/* (non-Javadoc)
 	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.impl.BaseEntityManagerImpl#deleteById(java.lang.Object)
 	 */
