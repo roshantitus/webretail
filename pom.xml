@@ -111,6 +111,13 @@
   		<groupId>org.springframework</groupId>
   		<artifactId>spring-context</artifactId>
   		<version>${org.springframework.version}</version>
+            <exclusions>
+                <!-- Exclude Commons Logging in favor of SLF4j -->
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>  		
   	</dependency> 	  	
 	<dependency>
 		<groupId>org.springframework</groupId>
@@ -133,7 +140,35 @@
 		<version>${org.springframework.version}</version>
 	</dependency>    
 
-	
+        <!-- tiles -->
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-jsp</artifactId>
+            <version>${org.apache.tiles}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-core</artifactId>
+            <version>${org.apache.tiles}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-api</artifactId>
+            <version>${org.apache.tiles}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-servlet</artifactId>
+            <version>${org.apache.tiles}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-template</artifactId>
+            <version>${org.apache.tiles}</version>
+        </dependency>
+        	
 	<dependency>
 	    <groupId>org.hibernate</groupId>
 	    <artifactId>hibernate-entitymanager</artifactId>
@@ -197,7 +232,7 @@
   
 	<properties>
 	
-		<persistenceUnitName>PersistenceUnit</persistenceUnitName>
+		<org.apache.tiles>3.0.5</org.apache.tiles>
 		<com.rsinc.webretail.version>0.0.1-SNAPSHOT</com.rsinc.webretail.version>
 		<sonar.host.url>http://localhost:9000/sonar</sonar.host.url>
 		

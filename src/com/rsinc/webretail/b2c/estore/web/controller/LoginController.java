@@ -31,7 +31,8 @@ public class LoginController {
 
     @RequestMapping(value="/", method=RequestMethod.GET)
     public String showLoginPage(Locale locale) {
-        return "login";
+        //return "login";
+    	return "redirect:admin/dashboard.html";
     }
     
     @RequestMapping(value="/login", method=RequestMethod.POST)

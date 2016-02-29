@@ -19,7 +19,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 /**
  * @author Roshan Titus
@@ -31,6 +32,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan(basePackages = { "com.rsinc.webretail.b2c.estore.web.controller", "com.rsinc.webretail.b2c.estore.common.logging" })
 public class WebConfig  extends WebMvcConfigurerAdapter{
 
+	//Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
@@ -40,14 +42,28 @@ public class WebConfig  extends WebMvcConfigurerAdapter{
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
- 
+    
     @Bean
-    public InternalResourceViewResolver jspViewResolver() {
-        InternalResourceViewResolver bean = new InternalResourceViewResolver();
-        bean.setPrefix("/WEB-INF/views/");
-        bean.setSuffix(".jsp");
-        return bean;
+    TilesViewResolver viewResolver(){
+        TilesViewResolver viewResolver = new TilesViewResolver();
+        return viewResolver;
     }
+
+    @Bean
+    TilesConfigurer tilesConfigurer(){
+        TilesConfigurer tilesConfigurer = new TilesConfigurer();
+        tilesConfigurer.setDefinitions("WEB-INF/tiles.xml");
+        tilesConfigurer.setPreparerFactoryClass(org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory.class);
+        return tilesConfigurer;    
+    }    
+ 
+//    @Bean
+//    public InternalResourceViewResolver jspViewResolver() {
+//        InternalResourceViewResolver bean = new InternalResourceViewResolver();
+//        bean.setPrefix("/WEB-INF/views/");
+//        bean.setSuffix(".jsp");
+//        return bean;
+//    }
  
     @Bean(name = "multipartResolver")
     public CommonsMultipartResolver getMultipartResolver() {

@@ -10,12 +10,6 @@
 		<form:form name="f" action="@{/login}" method="post">               
             <fieldset>
                 <legend>Please Login</legend>
-                <div form:if="${param.error}" class="alert alert-error">    
-                    Invalid username and password.
-                </div>
-                <div c:if="${param.logout}" class="alert alert-success"> 
-                    You have been logged out.
-                </div>
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username"/>        
                 <label for="password">Password</label>

@@ -4,6 +4,7 @@
 package com.rsinc.webretail.b2c.estore.web.controller.admin;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -34,7 +35,12 @@ public class ManageCategoriesController extends BaseController{
 //	@InjectLogger
 	private static Logger logger = LoggerFactory.getLogger(ManageCategoriesController.class);
 	
+    @RequestMapping(value="/admin/categoryList.html", method=RequestMethod.GET)
+    public String viewDashboard(Locale locale) {
+        return "categoryList";
+    }
 	
+	//REST APIS
     @RequestMapping(value = "/admin/category/list/all", method = RequestMethod.GET)
     public @ResponseBody List<Category> viewAllCategories() throws ApplicationException, SystemException {
         return eStoreAdminService.getAllCategories();
