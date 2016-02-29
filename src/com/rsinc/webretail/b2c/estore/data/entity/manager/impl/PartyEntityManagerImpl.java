@@ -15,6 +15,7 @@ import com.rsinc.webretail.b2c.estore.common.exception.application.RecordNotFoun
 import com.rsinc.webretail.b2c.estore.common.exception.application.ValidationException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.PersistanceFailureSystemException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.RetrievalFailureSystemException;
+import com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria;
 import com.rsinc.webretail.b2c.estore.data.entity.PartyBean;
 import com.rsinc.webretail.b2c.estore.data.entity.manager.AddressEntityManager;
 import com.rsinc.webretail.b2c.estore.data.entity.manager.PartyEntityManager;
@@ -78,4 +79,29 @@ public class PartyEntityManagerImpl extends BaseEntityManagerImpl<PartyBean> imp
 		return getPersistanceDao().findAll(PartyBean.class);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.impl.BaseEntityManagerImpl#findAll(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
+	 */
+	@Override
+	public List<PartyBean> findAll(ResultLoadCriteria resultLoadCriteria)
+			throws RetrievalFailureSystemException {
+		return getPersistanceDao().findAll(PartyBean.class, resultLoadCriteria);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.impl.BaseEntityManagerImpl#getTotalRecordCount()
+	 */
+	@Override
+	public Long getTotalRecordCount() throws RetrievalFailureSystemException {
+		return getPersistanceDao().getTotalRecordCount(PartyBean.class);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.impl.BaseEntityManagerImpl#getTotalRecordCount(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
+	 */
+	@Override
+	public Long getTotalRecordCount(ResultLoadCriteria resultLoadCriteria)
+			throws RetrievalFailureSystemException {
+		return getPersistanceDao().getTotalRecordCount(PartyBean.class, resultLoadCriteria);
+	}	
 }

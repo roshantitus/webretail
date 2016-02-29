@@ -12,6 +12,7 @@ import com.rsinc.webretail.b2c.estore.common.exception.application.RecordAlready
 import com.rsinc.webretail.b2c.estore.common.exception.application.RecordNotFoundException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.PersistanceFailureSystemException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.RetrievalFailureSystemException;
+import com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria;
 
 /**
  * @author Roshan Titus 
@@ -112,6 +113,24 @@ public interface PersistanceDao<T> {
 	 * @throws RetrievalFailureSystemException
 	 */
 	List<T> findAll(Class<T> type) throws RetrievalFailureSystemException;
+	
+	/**
+	 * 
+	 * @param type
+	 * @return
+	 * @throws RetrievalFailureSystemException
+	 */
+	Long getTotalRecordCount(Class<T> type) throws RetrievalFailureSystemException;
+	
+	/**
+	 * 
+	 * @param type
+	 * @param resultLoadCriteria
+	 * @return
+	 * @throws RetrievalFailureSystemException
+	 */
+	Long getTotalRecordCount(Class<T> type, ResultLoadCriteria resultLoadCriteria)
+			throws RetrievalFailureSystemException;	
 	/**
 	 * @param namedQueryName
 	 * @param params
@@ -172,6 +191,15 @@ public interface PersistanceDao<T> {
 	 * @throws RetrievalFailureSystemException
 	 */
 	List findByNativeQuery(String sql, Class type, List params, int resultLimit)
+			throws RetrievalFailureSystemException;
+
+	/**
+	 * @param entityClass
+	 * @param resultLoadCriteria
+	 * @return
+	 * @throws RetrievalFailureSystemException
+	 */
+	List<T> findAll(Class<T> entityClass, ResultLoadCriteria resultLoadCriteria)
 			throws RetrievalFailureSystemException;
 
 }

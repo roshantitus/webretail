@@ -14,6 +14,7 @@ import com.rsinc.webretail.b2c.estore.common.exception.application.RecordNotFoun
 import com.rsinc.webretail.b2c.estore.common.exception.application.ValidationException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.PersistanceFailureSystemException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.RetrievalFailureSystemException;
+import com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria;
 import com.rsinc.webretail.b2c.estore.data.entity.BaseBean;
 
 /**
@@ -130,6 +131,14 @@ public interface BaseEntityManager <T extends BaseBean> {
 	 * @throws RetrievalFailureSystemException
 	 */
 	List<T> findAll() throws RetrievalFailureSystemException;
+	
+	/**
+	 * 
+	 * @param resultLoadCriteria
+	 * @return
+	 * @throws RetrievalFailureSystemException
+	 */
+	List<T> findAll(ResultLoadCriteria resultLoadCriteria) throws RetrievalFailureSystemException;
 	
 	/**
 	 * 
@@ -339,4 +348,18 @@ public interface BaseEntityManager <T extends BaseBean> {
 	List<Map<String, Object>> queryForList(String query, Object[] args)
 			throws RetrievalFailureSystemException;
 	
+	/**
+	 * 
+	 * @return
+	 * @throws RetrievalFailureSystemException
+	 */
+	Long getTotalRecordCount() throws RetrievalFailureSystemException;
+	
+	/**
+	 * 
+	 * @param resultLoadCriteria
+	 * @return
+	 * @throws RetrievalFailureSystemException
+	 */
+	Long getTotalRecordCount(ResultLoadCriteria resultLoadCriteria) throws RetrievalFailureSystemException;
 }

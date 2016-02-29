@@ -15,6 +15,7 @@ import com.rsinc.webretail.b2c.estore.common.exception.application.RecordNotFoun
 import com.rsinc.webretail.b2c.estore.common.exception.application.ValidationException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.PersistanceFailureSystemException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.RetrievalFailureSystemException;
+import com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria;
 import com.rsinc.webretail.b2c.estore.data.entity.OrderBean;
 import com.rsinc.webretail.b2c.estore.data.entity.enums.OrderStatus;
 import com.rsinc.webretail.b2c.estore.data.entity.manager.OrderEntityManager;
@@ -83,5 +84,30 @@ public class OrderEntityManagerImpl extends BaseEntityManagerImpl<OrderBean> imp
 	}
 
 
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.impl.BaseEntityManagerImpl#findAll(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
+	 */
+	@Override
+	public List<OrderBean> findAll(ResultLoadCriteria resultLoadCriteria)
+			throws RetrievalFailureSystemException {
+		return getPersistanceDao().findAll(OrderBean.class, resultLoadCriteria);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.impl.BaseEntityManagerImpl#getTotalRecordCount()
+	 */
+	@Override
+	public Long getTotalRecordCount() throws RetrievalFailureSystemException {
+		return getPersistanceDao().getTotalRecordCount(OrderBean.class);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.impl.BaseEntityManagerImpl#getTotalRecordCount(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
+	 */
+	@Override
+	public Long getTotalRecordCount(ResultLoadCriteria resultLoadCriteria)
+			throws RetrievalFailureSystemException {
+		return getPersistanceDao().getTotalRecordCount(OrderBean.class, resultLoadCriteria);
+	}
 
 }

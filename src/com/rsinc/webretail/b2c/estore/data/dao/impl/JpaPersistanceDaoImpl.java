@@ -14,6 +14,10 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
@@ -21,6 +25,7 @@ import com.rsinc.webretail.b2c.estore.common.exception.application.RecordAlready
 import com.rsinc.webretail.b2c.estore.common.exception.application.RecordNotFoundException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.PersistanceFailureSystemException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.RetrievalFailureSystemException;
+import com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria;
 import com.rsinc.webretail.b2c.estore.common.util.Constants;
 import com.rsinc.webretail.b2c.estore.data.dao.PersistanceDao;
 
@@ -184,8 +189,21 @@ public class JpaPersistanceDaoImpl<T> implements PersistanceDao<T> {
 	public List<T> findAll(Class<T> entityClass)  throws RetrievalFailureSystemException{
 		List<T> result = null;
 		try {
-			//Class<T> entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-			Query query = getEntityManager().createQuery("from " + entityClass.getName());
+			TypedQuery<T> query = createQuery(entityClass);
+			result = query.getResultList();
+		} catch (IllegalArgumentException | PersistenceException e) {
+			throw new RetrievalFailureSystemException(e);
+		}		
+		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<T> findAll(Class<T> entityClass, ResultLoadCriteria resultLoadCriteria)  throws RetrievalFailureSystemException{
+		List<T> result = null;
+		try {
+			TypedQuery<T> query = createQuery(entityClass);
+			setResultLoadCriteria(query, resultLoadCriteria);			
 			result = query.getResultList();
 		} catch (IllegalArgumentException | PersistenceException e) {
 			throw new RetrievalFailureSystemException(e);
@@ -193,6 +211,77 @@ public class JpaPersistanceDaoImpl<T> implements PersistanceDao<T> {
 		return result;
 	}
 
+
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.data.dao.PersistanceDao#getTotalRecordCount(java.lang.Class)
+	 */
+	@Override
+	public Long getTotalRecordCount(Class<T> entityClass)
+			throws RetrievalFailureSystemException {
+		Long result = null;
+		try {
+			TypedQuery<Long> query = createCountQuery(entityClass);
+			result = (Long) query.getSingleResult();
+		} catch (IllegalArgumentException | PersistenceException e) {
+			throw new RetrievalFailureSystemException(e);
+		}		
+		return result;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.data.dao.PersistanceDao#getTotalRecordCount(java.lang.Class, com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
+	 */
+	@Override
+	public Long getTotalRecordCount(Class<T> entityClass,
+			ResultLoadCriteria resultLoadCriteria)
+			throws RetrievalFailureSystemException {
+		Long result = null;
+		try {
+			TypedQuery<Long> query = createCountQuery(entityClass);
+			setResultLoadCriteria(query, resultLoadCriteria);			
+			result = (Long) query.getSingleResult();
+		} catch (IllegalArgumentException | PersistenceException e) {
+			throw new RetrievalFailureSystemException(e);
+		}		
+		return result;
+	}	
+
+	/**
+	 * @param query
+	 * @param resultLoadCriteria
+	 */
+	private void setResultLoadCriteria(TypedQuery query,
+			ResultLoadCriteria resultLoadCriteria) {
+		if(null != resultLoadCriteria.getFirst())
+		{
+			query.setFirstResult(resultLoadCriteria.getFirst());
+		}
+		if(null != resultLoadCriteria.getPageSize())
+		{
+			query.setFirstResult(resultLoadCriteria.getPageSize());
+		}
+	}
+
+
+	/**
+	 * @param entityClass
+	 * @return
+	 */
+	private TypedQuery<T> createQuery(Class<T> entityClass) {
+		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+		CriteriaQuery<T> criteriaQuery = cb.createQuery(entityClass);
+		Root<T> from = criteriaQuery.from(entityClass);
+		return getEntityManager().createQuery(criteriaQuery);
+	}	
+
+	private TypedQuery<Long> createCountQuery(Class<T> entityClass) {
+		CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+		CriteriaQuery<Long> criteriaQuery = cb.createQuery(Long.class);
+		criteriaQuery.select(cb.count(criteriaQuery.from(entityClass)));
+		return getEntityManager().createQuery(criteriaQuery);
+	}	
 
 	/* (non-Javadoc)
 	 * @see com.rs.webretail.b2c.estore.dao.BaseDao#findWithNamedQuery(java.lang.String, java.util.Map)
@@ -343,5 +432,6 @@ public class JpaPersistanceDaoImpl<T> implements PersistanceDao<T> {
 			throw new RetrievalFailureSystemException(e);
 		}
 	}
+
 	
 }

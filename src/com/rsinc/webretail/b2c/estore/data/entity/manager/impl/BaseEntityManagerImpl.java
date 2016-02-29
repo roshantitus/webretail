@@ -19,6 +19,7 @@ import com.rsinc.webretail.b2c.estore.common.exception.application.RecordNotFoun
 import com.rsinc.webretail.b2c.estore.common.exception.application.ValidationException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.PersistanceFailureSystemException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.RetrievalFailureSystemException;
+import com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria;
 import com.rsinc.webretail.b2c.estore.common.util.Constants;
 import com.rsinc.webretail.b2c.estore.common.util.SecurityContextUtils;
 import com.rsinc.webretail.b2c.estore.data.dao.PersistanceDao;
@@ -33,6 +34,7 @@ import com.rsinc.webretail.b2c.estore.data.entity.manager.BaseEntityManager;
 @Component
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 public abstract class BaseEntityManagerImpl <T extends BaseBean> implements BaseEntityManager <T> {
+
 
 	@Inject
 	private PersistanceDao<T> persistanceDao;
@@ -161,6 +163,7 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 		getPersistanceDao().delete(baseBean);
 	}	
 
+	@Override
 	public abstract void deleteById(Object id) throws PersistanceFailureSystemException, RecordNotFoundException, ValidationException;
 	
 	protected void deleteById(Class<T> type, Object id) throws PersistanceFailureSystemException, RecordNotFoundException, ValidationException{
@@ -195,8 +198,10 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 		return getPersistanceDao().find(type, id);
 	}
 
+	@Override
 	public abstract T loadById(Object id) throws RetrievalFailureSystemException, RecordNotFoundException, ValidationException;
 
+	@Override
 	public abstract List<T> findAll() throws RetrievalFailureSystemException;
 
 	protected List<T> findAll(Class<T> type)
@@ -205,7 +210,36 @@ public abstract class BaseEntityManagerImpl <T extends BaseBean> implements Base
 		return getPersistanceDao().findAll(type);
 	}
 
+	@Override
+	public abstract List<T> findAll(ResultLoadCriteria resultLoadCriteria) throws RetrievalFailureSystemException;
+	
+	protected List<T> findAll(Class<T> type, ResultLoadCriteria resultLoadCriteria)
+			throws RetrievalFailureSystemException {
 
+		return getPersistanceDao().findAll(type, resultLoadCriteria);
+	}
+
+
+	@Override
+	public abstract Long getTotalRecordCount() throws RetrievalFailureSystemException;
+	
+	protected Long getTotalRecordCount(Class<T> type) throws RetrievalFailureSystemException {
+		return getPersistanceDao().getTotalRecordCount(type);
+	}
+
+
+
+	@Override
+	public abstract Long getTotalRecordCount(ResultLoadCriteria resultLoadCriteria)
+			throws RetrievalFailureSystemException;
+		
+	protected Long getTotalRecordCount(Class<T> type, ResultLoadCriteria resultLoadCriteria)
+			throws RetrievalFailureSystemException {	
+		
+		return getPersistanceDao().getTotalRecordCount(type, resultLoadCriteria);
+	}
+
+	
 
 	@Override
 	public List<T> findWithNamedQuery(String queryName)
