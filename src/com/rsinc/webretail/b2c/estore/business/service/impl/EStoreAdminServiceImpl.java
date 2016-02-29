@@ -17,6 +17,7 @@ import com.rsinc.webretail.b2c.estore.business.model.User;
 import com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService;
 import com.rsinc.webretail.b2c.estore.common.exception.application.ApplicationException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.SystemException;
+import com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria;
 import com.rsinc.webretail.b2c.estore.common.util.BeanUtils;
 import com.rsinc.webretail.b2c.estore.common.util.EntityConversionUtils;
 import com.rsinc.webretail.b2c.estore.data.entity.CategoryBean;
@@ -33,6 +34,35 @@ import com.rsinc.webretail.b2c.estore.data.entity.enums.OrderStatus;
 @Transactional
 public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements EStoreAdminService {
 
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getTotalUserCount()
+	 */
+	@Override
+	public Long getTotalUserCount() throws ApplicationException,
+			SystemException {
+		return getUserEntityManager().getTotalRecordCount();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getTotalUserCount(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
+	 */
+	@Override
+	public Long getTotalUserCount(ResultLoadCriteria resultLoadCriteria)
+			throws ApplicationException, SystemException {
+
+		return getUserEntityManager().getTotalRecordCount(resultLoadCriteria);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllUsers(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
+	 */
+	@Override
+	public List<User> getAllUsers(ResultLoadCriteria resultLoadCriteria)
+			throws ApplicationException, SystemException {
+		
+		return EntityConversionUtils.convertUserBean2User(getUserEntityManager().findAll(resultLoadCriteria));
+	}	
 
 	/* (non-Javadoc)
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllUsers()
@@ -107,6 +137,35 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 		return null;
 	}
 	
+
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getTotalCategoryCount()
+	 */
+	@Override
+	public Long getTotalCategoryCount() throws ApplicationException,
+			SystemException {
+		return getCategoryEntityManager().getTotalRecordCount();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getTotalCategoryCount(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
+	 */
+	@Override
+	public Long getTotalCategoryCount(ResultLoadCriteria resultLoadCriteria)
+			throws ApplicationException, SystemException {
+		
+		return getCategoryEntityManager().getTotalRecordCount(resultLoadCriteria);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllCategories(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
+	 */
+	@Override
+	public List<Category> getAllCategories(ResultLoadCriteria resultLoadCriteria)
+			throws ApplicationException, SystemException {
+		return EntityConversionUtils.convertCategoryBean2Category(getCategoryEntityManager().findAll(resultLoadCriteria));
+	}
 	
 	/*
 	 * (non-Javadoc)
@@ -181,6 +240,35 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 		}
 		return success;
 	}
+	
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getTotalProductCount()
+	 */
+	@Override
+	public Long getTotalProductCount() throws ApplicationException,
+			SystemException {
+		return getProductEntityManager().getTotalRecordCount();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getTotalProductCount(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
+	 */
+	@Override
+	public Long getTotalProductCount(ResultLoadCriteria resultLoadCriteria)
+			throws ApplicationException, SystemException {
+		return getProductEntityManager().getTotalRecordCount(resultLoadCriteria);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllProducts(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
+	 */
+	@Override
+	public List<Product> getAllProducts(ResultLoadCriteria resultLoadCriteria)
+			throws ApplicationException, SystemException {
+		
+		return EntityConversionUtils.convertProductBean2Product(getProductEntityManager().findAll(resultLoadCriteria));
+	}	
 
 	/* (non-Javadoc)
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllProducts()
@@ -253,6 +341,35 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 		return success;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getTotalOrderCount()
+	 */
+	@Override
+	public Long getTotalOrderCount() throws ApplicationException,
+			SystemException {
+		return getOrderEntityManager().getTotalRecordCount();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getTotalOrderCount(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
+	 */
+	@Override
+	public Long getTotalOrderCount(ResultLoadCriteria resultLoadCriteria)
+			throws ApplicationException, SystemException {
+		return getOrderEntityManager().getTotalRecordCount(resultLoadCriteria);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllOrders(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
+	 */
+	@Override
+	public List<Order> getAllOrders(ResultLoadCriteria resultLoadCriteria)
+			throws ApplicationException, SystemException {
+		
+		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().findAll(resultLoadCriteria));
+	}
+
+	
 	/* (non-Javadoc)
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllOrders()
 	 */

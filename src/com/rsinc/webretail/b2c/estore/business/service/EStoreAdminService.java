@@ -13,6 +13,7 @@ import com.rsinc.webretail.b2c.estore.business.model.Product;
 import com.rsinc.webretail.b2c.estore.business.model.User;
 import com.rsinc.webretail.b2c.estore.common.exception.application.ApplicationException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.SystemException;
+import com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria;
 
 /**
  * @author Roshan Titus
@@ -27,8 +28,34 @@ public interface EStoreAdminService extends EStoreService{
 	 * @throws ApplicationException
 	 * @throws SystemException
 	 */
+	Long getTotalUserCount() throws ApplicationException, SystemException;
+	
+	/**
+	 * 
+	 * @param resultLoadCriteria
+	 * @return
+	 * @throws ApplicationException
+	 * @throws SystemException
+	 */
+	Long getTotalUserCount(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;
+	
+	/**
+	 * 
+	 * @return
+	 * @throws ApplicationException
+	 * @throws SystemException
+	 */
 	List<User> getAllUsers() throws ApplicationException, SystemException;
 
+	/**
+	 * 
+	 * @param resultLoadCriteria
+	 * @return
+	 * @throws ApplicationException
+	 * @throws SystemException
+	 */
+	List<User> getAllUsers(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;
+	
 	/**
 	 * @param valueOf
 	 * @return
@@ -66,7 +93,32 @@ public interface EStoreAdminService extends EStoreService{
 	 * @throws ApplicationException
 	 * @throws SystemException
 	 */
+	Long getTotalCategoryCount() throws ApplicationException, SystemException;
+	
+	/**
+	 * 
+	 * @param resultLoadCriteria
+	 * @return
+	 * @throws ApplicationException
+	 * @throws SystemException
+	 */
+	Long getTotalCategoryCount(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;	
+	/**
+	 * 
+	 * @return
+	 * @throws ApplicationException
+	 * @throws SystemException
+	 */
 	List<Category> getAllCategories() throws ApplicationException, SystemException;
+	
+	/**
+	 * 
+	 * @param resultLoadCriteria
+	 * @return
+	 * @throws ApplicationException
+	 * @throws SystemException
+	 */
+	List<Category> getAllCategories(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;
 	
 	/**
 	 * @param category
@@ -93,10 +145,36 @@ public interface EStoreAdminService extends EStoreService{
 	Boolean deleteCategory(Long categoryId) throws ApplicationException, SystemException;
 
 	/**
+	 * 
+	 * @return
+	 * @throws ApplicationException
+	 * @throws SystemException
+	 */
+	Long getTotalProductCount() throws ApplicationException, SystemException;
+	
+	/**
+	 * 
+	 * @param resultLoadCriteria
+	 * @return
+	 * @throws ApplicationException
+	 * @throws SystemException
+	 */
+	Long getTotalProductCount(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;	
+	
+	/**
 	 * @return
 	 */
 	List<Product> getAllProducts() throws ApplicationException, SystemException;
 
+	/**
+	 * 
+	 * @param resultLoadCriteria
+	 * @return
+	 * @throws ApplicationException
+	 * @throws SystemException
+	 */
+	List<Product> getAllProducts(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;
+	
 	/**
 	 * @param product
 	 * @return
@@ -122,11 +200,36 @@ public interface EStoreAdminService extends EStoreService{
 	Boolean deleteProduct(Long productId) throws ApplicationException, SystemException;
 
 	/**
+	 * 
+	 * @return
+	 * @throws ApplicationException
+	 * @throws SystemException
+	 */
+	Long getTotalOrderCount() throws ApplicationException, SystemException;
+	
+	/**
+	 * 
+	 * @param resultLoadCriteria
+	 * @return
+	 * @throws ApplicationException
+	 * @throws SystemException
+	 */
+	Long getTotalOrderCount(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;	
+	
+	/**
 	 * @return
 	 */
-	List<Order> getAllOrders() throws ApplicationException,
-	SystemException ;
+	List<Order> getAllOrders() throws ApplicationException, SystemException ;
 
+	/**
+	 * 
+	 * @param resultLoadCriteria
+	 * @return
+	 * @throws ApplicationException
+	 * @throws SystemException
+	 */
+	List<Order> getAllOrders(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException ;
+	
 	/**
 	 * @param order
 	 * @return
