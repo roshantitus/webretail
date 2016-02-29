@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * @author Roshan Titus
@@ -44,10 +46,10 @@ public class OrderBean extends BaseBean{
 	}
 
 	@Column(name = "order_date")	
+	@Temporal(TemporalType.DATE)	
 	public Calendar getOrderDate() {
 		return orderDate;
 	}
-
 
 	public void setOrderDate(Calendar orderDate) {
 		this.orderDate = orderDate;
@@ -70,7 +72,5 @@ public class OrderBean extends BaseBean{
 		this.id = orderId;
 		
 	}
-	
-	
 
 }

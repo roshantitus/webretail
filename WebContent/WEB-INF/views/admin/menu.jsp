@@ -37,15 +37,14 @@
                     <li class="xn-openable">
                         <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Sales</span></a>                        
                         <ul>
-                            <li><a href="categoryList.html"><span class="fa fa-heart"></span> Pending Orders</a></li>                            
-                            <li><a href="categoryList.html"><span class="fa fa-cogs"></span> Completed Orders</a></li>                         
-                            <li><a href="categoryList.html"><span class="fa fa-pencil-square-o"></span> Shipping</a></li>
+                            <li><a href="pendingOrderList.html"><span class="fa fa-heart"></span> Pending Orders</a></li>                            
+                            <li><a href="shippedOrderList.html"><span class="fa fa-cogs"></span> Shipped Orders</a></li> 
+                            <li><a href="returnedOrderList.html"><span class="fa fa-th"></span> Returned Orders</a></li>                                               
+                            <li><a href="categoryList.html"><span class="fa fa-pencil-square-o"></span> Track Shipping</a></li>
                             <li><a href="categoryList.html"><span class="fa fa-pencil"></span> Payments</a></li>
-                            <li><a href="categoryList.html"><span class="fa fa-th"></span> Returns</a></li>
                             <li><a href="categoryList.html"><span class="fa fa-warning"></span> Tax</a></li>                              
                             <li><a href="categoryList.html"><span class="fa fa-list-ul"></span> Gift Vouchers</a></li>
                             <li><a href="categoryList.html"><span class="fa fa-arrows-h"></span> Coupons</a></li>
-                            <li><a href="categoryList.html"><span class="fa fa-list-ul"></span> Visitors</a></li>
                         </ul>
                     </li>         
                 	<li class="xn-openable">
@@ -54,7 +53,6 @@
                             <li><a href="categoryList.html"><span class="fa fa-heart"></span> Preferences</a></li>                            
                             <li><a href="localeList.html"><span class="fa fa-cogs"></span> Languages</a></li>
                             <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Currency</a></li>                            
-                            <li><a href="categoryList.html"><span class="fa fa-user"></span> Users</a></li>
                             <li><a href="categoryList.html"><span class="fa fa-list-ul"></span> Site Information</a></li>                            
                         </ul>
                     </li>                        
@@ -66,6 +64,7 @@
                         	<li><a href="categoryList.html"><span class="fa fa-heart"></span> Products Purchased List</a></li>
                             <li><a href="categoryList.html"><span class="fa fa-heart"></span> Customer Actvity</a></li>
                             <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Error Logs</a></li>
+                            <li><a href="visitorList.html"><span class="fa fa-list-ul"></span> Visitors</a></li>                            
                         </ul>
                     </li>                                
                 </ul>

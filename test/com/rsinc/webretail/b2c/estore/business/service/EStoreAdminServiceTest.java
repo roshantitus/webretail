@@ -207,7 +207,7 @@ public class EStoreAdminServiceTest {
 			assertNotNull(orderFromDB.getOrderStatus());
 			assertEquals(newOrder.getOrderStatus(), orderFromDB.getOrderStatus());
 			assertNotNull(orderFromDB.getOrderDate());
-			assertEquals(newOrder.getOrderDate(), orderFromDB.getOrderDate());
+			assertTrue(orderFromDB.getOrderDate().equals(newOrder.getOrderDate()));
 			
 			//fetch all categories
 			List<Order> orderList = eStoreAdminService.getAllOrders();
