@@ -36,33 +36,33 @@ public class ManageCategoriesController extends BaseController{
 	private static Logger logger = LoggerFactory.getLogger(ManageCategoriesController.class);
 	
     @RequestMapping(value="/admin/categoryList.html", method=RequestMethod.GET)
-    public String viewDashboard(Locale locale) {
+    public String viewAllCategories(Locale locale) {
         return "categoryList";
     }
 	
 	//REST APIS
-    @RequestMapping(value = "/admin/category/list/all", method = RequestMethod.GET)
-    public @ResponseBody List<Category> viewAllCategories() throws ApplicationException, SystemException {
-        return eStoreAdminService.getAllCategories();
-    }
-    
-    @RequestMapping(value = "/admin/category/add", method = RequestMethod.POST)
-    public @ResponseBody Long addCategory(Category category) throws ApplicationException, SystemException {
-        return eStoreAdminService.addCategory(category);
-    }	
-    
-    @RequestMapping(value = "/admin/category/view", method = RequestMethod.GET)
-    public @ResponseBody Category viewCategory(String categoryId) throws ApplicationException, SystemException {
-        return eStoreAdminService.getCategory(Long.valueOf(categoryId));
-    }    
-    
-    @RequestMapping(value = "/admin/category/edit", method = RequestMethod.POST)
-    public @ResponseBody Boolean editCategory(Category category) throws ApplicationException, SystemException {
-        return eStoreAdminService.updateCategory(category);
-    }       
-    
-    @RequestMapping(value = "/admin/category/delete", method = RequestMethod.GET)
-    public @ResponseBody Boolean deleteCategory(String categoryId) throws ApplicationException, SystemException {
-        return eStoreAdminService.deleteCategory(Long.valueOf(categoryId));
-    }   	
+//    @RequestMapping(value = "/admin/category/list/all", method = RequestMethod.GET)
+//    public @ResponseBody List<Category> viewAllCategories() throws ApplicationException, SystemException {
+//        return eStoreAdminService.getAllCategories();
+//    }
+//    
+//    @RequestMapping(value = "/admin/category/add", method = RequestMethod.POST)
+//    public @ResponseBody Long addCategory(Category category) throws ApplicationException, SystemException {
+//        return eStoreAdminService.addCategory(category);
+//    }	
+//    
+//    @RequestMapping(value = "/admin/category/view", method = RequestMethod.GET)
+//    public @ResponseBody Category viewCategory(String categoryId) throws ApplicationException, SystemException {
+//        return eStoreAdminService.getCategory(Long.valueOf(categoryId));
+//    }    
+//    
+//    @RequestMapping(value = "/admin/category/edit", method = RequestMethod.POST)
+//    public @ResponseBody Boolean editCategory(Category category) throws ApplicationException, SystemException {
+//        return eStoreAdminService.updateCategory(category);
+//    }       
+//    
+//    @RequestMapping(value = "/admin/category/delete", method = RequestMethod.GET)
+//    public @ResponseBody Boolean deleteCategory(String categoryId) throws ApplicationException, SystemException {
+//        return eStoreAdminService.deleteCategory(Long.valueOf(categoryId));
+//    }   	
 }

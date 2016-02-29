@@ -43,14 +43,6 @@ public class OrderEntityManagerImpl extends BaseEntityManagerImpl<OrderBean> imp
 		super.setDefaultValues(orderBean);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.OrderEntityManager#getPendingOrders()
-	 */
-	@Override
-	public List<OrderBean> getPendingOrders() {
-		// TODO implement method functionality
-		return null;
-	}
 
 	/* (non-Javadoc)
 	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.impl.BaseEntityManagerImpl#deleteById(java.lang.Object)
@@ -78,6 +70,16 @@ public class OrderEntityManagerImpl extends BaseEntityManagerImpl<OrderBean> imp
 	@Override
 	public List<OrderBean> findAll() throws RetrievalFailureSystemException {
 		return getPersistanceDao().findAll(OrderBean.class);
+	}
+
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.OrderEntityManager#findOrdersByStatus(java.util.List)
+	 */
+	@Override
+	public List<OrderBean> findOrdersByStatus(List<OrderStatus> orderStatusList) {
+		// TODO implement method functionality
+		return null;
 	}
 
 

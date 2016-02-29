@@ -3,6 +3,7 @@
  */
 package com.rsinc.webretail.b2c.estore.business.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeansException;
@@ -22,6 +23,7 @@ import com.rsinc.webretail.b2c.estore.data.entity.CategoryBean;
 import com.rsinc.webretail.b2c.estore.data.entity.OrderBean;
 import com.rsinc.webretail.b2c.estore.data.entity.ProductBean;
 import com.rsinc.webretail.b2c.estore.data.entity.UserBean;
+import com.rsinc.webretail.b2c.estore.data.entity.enums.OrderStatus;
 
 /**
  * @author Roshan Titus
@@ -324,10 +326,56 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getPendingOrders()
 	 */
 	@Override
-	public List<Order> getPendingOrders()  throws ApplicationException,
+	public List<Order> getAllPendingOrders()  throws ApplicationException,
 	SystemException {
-		
-		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().getPendingOrders());
+		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
+		orderStatusList.add(OrderStatus.NEW);
+		orderStatusList.add(OrderStatus.PAYMENT_RECIEVED);
+		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().findOrdersByStatus(orderStatusList));
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllInProgressOrders()
+	 */
+	@Override
+	public List<Order> getAllInProgressOrders() throws ApplicationException,
+			SystemException {
+		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
+		orderStatusList.add(OrderStatus.PROCESSING);
+		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().findOrdersByStatus(orderStatusList));
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllShippedOrders()
+	 */
+	@Override
+	public List<Order> getAllShippedOrders() throws ApplicationException,
+			SystemException {
+		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
+		orderStatusList.add(OrderStatus.SHIPPED);
+		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().findOrdersByStatus(orderStatusList));
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllDeliveredOrders()
+	 */
+	@Override
+	public List<Order> getAllDeliveredOrders() throws ApplicationException,
+			SystemException {
+		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
+		orderStatusList.add(OrderStatus.DELIVERED);
+		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().findOrdersByStatus(orderStatusList));
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllReturnedOrders()
+	 */
+	@Override
+	public List<Order> getAllReturnedOrders() throws ApplicationException,
+			SystemException {
+		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
+		orderStatusList.add(OrderStatus.RETURNED);
+		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().findOrdersByStatus(orderStatusList));
 	}
 
 

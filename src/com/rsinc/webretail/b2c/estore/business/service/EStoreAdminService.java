@@ -53,6 +53,13 @@ public interface EStoreAdminService extends EStoreService{
 	 */
 	Boolean enableUser(Long userId) throws ApplicationException, SystemException;
 
+
+	/**
+	 * @param valueOf
+	 * @return
+	 */
+	Boolean disableUser(Long valueOf);
+	
 	/**
 	 * 
 	 * @return
@@ -149,15 +156,47 @@ public interface EStoreAdminService extends EStoreService{
 	SystemException ;
 
 	/**
+	 * Returns orders with status NEW and PAYMENT_RECIEVED
 	 * @return
+	 * @throws ApplicationException
+	 * @throws SystemException
 	 */
-	List<Order> getPendingOrders() throws ApplicationException,
+	List<Order> getAllPendingOrders() throws ApplicationException,
 	SystemException ;
 
 	/**
-	 * @param valueOf
+	 * Returns orders with status PROCESSING
 	 * @return
+	 * @throws ApplicationException
+	 * @throws SystemException
 	 */
-	Boolean disableUser(Long valueOf);
-
+	List<Order> getAllInProgressOrders() throws ApplicationException,
+	SystemException ;
+	
+	/**
+	 * Returns orders with status SHIPPED
+	 * @return
+	 * @throws ApplicationException
+	 * @throws SystemException
+	 */
+	List<Order> getAllShippedOrders() throws ApplicationException,
+	SystemException ;
+	
+	/**
+	 * Returns orders with status DELIVERED
+	 * @return
+	 * @throws ApplicationException
+	 * @throws SystemException
+	 */
+	List<Order> getAllDeliveredOrders() throws ApplicationException,
+	SystemException ;
+	
+	/**
+	 * Returns orders with status RETURNED
+	 * @return
+	 * @throws ApplicationException
+	 * @throws SystemException
+	 */
+	List<Order> getAllReturnedOrders() throws ApplicationException,
+	SystemException ;	
 }

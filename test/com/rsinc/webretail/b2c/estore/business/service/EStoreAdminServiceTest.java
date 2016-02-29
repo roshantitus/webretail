@@ -256,7 +256,7 @@ public class EStoreAdminServiceTest {
 	private Order getOrderWithChanges() {
 		Order order = new Order();
 		order.setOrderDate(Calendar.getInstance());
-		order.setOrderStatus(OrderStatus.IN_PROGRESS.toString());
+		order.setOrderStatus(OrderStatus.PROCESSING.toString());
 		return order;
 	}		
 		

@@ -8,6 +8,6 @@ package com.rsinc.webretail.b2c.estore.data.entity.enums;
  *
  */
 public enum OrderStatus {
-	NEW, IN_PROGRESS, SHIPPED, DELIVERED
+	NEW, PAYMENT_RECIEVED, PROCESSING, SHIPPED, DELIVERED, RETURNED
 
 }

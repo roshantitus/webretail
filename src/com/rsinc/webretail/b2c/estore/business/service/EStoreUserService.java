@@ -16,5 +16,9 @@ import com.rsinc.webretail.b2c.estore.common.exception.system.SystemException;
 public interface EStoreUserService extends EStoreService{
 
 	//UserBean registerUser(UserBean user) throws ApplicationException, SystemException;
-	//void addItemsToCart(items) throws ApplicationException, SystemException;
+	//List<Product> getProductsForCategory(Long categoryId) throws ApplicationException, SystemException;
+	//List<Category> getAllParentCategories() throws ApplicationException, SystemException;
+	
+	//void addProductToCart(Product product) throws ApplicationException, SystemException;
+	//void removeIteemFromCart(Long cartItemId) throws ApplicationException, SystemException;
 }

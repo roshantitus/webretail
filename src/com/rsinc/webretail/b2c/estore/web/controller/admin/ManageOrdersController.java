@@ -4,6 +4,7 @@
 package com.rsinc.webretail.b2c.estore.web.controller.admin;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -33,7 +34,11 @@ public class ManageOrdersController extends BaseController {
 //	@InjectLogger
 	private static Logger logger = LoggerFactory.getLogger(ManageOrdersController.class);
 	
-	
+    @RequestMapping(value="/admin/orderList.html", method=RequestMethod.GET)
+    public String viewOrderHistory(Locale locale) {
+        return "orderList";
+    }
+    
     @RequestMapping(value = "/admin/order/list/all", method = RequestMethod.GET)
     public @ResponseBody List<Order> viewAllOrders() throws ApplicationException, SystemException {
         return eStoreAdminService.getAllOrders();
@@ -41,7 +46,7 @@ public class ManageOrdersController extends BaseController {
     
     @RequestMapping(value = "/admin/order/list/pending", method = RequestMethod.GET)
     public @ResponseBody List<Order> viewPendingOrders() throws ApplicationException, SystemException {
-        return eStoreAdminService.getPendingOrders();
+        return eStoreAdminService.getAllPendingOrders();
     }
     
     @RequestMapping(value = "/admin/order/add", method = RequestMethod.POST)

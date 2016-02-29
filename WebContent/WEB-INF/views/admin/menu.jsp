@@ -29,8 +29,8 @@
                         <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">Catalog</span></a>
                         <ul>
                             <li><a href="categoryList.html"><span class="fa fa-cogs"></span> Catagories</a></li>
-                            <li><a href="categoryList.html"><span class="fa fa-list-ul"></span> Products</a></li>
-                            <li><a href="categoryList.html"><span class="fa fa-user"></span> Customers</a></li>                            
+                            <li><a href="productList.html"><span class="fa fa-list-ul"></span> Products</a></li>
+                            <li><a href="userList.html"><span class="fa fa-user"></span> Customers</a></li>                            
                             <li><a href="categoryList.html"><span class="fa fa-list-ul"></span> Reviews</a></li>
                         </ul>
                     </li>
@@ -52,7 +52,7 @@
                         <a href="#"><span class="fa fa-cogs"></span> <span class="xn-text">System</span></a>                        
                         <ul>
                             <li><a href="categoryList.html"><span class="fa fa-heart"></span> Preferences</a></li>                            
-                            <li><a href="categoryList.html"><span class="fa fa-cogs"></span> Languages</a></li>
+                            <li><a href="localeList.html"><span class="fa fa-cogs"></span> Languages</a></li>
                             <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Currency</a></li>                            
                             <li><a href="categoryList.html"><span class="fa fa-user"></span> Users</a></li>
                             <li><a href="categoryList.html"><span class="fa fa-list-ul"></span> Site Information</a></li>                            
@@ -61,7 +61,7 @@
                     <li class="xn-openable">
                         <a href="#"><span class="fa fa-bar-chart-o"></span> <span class="xn-text">Reports</span></a>                      
                         <ul>
-                        	<li><a href="categoryList.html"><span class="fa fa-heart"></span> Order History</a></li>   
+                        	<li><a href="orderList.html"><span class="fa fa-heart"></span> Order History</a></li>   
                         	<li><a href="categoryList.html"><span class="fa fa-heart"></span> Products Viewed Report</a></li> 
                         	<li><a href="categoryList.html"><span class="fa fa-heart"></span> Products Purchased List</a></li>
                             <li><a href="categoryList.html"><span class="fa fa-heart"></span> Customer Actvity</a></li>

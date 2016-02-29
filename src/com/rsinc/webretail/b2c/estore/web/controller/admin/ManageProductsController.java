@@ -4,6 +4,7 @@
 package com.rsinc.webretail.b2c.estore.web.controller.admin;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -34,28 +35,34 @@ public class ManageProductsController extends BaseController {
 	private static Logger logger = LoggerFactory.getLogger(ManageProductsController.class);
 	
 	
-    @RequestMapping(value = "/admin/product/list/all", method = RequestMethod.GET)
-    public @ResponseBody List<Product> viewAllProducts() throws ApplicationException, SystemException {
-        return eStoreAdminService.getAllProducts();
+    @RequestMapping(value="/admin/productList.html", method=RequestMethod.GET)
+    public String viewAllProducts(Locale locale) {
+        return "productList";
     }
-    
-    @RequestMapping(value = "/admin/product/add", method = RequestMethod.POST)
-    public @ResponseBody Long addProduct(Product product) throws ApplicationException, SystemException {
-        return eStoreAdminService.addProduct(product);
-    }	
-    
-    @RequestMapping(value = "/admin/product/view", method = RequestMethod.GET)
-    public @ResponseBody Product viewProduct(String productId) throws ApplicationException, SystemException {
-        return eStoreAdminService.getProduct(Long.valueOf(productId));
-    }    
-    
-    @RequestMapping(value = "/admin/product/edit", method = RequestMethod.POST)
-    public @ResponseBody Boolean editProduct(Product product) throws ApplicationException, SystemException {
-        return eStoreAdminService.updateProduct(product);
-    }       
-    
-    @RequestMapping(value = "/admin/product/delete", method = RequestMethod.GET)
-    public @ResponseBody Boolean deleteProduct(String productId) throws ApplicationException, SystemException {
-        return eStoreAdminService.deleteProduct(Long.valueOf(productId));
-    }	
+	
+	//REST APIS	
+//    @RequestMapping(value = "/admin/product/list/all", method = RequestMethod.GET)
+//    public @ResponseBody List<Product> viewAllProducts() throws ApplicationException, SystemException {
+//        return eStoreAdminService.getAllProducts();
+//    }
+//    
+//    @RequestMapping(value = "/admin/product/add", method = RequestMethod.POST)
+//    public @ResponseBody Long addProduct(Product product) throws ApplicationException, SystemException {
+//        return eStoreAdminService.addProduct(product);
+//    }	
+//    
+//    @RequestMapping(value = "/admin/product/view", method = RequestMethod.GET)
+//    public @ResponseBody Product viewProduct(String productId) throws ApplicationException, SystemException {
+//        return eStoreAdminService.getProduct(Long.valueOf(productId));
+//    }    
+//    
+//    @RequestMapping(value = "/admin/product/edit", method = RequestMethod.POST)
+//    public @ResponseBody Boolean editProduct(Product product) throws ApplicationException, SystemException {
+//        return eStoreAdminService.updateProduct(product);
+//    }       
+//    
+//    @RequestMapping(value = "/admin/product/delete", method = RequestMethod.GET)
+//    public @ResponseBody Boolean deleteProduct(String productId) throws ApplicationException, SystemException {
+//        return eStoreAdminService.deleteProduct(Long.valueOf(productId));
+//    }	
 }
