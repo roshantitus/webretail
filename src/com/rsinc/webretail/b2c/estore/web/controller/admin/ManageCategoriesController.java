@@ -9,6 +9,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +20,7 @@ import com.rsinc.webretail.b2c.estore.common.exception.application.ApplicationEx
 import com.rsinc.webretail.b2c.estore.common.exception.system.SystemException;
 import com.rsinc.webretail.b2c.estore.common.logging.Logger;
 import com.rsinc.webretail.b2c.estore.common.logging.LoggerFactory;
+import com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria;
 import com.rsinc.webretail.b2c.estore.web.controller.BaseController;
 
 /**
@@ -41,10 +43,20 @@ public class ManageCategoriesController extends BaseController{
     }
 	
 	//REST APIS
-//    @RequestMapping(value = "/admin/category/list/all", method = RequestMethod.GET)
-//    public @ResponseBody List<Category> viewAllCategories() throws ApplicationException, SystemException {
-//        return eStoreAdminService.getAllCategories();
-//    }
+    @RequestMapping(value = "/admin/category/list/all/{pageSize}/{page}", method = RequestMethod.GET)
+    public @ResponseBody List<Category> viewAllCategories(@PathVariable String pageSize, @PathVariable String page) throws ApplicationException, SystemException {
+    	ResultLoadCriteria resultLoadCriteria = new ResultLoadCriteria();
+    	//Integer first = Integer.valueOf(page) * Integer.valueOf(pageSize);
+    	Integer first = (Integer.valueOf(page) - 1) * Integer.valueOf(pageSize);
+    	resultLoadCriteria.setFirst(first);
+    	resultLoadCriteria.setPageSize(Integer.valueOf(pageSize));
+        return eStoreAdminService.getAllCategories(resultLoadCriteria);
+    }
+    
+    @RequestMapping(value = "/admin/category/count/all/", method = RequestMethod.GET)    
+    public @ResponseBody Long viewAllCategories() throws ApplicationException, SystemException {
+        return eStoreAdminService.getTotalCategoryCount();
+    }    
 //    
 //    @RequestMapping(value = "/admin/category/add", method = RequestMethod.POST)
 //    public @ResponseBody Long addCategory(Category category) throws ApplicationException, SystemException {

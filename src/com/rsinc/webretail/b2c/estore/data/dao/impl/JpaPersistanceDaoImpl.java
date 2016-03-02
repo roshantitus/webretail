@@ -260,7 +260,7 @@ public class JpaPersistanceDaoImpl<T> implements PersistanceDao<T> {
 		}
 		if(null != resultLoadCriteria.getPageSize())
 		{
-			query.setFirstResult(resultLoadCriteria.getPageSize());
+			query.setMaxResults(resultLoadCriteria.getPageSize());
 		}
 	}
 

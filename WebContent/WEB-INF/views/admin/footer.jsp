@@ -1,44 +1,3 @@
-<%@include file="/WEB-INF/views/include.jsp" %>
-<!DOCTYPE html>
-<html lang="en" ng-app="myApp">
-    <head>        
-        <!-- META SECTION -->
-        <title><tiles:insertAttribute name="title" ignore="true" /></title>            
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        
-        <link rel="icon" href="favicon.ico" type="image/x-icon" />
-        <!-- END META SECTION -->
-        
-        <!-- CSS INCLUDE -->        
-        <link rel="stylesheet" type="text/css" id="theme" href="<c:url value='/resources/admin/css/theme-default.css'/>"/>
-        <!-- EOF CSS INCLUDE -->                            
-        <link rel="stylesheet" type="text/css" id="theme" href="<c:url value='/resources/admin/css/style.css'/>"/>
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ng-grid/2.0.11/ng-grid.css" />
-		        
-    </head>
-    <body ng-controller="MyController">
-    
-
-        <!-- START PAGE CONTAINER -->
-        <div class="page-container">
-            
-			<tiles:insertAttribute name="menu" />
-            
-            <!-- PAGE CONTENT -->
-            <div class="page-content">
-                
-				<tiles:insertAttribute name="header" />                
-                
-                <tiles:insertAttribute name="body" />
-                
-             </div>            
-            <!-- END PAGE CONTENT -->
-            
-        </div>
-        <!-- END PAGE CONTAINER -->
-                    
 
         <!-- START PRELOADS -->
         <audio id="audio-alert" src="<c:url value='/resources/admin/audio/alert.mp3'/>" preload="auto"></audio>
@@ -83,7 +42,3 @@
 
 		          
     <!-- END SCRIPTS -->  
-       
-    </body>
-</html>
-    
