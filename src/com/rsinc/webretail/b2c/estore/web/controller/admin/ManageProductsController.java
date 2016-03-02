@@ -9,6 +9,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +20,7 @@ import com.rsinc.webretail.b2c.estore.common.exception.application.ApplicationEx
 import com.rsinc.webretail.b2c.estore.common.exception.system.SystemException;
 import com.rsinc.webretail.b2c.estore.common.logging.Logger;
 import com.rsinc.webretail.b2c.estore.common.logging.LoggerFactory;
+import com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria;
 import com.rsinc.webretail.b2c.estore.web.controller.BaseController;
 
 /**
@@ -41,11 +43,20 @@ public class ManageProductsController extends BaseController {
     }
 	
 	//REST APIS	
-//    @RequestMapping(value = "/admin/product/list/all", method = RequestMethod.GET)
-//    public @ResponseBody List<Product> viewAllProducts() throws ApplicationException, SystemException {
-//        return eStoreAdminService.getAllProducts();
-//    }
-//    
+    @RequestMapping(value = "/admin/product/list/all/{pageSize}/{page}", method = RequestMethod.GET)
+    public @ResponseBody List<Product> getAllProducts(@PathVariable String pageSize, @PathVariable String page) throws ApplicationException, SystemException {
+    	ResultLoadCriteria resultLoadCriteria = new ResultLoadCriteria();
+    	Integer first = (Integer.valueOf(page) - 1) * Integer.valueOf(pageSize);
+    	resultLoadCriteria.setFirst(first);
+    	resultLoadCriteria.setPageSize(Integer.valueOf(pageSize));    	
+        return eStoreAdminService.getAllProducts(resultLoadCriteria);
+    }
+    
+    @RequestMapping(value = "/admin/product/count/all/", method = RequestMethod.GET)    
+    public @ResponseBody Long getTotalCategoryCount() throws ApplicationException, SystemException {
+        return eStoreAdminService.getTotalCategoryCount();    
+    }
+    
 //    @RequestMapping(value = "/admin/product/add", method = RequestMethod.POST)
 //    public @ResponseBody Long addProduct(Product product) throws ApplicationException, SystemException {
 //        return eStoreAdminService.addProduct(product);

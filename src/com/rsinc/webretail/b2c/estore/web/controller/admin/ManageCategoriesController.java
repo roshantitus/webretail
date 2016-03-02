@@ -44,9 +44,8 @@ public class ManageCategoriesController extends BaseController{
 	
 	//REST APIS
     @RequestMapping(value = "/admin/category/list/all/{pageSize}/{page}", method = RequestMethod.GET)
-    public @ResponseBody List<Category> viewAllCategories(@PathVariable String pageSize, @PathVariable String page) throws ApplicationException, SystemException {
+    public @ResponseBody List<Category> getAllCategories(@PathVariable String pageSize, @PathVariable String page) throws ApplicationException, SystemException {
     	ResultLoadCriteria resultLoadCriteria = new ResultLoadCriteria();
-    	//Integer first = Integer.valueOf(page) * Integer.valueOf(pageSize);
     	Integer first = (Integer.valueOf(page) - 1) * Integer.valueOf(pageSize);
     	resultLoadCriteria.setFirst(first);
     	resultLoadCriteria.setPageSize(Integer.valueOf(pageSize));
@@ -54,7 +53,7 @@ public class ManageCategoriesController extends BaseController{
     }
     
     @RequestMapping(value = "/admin/category/count/all/", method = RequestMethod.GET)    
-    public @ResponseBody Long viewAllCategories() throws ApplicationException, SystemException {
+    public @ResponseBody Long getTotalCategoryCount() throws ApplicationException, SystemException {
         return eStoreAdminService.getTotalCategoryCount();
     }    
 //    

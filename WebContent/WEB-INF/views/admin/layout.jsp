@@ -1,6 +1,6 @@
 <%@include file="/WEB-INF/views/include.jsp" %>
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp">
+<html lang="en" ng-app="adminApp">
     <head>        
         <!-- META SECTION -->
         <title><tiles:insertAttribute name="title" ignore="true" /></title>            
@@ -14,11 +14,18 @@
         <!-- CSS INCLUDE -->        
         <link rel="stylesheet" type="text/css" id="theme" href="<c:url value='/resources/admin/css/theme-default.css'/>"/>
         <!-- EOF CSS INCLUDE -->                            
-        <link rel="stylesheet" type="text/css" id="theme" href="<c:url value='/resources/admin/css/style.css'/>"/>
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ng-grid/2.0.11/ng-grid.css" />
 		        
+        <!-- START ng-grid -->
+        <link rel="stylesheet" type="text/css" id="theme" href="<c:url value='/resources/admin/css/admin_style.css'/>"/>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ng-grid/2.0.11/ng-grid.css" />
+                
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ng-grid/2.0.11/ng-grid.debug.js"></script>     
+        <script type="text/javascript" src="<c:url value='/resources/admin/js/admin_script.js'/>"></script>        
+		<!-- END ng-grid -->   		        
     </head>
-    <body ng-controller="MyController">
+    <body>
     
 
         <!-- START PAGE CONTAINER -->
