@@ -301,5 +301,47 @@ public interface EStoreAdminService extends EStoreService{
 	 * @throws SystemException
 	 */
 	List<Order> getAllReturnedOrders() throws ApplicationException,
-	SystemException ;	
+	SystemException ;
+
+	/**
+	 * @return
+	 */
+	Long getReturnedOrderCount() throws ApplicationException,
+	SystemException ;
+
+	/**
+	 * @return
+	 */
+	Long getShippedOrderCount() throws ApplicationException,
+	SystemException ;
+
+	/**
+	 * @return
+	 */
+	Long getPendingOrderCount() throws ApplicationException,
+	SystemException ;
+
+	/**
+	 * @param resultLoadCriteria
+	 * @return
+	 * @throws ApplicationException 
+	 * @throws SystemException 
+	 */
+	List<Order> getAllPendingOrders(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;
+
+	/**
+	 * @param resultLoadCriteria
+	 * @return
+	 * @throws SystemException 
+	 * @throws ApplicationException 
+	 */
+	List<Order> getAllShippedOrders(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;
+
+	/**
+	 * @param resultLoadCriteria
+	 * @return
+	 * @throws SystemException 
+	 * @throws ApplicationException 
+	 */
+	List<Order> getAllReturnedOrders(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;	
 }

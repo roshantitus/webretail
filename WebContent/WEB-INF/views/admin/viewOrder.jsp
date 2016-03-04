@@ -1,6 +1,6 @@
 <%@include file="/WEB-INF/views/include.jsp" %>
 
-				<h1>Order History</h1>
+				<h1>View Order</h1>
 				
                 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
@@ -12,8 +12,6 @@
                 
                 <!-- PAGE CONTENT WRAPPER -->
                 <div class="page-content-wrap">             
-					<div ng-controller="ViewAllOrdersController">                      
-				        <div class="gridStyle" ng-grid="gridOptions"></div>
-				    </div>                        
+                   
                 </div>
                 <!-- END PAGE CONTENT WRAPPER -->                         

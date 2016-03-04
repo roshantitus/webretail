@@ -1,21 +1,19 @@
 <%@include file="/WEB-INF/views/include.jsp" %>
 
-				<h1>Products</h1>
+				<h1>Shipped Orders</h1>
 				
                 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
                     <li><a href="#">Home</a></li>                    
-                    <li class="active">Products</li>
+                    <li class="active">Shipped Orders</li>
                 </ul>
                 <!-- END BREADCRUMB -->     
                 
                 
                 <!-- PAGE CONTENT WRAPPER -->
-                <div class="page-content-wrap">      
-                       
-					<div ng-controller="ViewAllProductsController">                      
+                <div class="page-content-wrap">             
+					<div ng-controller="ViewShippedOrdersController">                      
 				        <div class="gridStyle" ng-grid="gridOptions"></div>
-				    </div>      
-				                     
+				    </div>                        
                 </div>
-                <!-- END PAGE CONTENT WRAPPER -->                       
+                <!-- END PAGE CONTENT WRAPPER -->                         

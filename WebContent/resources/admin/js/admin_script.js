@@ -1,12 +1,11 @@
-function DataTableController(type) {
+function DataTableController(type, list, colDefs) {
 	
     return function($scope, $http) {
 	      $scope.filterOptions = {
 		          filterText: "",
 		          useExternalFilter: true
 		      };
-
-		      $scope.totalServerItems = $http.get(type + '/count/all/').success(function (count) {
+		      $scope.totalServerItems = $http.get(type + '/count/'+ list + '/').success(function (count) {
 		    	  $scope.totalServerItems = count;
 	    	  })
 	    	  .error(function (data) {
@@ -29,7 +28,7 @@ function DataTableController(type) {
 		              var data;
 		              if (searchText) {
 		                  var ft = searchText.toLowerCase();
-		                  $http.get(type + '/list/all/'+pageSize+"/"+page).success(function (largeLoad) {		
+		                  $http.get(type + '/list/'+ list +'/'+pageSize+"/"+page).success(function (largeLoad) {		
 		                      data = largeLoad.filter(function(item) {
 		                          return JSON.stringify(item).toLowerCase().indexOf(ft) != -1;
 		                      });
@@ -62,7 +61,11 @@ function DataTableController(type) {
 		          showFooter: true,
 		          totalServerItems: $scope.totalServerItems,
 		          pagingOptions: $scope.pagingOptions,
-		          filterOptions: $scope.filterOptions
+		          filterOptions: $scope.filterOptions,
+		          showSelectionCheckbox: true,
+		          selectWithCheckboxOnly: true,
+		          multiSelect: false,
+		          columnDefs: colDefs
 		      };
 		  }
 }
@@ -70,5 +73,136 @@ function DataTableController(type) {
 
 var app = angular.module('adminApp', ['ngGrid']);
 
-app.controller('CategoryController', ['$scope', '$http', DataTableController('category')]);
-app.controller('ProductController', ['$scope', '$http', DataTableController('product')]);
+app.controller('ViewAllCategoriesController', ['$scope', '$http', DataTableController('category', 'all', [ {
+                                                                                                              field: 'categoryName',
+                                                                                                              displayName: 'Category Name',
+                                                                                                              enableCellEdit: false
+                                                                                                            },
+                                                                                                            {
+                                                                                                              field: 'categoryDescription',
+                                                                                                              displayName: 'Category Description',
+                                                                                                              enableCellEdit: false
+                                                                                                            },
+                                                                                                            {
+                                                                                                              field: 'categoryId',
+                                                                                                              displayName: 'Action',
+                                                                                                              enableCellEdit: false,
+                                                                                                              cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a ng-href="editCategory.html?categoryId={{COL_FIELD}}" class="glyphicon glyphicon-eye-open green"></a></div>'
+                                                                                                            }
+                                                                                                        ])]);
+
+app.controller('ViewAllProductsController', ['$scope', '$http', DataTableController('product', 'all', [
+                                                                                                       {
+                                                                                                           field: 'productName',
+                                                                                                           displayName: 'Product Name',
+                                                                                                           enableCellEdit: false
+                                                                                                         },
+                                                                                                         {
+                                                                                                           field: 'quantity',
+                                                                                                           displayName: 'Quantity',
+                                                                                                           enableCellEdit: false
+                                                                                                         },
+                                                                                                         {
+                                                                                                           field: 'unitPrice',
+                                                                                                           displayName: 'Unit Price',
+                                                                                                           enableCellEdit: false
+                                                                                                         },			
+                                                                                                         {
+                                                                                                           field: 'productId',
+                                                                                                           displayName: 'Action',
+                                                                                                           enableCellEdit: false,
+                                                                                                           cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a ng-href="editProduct.html?productId={{COL_FIELD}}" class="glyphicon glyphicon-eye-open green"></a></div>'
+                                                                                                         }
+                                                                                                     ])]);
+app.controller('ViewAllOrdersController', ['$scope', '$http', DataTableController('order', 'all', [
+                                                                                                   {
+                                                                                                       field: 'orderId',
+                                                                                                       displayName: 'Order ID',
+                                                                                                       enableCellEdit: false
+                                                                                                     },		
+                                                                                                     {
+                                                                                                       field: 'orderStatus',
+                                                                                                       displayName: 'Status',
+                                                                                                       enableCellEdit: false
+                                                                                                     },			
+                                                                                                     {
+                                                                                                       field: 'orderDate',
+                                                                                                       displayName: 'Order Date',
+                                                                                                       enableCellEdit: false
+                                                                                                     },		
+                                                                                                     {
+                                                                                                       field: 'orderId',
+                                                                                                       displayName: 'Action',
+                                                                                                       enableCellEdit: false,
+                                                                                                       cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a ng-href="viewOrder.html?orderId={{COL_FIELD}}" class="glyphicon glyphicon-eye-open green"></a></div>'
+                                                                                                     }
+                                                                                                 ])]);
+pp.controller('ViewPendingOrdersController', ['$scope', '$http', DataTableController('order', 'pending', [
+                                                                                                             {
+                                                                                                                 field: 'orderId',
+                                                                                                                 displayName: 'Order ID',
+                                                                                                                 enableCellEdit: false
+                                                                                                               },		
+                                                                                                               {
+                                                                                                                 field: 'orderStatus',
+                                                                                                                 displayName: 'Status',
+                                                                                                                 enableCellEdit: false
+                                                                                                               },			
+                                                                                                               {
+                                                                                                                 field: 'orderDate',
+                                                                                                                 displayName: 'Order Date',
+                                                                                                                 enableCellEdit: false
+                                                                                                               },		
+                                                                                                               {
+                                                                                                                 field: 'orderId',
+                                                                                                                 displayName: 'Action',
+                                                                                                                 enableCellEdit: false,
+                                                                                                                 cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a ng-href="viewOrder.html?orderId={{COL_FIELD}}" class="glyphicon glyphicon-eye-open green"></a></div>'
+                                                                                                               }
+                                                                                                           ])]);
+app.controller('ViewShippedOrdersController', ['$scope', '$http', DataTableController('order', 'shipped', [
+                                                                                                              {
+                                                                                                                  field: 'orderId',
+                                                                                                                  displayName: 'Order ID',
+                                                                                                                  enableCellEdit: false
+                                                                                                                },		
+                                                                                                                {
+                                                                                                                  field: 'orderStatus',
+                                                                                                                  displayName: 'Status',
+                                                                                                                  enableCellEdit: false
+                                                                                                                },			
+                                                                                                                {
+                                                                                                                  field: 'orderDate',
+                                                                                                                  displayName: 'Order Date',
+                                                                                                                  enableCellEdit: false
+                                                                                                                },		
+                                                                                                                {
+                                                                                                                  field: 'orderId',
+                                                                                                                  displayName: 'Action',
+                                                                                                                  enableCellEdit: false,
+                                                                                                                  cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a ng-href="viewOrder.html?orderId={{COL_FIELD}}" class="glyphicon glyphicon-eye-open green"></a></div>'
+                                                                                                                }
+                                                                                                            ])]);
+app.controller('ViewReturnedOrdersController', ['$scope', '$http', DataTableController('order', 'returned', [
+                                                                                                                {
+                                                                                                                    field: 'orderId',
+                                                                                                                    displayName: 'Order ID',
+                                                                                                                    enableCellEdit: false
+                                                                                                                  },		
+                                                                                                                  {
+                                                                                                                    field: 'orderStatus',
+                                                                                                                    displayName: 'Status',
+                                                                                                                    enableCellEdit: false
+                                                                                                                  },			
+                                                                                                                  {
+                                                                                                                    field: 'orderDate',
+                                                                                                                    displayName: 'Order Date',
+                                                                                                                    enableCellEdit: false
+                                                                                                                  },		
+                                                                                                                  {
+                                                                                                                    field: 'orderId',
+                                                                                                                    displayName: 'Action',
+                                                                                                                    enableCellEdit: false,
+                                                                                                                    cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a ng-href="viewOrder.html?orderId={{COL_FIELD}}" class="glyphicon glyphicon-eye-open green"></a></div>'
+                                                                                                                  }
+                                                                                                              ])]);

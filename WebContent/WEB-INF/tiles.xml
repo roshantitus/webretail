@@ -41,4 +41,39 @@
         <put-attribute name="title" value="Webretail::Languages" />
         <put-attribute name="body" value="/WEB-INF/views/admin/localeList.jsp" />
     </definition>      
+    
+    <definition name="orderList" extends="base.definition">
+        <put-attribute name="title" value="Webretail::Order History" />
+        <put-attribute name="body" value="/WEB-INF/views/admin/orderList.jsp" />
+    </definition>    
+    
+    <definition name="pendingOrderList" extends="base.definition">
+        <put-attribute name="title" value="Webretail::Pending Orders" />
+        <put-attribute name="body" value="/WEB-INF/views/admin/pendingOrderList.jsp" />
+    </definition>
+    
+    <definition name="shippedOrderList" extends="base.definition">
+        <put-attribute name="title" value="Webretail::Shipped Orders" />
+        <put-attribute name="body" value="/WEB-INF/views/admin/shippedOrderList.jsp" />
+    </definition>
+    
+    <definition name="returnedOrderList" extends="base.definition">
+        <put-attribute name="title" value="Webretail::Returned Orders" />
+        <put-attribute name="body" value="/WEB-INF/views/admin/returnedOrderList.jsp" />
+    </definition>            
+    
+    <definition name="editCategory" extends="base.definition">
+        <put-attribute name="title" value="Webretail::Edit Category" />
+        <put-attribute name="body" value="/WEB-INF/views/admin/editCategory.jsp" />
+    </definition>     
+    
+	<definition name="editProduct" extends="base.definition">
+        <put-attribute name="title" value="Webretail::Edit Product" />
+        <put-attribute name="body" value="/WEB-INF/views/admin/editProduct.jsp" />
+    </definition>     
+    
+	<definition name="viewOrder" extends="base.definition">
+        <put-attribute name="title" value="Webretail::View Order" />
+        <put-attribute name="body" value="/WEB-INF/views/admin/viewOrder.jsp" />
+    </definition>     
 </tiles-definitions>

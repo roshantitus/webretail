@@ -240,7 +240,7 @@ public class JpaPersistanceDaoImpl<T> implements PersistanceDao<T> {
 		Long result = null;
 		try {
 			TypedQuery<Long> query = createCountQuery(entityClass);
-			setResultLoadCriteria(query, resultLoadCriteria);			
+			setResultLoadCriteriaForCountQuery(query, resultLoadCriteria);			
 			result = (Long) query.getSingleResult();
 		} catch (IllegalArgumentException | PersistenceException e) {
 			throw new RetrievalFailureSystemException(e);
@@ -252,7 +252,7 @@ public class JpaPersistanceDaoImpl<T> implements PersistanceDao<T> {
 	 * @param query
 	 * @param resultLoadCriteria
 	 */
-	private void setResultLoadCriteria(TypedQuery query,
+	private void setResultLoadCriteria(Query query,
 			ResultLoadCriteria resultLoadCriteria) {
 		if(null != resultLoadCriteria.getFirst())
 		{
@@ -264,7 +264,11 @@ public class JpaPersistanceDaoImpl<T> implements PersistanceDao<T> {
 		}
 	}
 
+	private void setResultLoadCriteriaForCountQuery(Query query,
+			ResultLoadCriteria resultLoadCriteria) {
 
+	}
+	
 	/**
 	 * @param entityClass
 	 * @return
@@ -382,6 +386,57 @@ public class JpaPersistanceDaoImpl<T> implements PersistanceDao<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
+	@Override	
+	public List<T> findWithNamedQueryWithINClause(String namedQueryName, List params)  throws RetrievalFailureSystemException	
+	{	
+		try {
+			Query query = getEntityManager().createNamedQuery(namedQueryName);
+			query.setParameter("params", params);
+			return query.getResultList();
+		} catch (IllegalArgumentException | PersistenceException e) {
+			throw new RetrievalFailureSystemException(e);
+		}
+	}	
+	
+
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.data.dao.PersistanceDao#findWithNamedQueryWithINClause(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria, java.lang.String, java.util.List)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<T> findWithNamedQueryWithINClause(
+			ResultLoadCriteria resultLoadCriteria, String namedQueryName,
+			List params) throws RetrievalFailureSystemException {
+		
+		try {
+			Query query = getEntityManager().createNamedQuery(namedQueryName);
+			query.setParameter("params", params);
+			setResultLoadCriteria(query, resultLoadCriteria);				
+			return query.getResultList();
+		} catch (IllegalArgumentException | PersistenceException e) {
+			throw new RetrievalFailureSystemException(e);
+		}
+	}
+	
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.data.dao.PersistanceDao#getCountWithNamedQueryWithINClause(java.lang.String, java.util.List)
+	 */
+	@Override
+	public Object findSingleResultWithINClause(String namedQueryName,
+			List params) throws RetrievalFailureSystemException {
+		try {
+			Query query = getEntityManager().createNamedQuery(namedQueryName);
+			query.setParameter("params", params);			
+			return query.getSingleResult();
+		} catch (IllegalArgumentException | PersistenceException e) {
+			throw new RetrievalFailureSystemException(e);
+		}
+	}	
+	
+	
+	@SuppressWarnings("unchecked")
 	@Override	 	
 	public List findByNativeQuery(String sql, Class type)  throws RetrievalFailureSystemException
 	{
@@ -432,6 +487,8 @@ public class JpaPersistanceDaoImpl<T> implements PersistanceDao<T> {
 			throw new RetrievalFailureSystemException(e);
 		}
 	}
+
+
 
 	
 }

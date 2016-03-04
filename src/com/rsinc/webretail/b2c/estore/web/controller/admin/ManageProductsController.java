@@ -57,6 +57,11 @@ public class ManageProductsController extends BaseController {
         return eStoreAdminService.getTotalCategoryCount();    
     }
     
+    @RequestMapping(value="/admin/editProduct.html", method=RequestMethod.GET)
+    public String editProduct() {
+        return "editProduct";
+    }    
+    
 //    @RequestMapping(value = "/admin/product/add", method = RequestMethod.POST)
 //    public @ResponseBody Long addProduct(Product product) throws ApplicationException, SystemException {
 //        return eStoreAdminService.addProduct(product);

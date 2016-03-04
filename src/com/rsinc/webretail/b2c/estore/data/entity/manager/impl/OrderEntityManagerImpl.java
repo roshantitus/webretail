@@ -78,12 +78,36 @@ public class OrderEntityManagerImpl extends BaseEntityManagerImpl<OrderBean> imp
 	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.OrderEntityManager#findOrdersByStatus(java.util.List)
 	 */
 	@Override
-	public List<OrderBean> findOrdersByStatus(List<OrderStatus> orderStatusList) {
+	public List<OrderBean> findOrdersByStatus(List<OrderStatus> orderStatusList) throws RetrievalFailureSystemException {
 		// TODO implement method functionality
-		return null;
+		return getPersistanceDao().findWithNamedQueryWithINClause("findOrdersByStatus", orderStatusList);
 	}
 
 
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.OrderEntityManager#findOrdersByStatus(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria, java.util.List)
+	 */
+	@Override
+	public List<OrderBean> findOrdersByStatus(
+			ResultLoadCriteria resultLoadCriteria,
+			List<OrderStatus> orderStatusList)
+			throws RetrievalFailureSystemException {
+
+		return getPersistanceDao().findWithNamedQueryWithINClause(resultLoadCriteria, "findOrdersByStatus", orderStatusList);
+	}
+	
+
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.OrderEntityManager#findOrderCountByStatus(java.util.List)
+	 */
+	@Override
+	public Long findOrderCountByStatus(List<OrderStatus> orderStatusList)
+			throws RetrievalFailureSystemException {
+		
+		return (Long) getPersistanceDao().findSingleResultWithINClause("findOrderCountByStatus", orderStatusList);
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.rsinc.webretail.b2c.estore.data.entity.manager.impl.BaseEntityManagerImpl#findAll(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
 	 */
@@ -109,5 +133,8 @@ public class OrderEntityManagerImpl extends BaseEntityManagerImpl<OrderBean> imp
 			throws RetrievalFailureSystemException {
 		return getPersistanceDao().getTotalRecordCount(OrderBean.class, resultLoadCriteria);
 	}
+
+
+
 
 }

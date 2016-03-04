@@ -452,6 +452,19 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	}
 
 	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllPendingOrders(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
+	 */
+	@Override
+	public List<Order> getAllPendingOrders(ResultLoadCriteria resultLoadCriteria) throws ApplicationException,
+	SystemException {
+		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
+		orderStatusList.add(OrderStatus.NEW);
+		orderStatusList.add(OrderStatus.PAYMENT_RECIEVED);
+		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().findOrdersByStatus(resultLoadCriteria, orderStatusList));
+	}
+
+	
+	/* (non-Javadoc)
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllInProgressOrders()
 	 */
 	@Override
@@ -494,6 +507,68 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 		orderStatusList.add(OrderStatus.RETURNED);
 		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().findOrdersByStatus(orderStatusList));
 	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllShippedOrders(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
+	 */
+	@Override
+	public List<Order> getAllShippedOrders(ResultLoadCriteria resultLoadCriteria) throws ApplicationException,
+	SystemException {
+		
+		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
+		orderStatusList.add(OrderStatus.SHIPPED);
+		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().findOrdersByStatus(resultLoadCriteria, orderStatusList));
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllReturnedOrders(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
+	 */
+	@Override
+	public List<Order> getAllReturnedOrders(
+			ResultLoadCriteria resultLoadCriteria) throws ApplicationException,
+			SystemException {
+		
+		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
+		orderStatusList.add(OrderStatus.RETURNED);
+		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().findOrdersByStatus(resultLoadCriteria, orderStatusList));
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getReturnedOrderCount()
+	 */
+	@Override
+	public Long getReturnedOrderCount() throws ApplicationException,
+			SystemException {
+		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
+		orderStatusList.add(OrderStatus.RETURNED);
+		return getOrderEntityManager().findOrderCountByStatus(orderStatusList);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getShippedOrderCount()
+	 */
+	@Override
+	public Long getShippedOrderCount() throws ApplicationException,
+			SystemException {
+		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
+		orderStatusList.add(OrderStatus.SHIPPED);
+		return getOrderEntityManager().findOrderCountByStatus(orderStatusList);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getPendingOrderCount()
+	 */
+	@Override
+	public Long getPendingOrderCount() throws ApplicationException,
+			SystemException {
+		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
+		orderStatusList.add(OrderStatus.NEW);
+		orderStatusList.add(OrderStatus.PAYMENT_RECIEVED);
+		return getOrderEntityManager().findOrderCountByStatus(orderStatusList);
+	}
+
+
+
 
 
 

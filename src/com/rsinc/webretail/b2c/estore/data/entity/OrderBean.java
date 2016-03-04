@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,7 +24,8 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Access(AccessType.PROPERTY)
-//@NamedQueries({@NamedQuery(name="findByUsername", query=""), })
+@NamedQueries({@NamedQuery(name="findOrdersByStatus", query="from OrderBean orderBean where orderBean.orderStatus IN :params"), 
+	@NamedQuery(name="findOrderCountByStatus", query="select count(orderBean) from OrderBean orderBean where orderBean.orderStatus IN :params"), })
 @Table(name="ORDER")
 public class OrderBean extends BaseBean{
 

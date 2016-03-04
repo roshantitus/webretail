@@ -56,6 +56,12 @@ public class ManageCategoriesController extends BaseController{
     public @ResponseBody Long getTotalCategoryCount() throws ApplicationException, SystemException {
         return eStoreAdminService.getTotalCategoryCount();
     }    
+    
+    @RequestMapping(value="/admin/editCategory.html", method=RequestMethod.GET)
+    public String editCategory() {
+        return "editCategory";
+    }
+        
 //    
 //    @RequestMapping(value = "/admin/category/add", method = RequestMethod.POST)
 //    public @ResponseBody Long addCategory(Category category) throws ApplicationException, SystemException {

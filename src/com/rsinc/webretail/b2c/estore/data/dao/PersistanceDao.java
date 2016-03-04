@@ -202,4 +202,26 @@ public interface PersistanceDao<T> {
 	List<T> findAll(Class<T> entityClass, ResultLoadCriteria resultLoadCriteria)
 			throws RetrievalFailureSystemException;
 
+	/**
+	 * @param namedQueryName
+	 * @param params
+	 * @return
+	 * @throws RetrievalFailureSystemException
+	 */
+	List<T> findWithNamedQueryWithINClause(String namedQueryName, List params)
+			throws RetrievalFailureSystemException;
+	
+	/**
+	 * 
+	 * @param resultLoadCriteria
+	 * @param namedQueryName
+	 * @param params
+	 * @return
+	 * @throws RetrievalFailureSystemException
+	 */
+	List<T> findWithNamedQueryWithINClause(ResultLoadCriteria resultLoadCriteria, String namedQueryName, List params)
+			throws RetrievalFailureSystemException;	
+
+	Object findSingleResultWithINClause(String namedQueryName, List params)
+			throws RetrievalFailureSystemException;
 }
