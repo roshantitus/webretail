@@ -9,10 +9,12 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.rsinc.webretail.b2c.estore.business.model.Product;
 import com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService;
@@ -58,16 +60,47 @@ public class ManageProductsController extends BaseController {
     }
     
     @RequestMapping(value="/admin/editProduct.html", method=RequestMethod.GET)
-    public String showEditProductForm(String productId) throws ApplicationException, SystemException {
+    public ModelAndView showEditProductForm(String productId) throws ApplicationException, SystemException {
     	
-    	Product product = eStoreAdminService.getProduct(Long.valueOf(productId));
-        return "editProduct";
+    	ModelAndView modelAndView = new ModelAndView("editProduct");
+    	modelAndView.addObject("product", eStoreAdminService.getProduct(Long.valueOf(productId)));
+        return modelAndView;
     }    
     
+    @RequestMapping(value="/admin/editProduct.html", method=RequestMethod.POST)
+    public String editProduct(@ModelAttribute Product product) throws ApplicationException, SystemException {
+    	
+    	try {
+			eStoreAdminService.updateProduct(product);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return "redirect:productList.html";
+    }     
+    
     @RequestMapping(value="/admin/addProduct.html", method=RequestMethod.GET)
-    public String showAddProductForm() {
-        return "addProduct";
-    }      
+    public ModelAndView showAddProductForm() {
+    	
+    	ModelAndView modelAndView = new ModelAndView("addProduct");
+    	modelAndView.addObject("product", new Product());
+        return modelAndView;    	
+    }   
+    
+    @RequestMapping(value="/admin/addProduct.html", method=RequestMethod.POST)
+    public String addProduct(@ModelAttribute Product product) {
+    	
+    	try {
+			eStoreAdminService.addProduct(product);
+		} catch (ApplicationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return "redirect:productList.html";  	
+    }     
     
 //    @RequestMapping(value = "/admin/product/add", method = RequestMethod.POST)
 //    public @ResponseBody Long addProduct(Product product) throws ApplicationException, SystemException {

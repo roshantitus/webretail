@@ -1,5 +1,5 @@
 <%@include file="/WEB-INF/views/include.jsp" %>
-<form:form method="POST" modelAttribute="product" name="form-product" id="form-product" class="form-horizontal">
+<form:form method="POST" modelAttribute="category" name="form-category" id="form-category" class="form-horizontal">
     <div class="panel panel-default tabs">                            
         <ul class="nav nav-tabs" role="tablist">
             <li class="active"><a href="#tab-first" role="tab" data-toggle="tab">General</a></li>
@@ -11,21 +11,21 @@
 
                 <div class="form-group">
                     <div class="col-md-6 col-xs-12">                                                                                                                                                        
-                        <form:hidden path="productId" class="form-control" />                                                    
+                        <form:hidden path="categoryId" class="form-control" />                                                    
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label class="col-md-3 col-xs-12 control-label">Product Name</label>
+                    <label class="col-md-3 col-xs-12 control-label">Category Name</label>
                     <div class="col-md-6 col-xs-12">                                                                                                                                                        
-                        <form:input path="productName" type="text" class="form-control"/>                                                    
+                        <form:input path="categoryName" type="text" class="form-control"/>                                                    
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-md-3 col-xs-12 control-label">Description</label>
                     <div class="col-md-6 col-xs-12">                                    
-                        <form:textarea path="productDescription" class="block"></form:textarea>
+                        <form:textarea path="categoryDescription" class="block"></form:textarea>
                     </div>
                 </div>
 
@@ -33,18 +33,12 @@
             <div class="tab-pane" id="tab-second">
                 
                 <div class="form-group">
-                    <label class="col-md-2 col-xs-12 control-label">Quantity</label>
+                    <label class="col-md-2 col-xs-12 control-label">Products</label>
                     <div class="col-md-6 col-xs-12">                                                                                                                                                        
-                        <form:input path="quantity" type="text" class="form-control"/>                                                    
+                        <input type="text" class="form-control"/>                                                    
                     </div>
                 </div>
                 
-                <div class="form-group">
-                    <label class="col-md-2 col-xs-12 control-label">Price</label>
-                    <div class="col-md-6 col-xs-12">                                                                                                                                                        
-                        <form:input path="unitPrice" type="text" class="form-control"/>                                                    
-                    </div>
-                </div>
                 
             </div>                                        
             <div class="tab-pane" id="tab-third">
@@ -59,7 +53,7 @@
             </div>
         </div>
         <div class="panel-footer">                                                                        
-            <button class="btn btn-primary pull-right" onclick="$('#form-product').submit()">Save Changes <span class="fa fa-floppy-o fa-right"></span></button>
+            <button class="btn btn-primary pull-right" onclick="$('#form-category').submit()">Save Changes <span class="fa fa-floppy-o fa-right"></span></button>
         </div>
     </div>     
  </form:form>                                

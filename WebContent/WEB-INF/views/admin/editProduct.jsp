@@ -16,12 +16,10 @@
                 <div class="page-content-wrap">      
                     <div class="row">
                         <div class="col-md-12">
-                            
-                            <form class="form-horizontal">
+
                                                             
 								<%@include file="/WEB-INF/views/admin/viewProduct.jsp" %>                              
-                            
-                            </form>
+
                             
                         </div>
                     </div>                    

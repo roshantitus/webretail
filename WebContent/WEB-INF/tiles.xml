@@ -65,7 +65,12 @@
     <definition name="editCategory" extends="base.definition">
         <put-attribute name="title" value="Webretail - Edit Category" />
         <put-attribute name="body" value="/WEB-INF/views/admin/editCategory.jsp" />
-    </definition>     
+    </definition>    
+    
+	<definition name="addCategory" extends="base.definition">
+        <put-attribute name="title" value="Webretail - Add Product" />
+        <put-attribute name="body" value="/WEB-INF/views/admin/addCategory.jsp" />
+    </definition>       
     
 	<definition name="editProduct" extends="base.definition">
         <put-attribute name="title" value="Webretail - Edit Product" />
@@ -73,7 +78,7 @@
     </definition>     
     
 	<definition name="addProduct" extends="base.definition">
-        <put-attribute name="title" value="Webretail - Edit Product" />
+        <put-attribute name="title" value="Webretail - Add Product" />
         <put-attribute name="body" value="/WEB-INF/views/admin/addProduct.jsp" />
     </definition>  
         

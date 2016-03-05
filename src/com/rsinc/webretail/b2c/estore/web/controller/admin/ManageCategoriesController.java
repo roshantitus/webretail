@@ -9,11 +9,14 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.rsinc.webretail.b2c.estore.business.model.Category;
 import com.rsinc.webretail.b2c.estore.business.model.Category;
 import com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService;
 import com.rsinc.webretail.b2c.estore.common.exception.application.ApplicationException;
@@ -56,11 +59,49 @@ public class ManageCategoriesController extends BaseController{
     public @ResponseBody Long getTotalCategoryCount() throws ApplicationException, SystemException {
         return eStoreAdminService.getTotalCategoryCount();
     }    
-    
+
     @RequestMapping(value="/admin/editCategory.html", method=RequestMethod.GET)
-    public String editCategory() {
-        return "editCategory";
-    }
+    public ModelAndView showEditCategoryForm(String categoryId) throws ApplicationException, SystemException {
+    	
+    	ModelAndView modelAndView = new ModelAndView("editCategory");
+    	modelAndView.addObject("category", eStoreAdminService.getCategory(Long.valueOf(categoryId)));
+        return modelAndView;
+    }    
+    
+    @RequestMapping(value="/admin/editCategory.html", method=RequestMethod.POST)
+    public String editCategory(@ModelAttribute Category category) throws ApplicationException, SystemException {
+    	
+    	try {
+			eStoreAdminService.updateCategory(category);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return "redirect:categoryList.html";
+    }     
+    
+    @RequestMapping(value="/admin/addCategory.html", method=RequestMethod.GET)
+    public ModelAndView showAddCategoryForm() {
+    	
+    	ModelAndView modelAndView = new ModelAndView("addCategory");
+    	modelAndView.addObject("category", new Category());
+        return modelAndView;    	
+    }   
+    
+    @RequestMapping(value="/admin/addCategory.html", method=RequestMethod.POST)
+    public String addCategory(@ModelAttribute Category category) {
+    	
+    	try {
+			eStoreAdminService.addCategory(category);
+		} catch (ApplicationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return "redirect:categoryList.html";  	
+    }    
         
 //    
 //    @RequestMapping(value = "/admin/category/add", method = RequestMethod.POST)
