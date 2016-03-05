@@ -58,9 +58,16 @@ public class ManageProductsController extends BaseController {
     }
     
     @RequestMapping(value="/admin/editProduct.html", method=RequestMethod.GET)
-    public String editProduct() {
+    public String showEditProductForm(String productId) throws ApplicationException, SystemException {
+    	
+    	Product product = eStoreAdminService.getProduct(Long.valueOf(productId));
         return "editProduct";
     }    
+    
+    @RequestMapping(value="/admin/addProduct.html", method=RequestMethod.GET)
+    public String showAddProductForm() {
+        return "addProduct";
+    }      
     
 //    @RequestMapping(value = "/admin/product/add", method = RequestMethod.POST)
 //    public @ResponseBody Long addProduct(Product product) throws ApplicationException, SystemException {

@@ -87,8 +87,7 @@
 		  
         <!-- END TEMPLATE -->
         
-
-		          
+<!--  		<div id="footer"><a href="http://www.webretail.com">Webretail</a> © 2015-2016 All Rights Reserved.<br>Version 1.0.0</div>      -->
     <!-- END SCRIPTS -->  
        
     </body>

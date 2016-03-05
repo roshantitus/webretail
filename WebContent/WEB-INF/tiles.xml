@@ -13,67 +13,72 @@
     </definition>
  
     <definition name="dashboard" extends="base.definition">
-        <put-attribute name="title" value="Webretail::Dashboard" />
+        <put-attribute name="title" value="Webretail - Dashboard" />
         <put-attribute name="body" value="/WEB-INF/views/admin/dashboard.jsp" />
     </definition>
  
     <definition name="categoryList" extends="base.definition">
-        <put-attribute name="title" value="Webretail::Categories" />
+        <put-attribute name="title" value="Webretail - Categories" />
         <put-attribute name="body" value="/WEB-INF/views/admin/categoryList.jsp" />
     </definition> 
     
     <definition name="productList" extends="base.definition">
-        <put-attribute name="title" value="Webretail::Products" />
+        <put-attribute name="title" value="Webretail - Products" />
         <put-attribute name="body" value="/WEB-INF/views/admin/productList.jsp" />
     </definition>     
     
     <definition name="userList" extends="base.definition">
-        <put-attribute name="title" value="Webretail::Users" />
+        <put-attribute name="title" value="Webretail - Users" />
         <put-attribute name="body" value="/WEB-INF/views/admin/userList.jsp" />
     </definition>
  
     <definition name="visitorList" extends="base.definition">
-        <put-attribute name="title" value="Webretail::Visitors" />
+        <put-attribute name="title" value="Webretail - Visitors" />
         <put-attribute name="body" value="/WEB-INF/views/admin/visitorList.jsp" />
     </definition> 
     
     <definition name="localeList" extends="base.definition">
-        <put-attribute name="title" value="Webretail::Languages" />
+        <put-attribute name="title" value="Webretail - Languages" />
         <put-attribute name="body" value="/WEB-INF/views/admin/localeList.jsp" />
     </definition>      
     
     <definition name="orderList" extends="base.definition">
-        <put-attribute name="title" value="Webretail::Order History" />
+        <put-attribute name="title" value="Webretail - Order History" />
         <put-attribute name="body" value="/WEB-INF/views/admin/orderList.jsp" />
     </definition>    
     
     <definition name="pendingOrderList" extends="base.definition">
-        <put-attribute name="title" value="Webretail::Pending Orders" />
+        <put-attribute name="title" value="Webretail - Pending Orders" />
         <put-attribute name="body" value="/WEB-INF/views/admin/pendingOrderList.jsp" />
     </definition>
     
     <definition name="shippedOrderList" extends="base.definition">
-        <put-attribute name="title" value="Webretail::Shipped Orders" />
+        <put-attribute name="title" value="Webretail - Shipped Orders" />
         <put-attribute name="body" value="/WEB-INF/views/admin/shippedOrderList.jsp" />
     </definition>
     
     <definition name="returnedOrderList" extends="base.definition">
-        <put-attribute name="title" value="Webretail::Returned Orders" />
+        <put-attribute name="title" value="Webretail - Returned Orders" />
         <put-attribute name="body" value="/WEB-INF/views/admin/returnedOrderList.jsp" />
     </definition>            
     
     <definition name="editCategory" extends="base.definition">
-        <put-attribute name="title" value="Webretail::Edit Category" />
+        <put-attribute name="title" value="Webretail - Edit Category" />
         <put-attribute name="body" value="/WEB-INF/views/admin/editCategory.jsp" />
     </definition>     
     
 	<definition name="editProduct" extends="base.definition">
-        <put-attribute name="title" value="Webretail::Edit Product" />
+        <put-attribute name="title" value="Webretail - Edit Product" />
         <put-attribute name="body" value="/WEB-INF/views/admin/editProduct.jsp" />
     </definition>     
     
+	<definition name="addProduct" extends="base.definition">
+        <put-attribute name="title" value="Webretail - Edit Product" />
+        <put-attribute name="body" value="/WEB-INF/views/admin/addProduct.jsp" />
+    </definition>  
+        
 	<definition name="viewOrder" extends="base.definition">
-        <put-attribute name="title" value="Webretail::View Order" />
+        <put-attribute name="title" value="Webretail - View Order" />
         <put-attribute name="body" value="/WEB-INF/views/admin/viewOrder.jsp" />
     </definition>     
 </tiles-definitions>

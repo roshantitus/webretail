@@ -9,7 +9,11 @@
                 </ul>
                 <!-- END BREADCRUMB -->     
                 
-                
+				<div class="pull-right">
+						<a data-original-title="Add New" href="addProduct.html" data-toggle="tooltip" title="Add New" class="btn btn-primary"><i class="fa fa-plus"></i></a>        
+				        <button data-original-title="Delete" type="button" data-toggle="tooltip" title="Delete" class="btn btn-danger" onclick="confirm('Delete cannot be undone! Are you sure you want to do this?');"><i class="fa fa-trash-o"></i></button>
+				</div>                
+				                
                 <!-- PAGE CONTENT WRAPPER -->
                 <div class="page-content-wrap">      
                        

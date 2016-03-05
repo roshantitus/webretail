@@ -1,6 +1,6 @@
 <%@include file="/WEB-INF/views/include.jsp" %>
 		
-				<h1>Edit Product</h1>
+				<h1>Add Product</h1>
 				
                 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
@@ -19,7 +19,7 @@
                             
                             <form class="form-horizontal">
                                                             
-								<%@include file="/WEB-INF/views/admin/viewProduct.jsp" %>                              
+                           		<%@include file="/WEB-INF/views/admin/viewProduct.jsp" %>
                             
                             </form>
                             
@@ -28,3 +28,5 @@
                 </div>
                 <!-- END PAGE CONTENT WRAPPER -->       
  
+
+		     

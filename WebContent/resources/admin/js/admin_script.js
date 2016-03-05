@@ -87,7 +87,7 @@ app.controller('ViewAllCategoriesController', ['$scope', '$http', DataTableContr
                                                                                                               field: 'categoryId',
                                                                                                               displayName: 'Action',
                                                                                                               enableCellEdit: false,
-                                                                                                              cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a ng-href="editCategory.html?categoryId={{COL_FIELD}}" class="glyphicon glyphicon-eye-open green"></a></div>'
+                                                                                                              cellTemplate: '<div class="ngCellText"><a data-original-title="Edit" ng-href="editCategory.html?categoryId={{COL_FIELD}}" data-toggle="tooltip" title="" class="btn btn-primary"><i class="fa fa-pencil"></i></a></div>'
                                                                                                             }
                                                                                                         ])]);
 
@@ -111,7 +111,7 @@ app.controller('ViewAllProductsController', ['$scope', '$http', DataTableControl
                                                                                                            field: 'productId',
                                                                                                            displayName: 'Action',
                                                                                                            enableCellEdit: false,
-                                                                                                           cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a ng-href="editProduct.html?productId={{COL_FIELD}}" class="glyphicon glyphicon-eye-open green"></a></div>'
+                                                                                                           cellTemplate: '<div class="ngCellText"><a data-original-title="Edit" ng-href="editProduct.html?productId={{COL_FIELD}}" data-toggle="tooltip" title="" class="btn btn-primary"><i class="fa fa-pencil"></i></a></div>'
                                                                                                          }
                                                                                                      ])]);
 app.controller('ViewAllOrdersController', ['$scope', '$http', DataTableController('order', 'all', [
@@ -134,7 +134,7 @@ app.controller('ViewAllOrdersController', ['$scope', '$http', DataTableControlle
                                                                                                        field: 'orderId',
                                                                                                        displayName: 'Action',
                                                                                                        enableCellEdit: false,
-                                                                                                       cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a ng-href="viewOrder.html?orderId={{COL_FIELD}}" class="glyphicon glyphicon-eye-open green"></a></div>'
+                                                                                                       cellTemplate: '<div class="ngCellText"><a data-original-title="Edit" ng-href="viewOrder.html?orderId={{COL_FIELD}}" data-toggle="tooltip" title="" class="btn btn-primary"><i class="fa fa-pencil"></i></a></div>'
                                                                                                      }
                                                                                                  ])]);
 pp.controller('ViewPendingOrdersController', ['$scope', '$http', DataTableController('order', 'pending', [
@@ -157,7 +157,7 @@ pp.controller('ViewPendingOrdersController', ['$scope', '$http', DataTableContro
                                                                                                                  field: 'orderId',
                                                                                                                  displayName: 'Action',
                                                                                                                  enableCellEdit: false,
-                                                                                                                 cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a ng-href="viewOrder.html?orderId={{COL_FIELD}}" class="glyphicon glyphicon-eye-open green"></a></div>'
+                                                                                                                 cellTemplate: '<div class="ngCellText"><a data-original-title="Edit" ng-href="viewOrder.html?orderId={{COL_FIELD}}" data-toggle="tooltip" title="" class="btn btn-primary"><i class="fa fa-pencil"></i></a></div>'
                                                                                                                }
                                                                                                            ])]);
 app.controller('ViewShippedOrdersController', ['$scope', '$http', DataTableController('order', 'shipped', [
@@ -180,7 +180,7 @@ app.controller('ViewShippedOrdersController', ['$scope', '$http', DataTableContr
                                                                                                                   field: 'orderId',
                                                                                                                   displayName: 'Action',
                                                                                                                   enableCellEdit: false,
-                                                                                                                  cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a ng-href="viewOrder.html?orderId={{COL_FIELD}}" class="glyphicon glyphicon-eye-open green"></a></div>'
+                                                                                                                  cellTemplate: '<div class="ngCellText"><a data-original-title="Edit" ng-href="viewOrder.html?orderId={{COL_FIELD}}" data-toggle="tooltip" title="" class="btn btn-primary"><i class="fa fa-pencil"></i></a></div>'
                                                                                                                 }
                                                                                                             ])]);
 app.controller('ViewReturnedOrdersController', ['$scope', '$http', DataTableController('order', 'returned', [
@@ -203,6 +203,6 @@ app.controller('ViewReturnedOrdersController', ['$scope', '$http', DataTableCont
                                                                                                                     field: 'orderId',
                                                                                                                     displayName: 'Action',
                                                                                                                     enableCellEdit: false,
-                                                                                                                    cellTemplate: '<div class="ngCellText" ng-class="col.colIndex()"><a ng-href="viewOrder.html?orderId={{COL_FIELD}}" class="glyphicon glyphicon-eye-open green"></a></div>'
+                                                                                                                    cellTemplate: '<div class="ngCellText"><a data-original-title="Edit" ng-href="viewOrder.html?orderId={{COL_FIELD}}" data-toggle="tooltip" title="" class="btn btn-primary"><i class="fa fa-pencil"></i></a></div>'
                                                                                                                   }
                                                                                                               ])]);
