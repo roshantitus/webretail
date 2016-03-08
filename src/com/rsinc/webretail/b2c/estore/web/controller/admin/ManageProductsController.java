@@ -63,6 +63,7 @@ public class ManageProductsController extends BaseController {
     public ModelAndView showEditProductForm(String productId) throws ApplicationException, SystemException {
     	
     	ModelAndView modelAndView = new ModelAndView("editProduct");
+    	modelAndView.addObject("categoryList", eStoreAdminService.getAllCategories());
     	modelAndView.addObject("product", eStoreAdminService.getProduct(Long.valueOf(productId)));
         return modelAndView;
     }    
@@ -80,9 +81,10 @@ public class ManageProductsController extends BaseController {
     }     
     
     @RequestMapping(value="/admin/addProduct.html", method=RequestMethod.GET)
-    public ModelAndView showAddProductForm() {
+    public ModelAndView showAddProductForm()  throws ApplicationException, SystemException {
     	
     	ModelAndView modelAndView = new ModelAndView("addProduct");
+    	modelAndView.addObject("categoryList", eStoreAdminService.getAllCategories());
     	modelAndView.addObject("product", new Product());
         return modelAndView;    	
     }   

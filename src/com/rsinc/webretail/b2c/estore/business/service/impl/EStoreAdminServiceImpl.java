@@ -19,7 +19,6 @@ import com.rsinc.webretail.b2c.estore.common.exception.application.ApplicationEx
 import com.rsinc.webretail.b2c.estore.common.exception.system.SystemException;
 import com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria;
 import com.rsinc.webretail.b2c.estore.common.util.BeanUtils;
-import com.rsinc.webretail.b2c.estore.common.util.EntityConversionUtils;
 import com.rsinc.webretail.b2c.estore.data.entity.CategoryBean;
 import com.rsinc.webretail.b2c.estore.data.entity.OrderBean;
 import com.rsinc.webretail.b2c.estore.data.entity.ProductBean;
@@ -61,7 +60,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	public List<User> getAllUsers(ResultLoadCriteria resultLoadCriteria)
 			throws ApplicationException, SystemException {
 		
-		return EntityConversionUtils.convertUserBean2User(getUserEntityManager().findAll(resultLoadCriteria));
+		return convertToUserDTOList(getUserEntityManager().findAll(resultLoadCriteria));
 	}	
 
 	/* (non-Javadoc)
@@ -70,7 +69,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	@Override
 	public List<User> getAllUsers() throws ApplicationException, SystemException{
 
-		return EntityConversionUtils.convertUserBean2User(getUserEntityManager().findAll());
+		return convertToUserDTOList(getUserEntityManager().findAll());
 	}
 
 	/* (non-Javadoc)
@@ -80,7 +79,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	public User getUser(Long userId) throws ApplicationException,
 			SystemException {
 		
-		return EntityConversionUtils.convertUserBean2User(getUserEntityManager().loadById(userId));
+		return convertToDTO(getUserEntityManager().loadById(userId));
 	}
 
 	/* (non-Javadoc)
@@ -91,7 +90,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 			SystemException {
 		Boolean success = null;
 		try {
-			UserBean userBean = EntityConversionUtils.convertUser2UserBean(user);
+			UserBean userBean = convertToEntity(user);
 			UserBean userBeanFromDB = getUserEntityManager().loadById(user.getUserId());
 			BeanUtils.copyProperties(userBean, userBeanFromDB);
 			getUserEntityManager().update(userBeanFromDB);
@@ -164,7 +163,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	@Override
 	public List<Category> getAllCategories(ResultLoadCriteria resultLoadCriteria)
 			throws ApplicationException, SystemException {
-		return EntityConversionUtils.convertCategoryBean2Category(getCategoryEntityManager().findAll(resultLoadCriteria));
+		return convertToCategoryDTOList(getCategoryEntityManager().findAll(resultLoadCriteria));
 	}
 	
 	/*
@@ -173,7 +172,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	 */
 	@Override
 	public List<Category> getAllCategories()  throws ApplicationException, SystemException{
-		return EntityConversionUtils.convertCategoryBean2Category(getCategoryEntityManager().findAll());
+		return convertToCategoryDTOList(getCategoryEntityManager().findAll());
 	}	
 
 	/* (non-Javadoc)
@@ -184,7 +183,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 			SystemException {
 		
 		try {
-			CategoryBean categoryBean = EntityConversionUtils.convertCategory2CategoryBean(category);
+			CategoryBean categoryBean = convertToEntity(category);
 			getCategoryEntityManager().create(categoryBean);
 			return categoryBean.getCategoryId();
 			
@@ -202,7 +201,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	public Category getCategory(Long categoryId) throws ApplicationException,
 			SystemException {
 		
-		return EntityConversionUtils.convertCategoryBean2Category(getCategoryEntityManager().loadById(categoryId));
+		return convertToDTO(getCategoryEntityManager().loadById(categoryId));
 	}
 
 	/* (non-Javadoc)
@@ -214,7 +213,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 		
 		Boolean success = null;
 		try {
-			CategoryBean categoryBean = EntityConversionUtils.convertCategory2CategoryBean(category);
+			CategoryBean categoryBean = convertToEntity(category);
 			CategoryBean categoryBeanFromDB = getCategoryEntityManager().loadById(category.getCategoryId());
 			BeanUtils.copyProperties(categoryBean, categoryBeanFromDB);
 			getCategoryEntityManager().update(categoryBeanFromDB);
@@ -267,7 +266,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	public List<Product> getAllProducts(ResultLoadCriteria resultLoadCriteria)
 			throws ApplicationException, SystemException {
 		
-		return EntityConversionUtils.convertProductBean2Product(getProductEntityManager().findAll(resultLoadCriteria));
+		return convertToProductDTOList(getProductEntityManager().findAll(resultLoadCriteria));
 	}	
 
 	/* (non-Javadoc)
@@ -276,7 +275,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	@Override
 	public List<Product> getAllProducts() throws ApplicationException,
 			SystemException {
-		return EntityConversionUtils.convertProductBean2Product(getProductEntityManager().findAll());
+		return convertToProductDTOList(getProductEntityManager().findAll());
 	}
 
 	/* (non-Javadoc)
@@ -286,7 +285,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	public Long addProduct(Product product) throws ApplicationException,
 			SystemException {
 		try {
-			ProductBean productBean = EntityConversionUtils.convertProduct2ProductBean(product);
+			ProductBean productBean = convertToEntity(product);
 			getProductEntityManager().create(productBean);
 			return productBean.getProductId();
 			
@@ -303,7 +302,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	@Override
 	public Product getProduct(Long productId) throws ApplicationException,
 			SystemException {
-		return EntityConversionUtils.convertProductBean2Product(getProductEntityManager().loadById(productId));
+		return convertToDTO(getProductEntityManager().loadById(productId));
 	}
 
 	/* (non-Javadoc)
@@ -314,7 +313,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 			SystemException {
 		Boolean success = null;
 		try {
-			ProductBean productBean = EntityConversionUtils.convertProduct2ProductBean(product);
+			ProductBean productBean = convertToEntity(product);
 			ProductBean productBeanFromDB = getProductEntityManager().loadById(product.getProductId());
 			BeanUtils.copyProperties(productBean, productBeanFromDB);
 			getProductEntityManager().update(productBeanFromDB);
@@ -366,7 +365,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	public List<Order> getAllOrders(ResultLoadCriteria resultLoadCriteria)
 			throws ApplicationException, SystemException {
 		
-		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().findAll(resultLoadCriteria));
+		return convertToOrderDTOList(getOrderEntityManager().findAll(resultLoadCriteria));
 	}
 
 	
@@ -376,7 +375,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	@Override
 	public List<Order> getAllOrders()  throws ApplicationException,
 	SystemException {
-		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().findAll());
+		return convertToOrderDTOList(getOrderEntityManager().findAll());
 	}
 
 	/* (non-Javadoc)
@@ -385,7 +384,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	@Override
 	public Long addOrder(Order order)  throws ApplicationException, SystemException {
 		try {
-			OrderBean orderBean = EntityConversionUtils.convertOrder2OrderBean(order);
+			OrderBean orderBean = convertToEntity(order);
 			getOrderEntityManager().create(orderBean);
 			return orderBean.getOrderId();
 			
@@ -401,7 +400,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	@Override
 	public Order getOrder(Long orderId)  throws ApplicationException,
 	SystemException {
-		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().loadById(orderId));
+		return convertToDTO(getOrderEntityManager().loadById(orderId));
 	}
 
 	/* (non-Javadoc)
@@ -412,7 +411,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	SystemException {
 		Boolean success = null;
 		try {
-			OrderBean orderBean = EntityConversionUtils.convertOrder2OrderBean(order);
+			OrderBean orderBean = convertToEntity(order);
 			OrderBean orderBeanFromDB = getOrderEntityManager().loadById(order.getOrderId());
 			BeanUtils.copyProperties(orderBean, orderBeanFromDB);
 			getOrderEntityManager().update(orderBeanFromDB);
@@ -448,7 +447,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
 		orderStatusList.add(OrderStatus.NEW);
 		orderStatusList.add(OrderStatus.PAYMENT_RECIEVED);
-		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().findOrdersByStatus(orderStatusList));
+		return convertToOrderDTOList(getOrderEntityManager().findOrdersByStatus(orderStatusList));
 	}
 
 	/* (non-Javadoc)
@@ -460,7 +459,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
 		orderStatusList.add(OrderStatus.NEW);
 		orderStatusList.add(OrderStatus.PAYMENT_RECIEVED);
-		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().findOrdersByStatus(resultLoadCriteria, orderStatusList));
+		return convertToOrderDTOList(getOrderEntityManager().findOrdersByStatus(resultLoadCriteria, orderStatusList));
 	}
 
 	
@@ -472,7 +471,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 			SystemException {
 		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
 		orderStatusList.add(OrderStatus.PROCESSING);
-		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().findOrdersByStatus(orderStatusList));
+		return convertToOrderDTOList(getOrderEntityManager().findOrdersByStatus(orderStatusList));
 	}
 
 	/* (non-Javadoc)
@@ -483,7 +482,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 			SystemException {
 		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
 		orderStatusList.add(OrderStatus.SHIPPED);
-		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().findOrdersByStatus(orderStatusList));
+		return convertToOrderDTOList(getOrderEntityManager().findOrdersByStatus(orderStatusList));
 	}
 
 	/* (non-Javadoc)
@@ -494,7 +493,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 			SystemException {
 		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
 		orderStatusList.add(OrderStatus.DELIVERED);
-		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().findOrdersByStatus(orderStatusList));
+		return convertToOrderDTOList(getOrderEntityManager().findOrdersByStatus(orderStatusList));
 	}
 
 	/* (non-Javadoc)
@@ -505,7 +504,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 			SystemException {
 		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
 		orderStatusList.add(OrderStatus.RETURNED);
-		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().findOrdersByStatus(orderStatusList));
+		return convertToOrderDTOList(getOrderEntityManager().findOrdersByStatus(orderStatusList));
 	}
 
 	/* (non-Javadoc)
@@ -517,7 +516,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 		
 		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
 		orderStatusList.add(OrderStatus.SHIPPED);
-		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().findOrdersByStatus(resultLoadCriteria, orderStatusList));
+		return convertToOrderDTOList(getOrderEntityManager().findOrdersByStatus(resultLoadCriteria, orderStatusList));
 	}
 
 	/* (non-Javadoc)
@@ -530,7 +529,7 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 		
 		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
 		orderStatusList.add(OrderStatus.RETURNED);
-		return EntityConversionUtils.convertOrderBean2Order(getOrderEntityManager().findOrdersByStatus(resultLoadCriteria, orderStatusList));
+		return convertToOrderDTOList(getOrderEntityManager().findOrdersByStatus(resultLoadCriteria, orderStatusList));
 	}
 	
 	/* (non-Javadoc)

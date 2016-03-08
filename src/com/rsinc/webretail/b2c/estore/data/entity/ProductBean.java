@@ -5,11 +5,15 @@ package com.rsinc.webretail.b2c.estore.data.entity;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -31,6 +35,7 @@ public class ProductBean  extends BaseBean {
 	private String productDescription;
 	private Integer quantity;
 	private Double unitPrice;
+	private CategoryBean category;
 	
 	/**
 	 * @return
@@ -85,4 +90,15 @@ public class ProductBean  extends BaseBean {
 		this.id = productId;		
 	}
 
+	@OneToOne(optional=false, fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @JoinColumn(name="CATEGORY_ID", unique=true, nullable=false, updatable=true)		
+	public CategoryBean getCategory() {
+		return category;
+	}
+
+	public void setCategory(CategoryBean category) {
+		this.category = category;
+	}
+
+	
 }

@@ -14,12 +14,25 @@ public class Product {
 	private String productDescription;
 	private Integer quantity;
 	private Double unitPrice;
+	private Category category;
 	
 	
 	public Product() {
 		super();
 		// TODO initialize object
 	}
+	
+	
+	public Category getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+
 	public Long getProductId() {
 		return productId;
 	}

@@ -28,6 +28,15 @@
                         <form:textarea path="productDescription" class="block"></form:textarea>
                     </div>
                 </div>
+                
+                <div class="form-group">
+                    <label class="col-md-3 col-xs-12 control-label">Category</label>
+                    <div class="col-md-6 col-xs-12">                                    
+                        <form:select path="category.categoryId" class="form-control select" data-style="btn-success">
+				            <form:options items="${categoryList}" itemLabel="categoryName" itemValue="categoryId" />
+				        </form:select>
+                    </div>
+                </div>                
 
             </div>
             <div class="tab-pane" id="tab-second">
