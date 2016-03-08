@@ -18,7 +18,10 @@
                 <div class="form-group">
                     <label class="col-md-3 col-xs-12 control-label">Category Name</label>
                     <div class="col-md-6 col-xs-12">                                                                                                                                                        
-                        <form:input path="categoryName" type="text" class="form-control"/>                                                    
+                        <form:input path="categoryName" type="text" class="form-control"/>      
+	                    <div class="has-error">
+	                        <form:errors path="categoryName" class="help-inline"/>
+	                    </div>                                                                      
                     </div>
                 </div>
 
@@ -26,6 +29,9 @@
                     <label class="col-md-3 col-xs-12 control-label">Description</label>
                     <div class="col-md-6 col-xs-12">                                    
                         <form:textarea path="categoryDescription" class="block"></form:textarea>
+	                    <div class="has-error">
+	                        <form:errors path="categoryDescription" class="help-inline"/>
+	                    </div>                        
                     </div>
                 </div>
 

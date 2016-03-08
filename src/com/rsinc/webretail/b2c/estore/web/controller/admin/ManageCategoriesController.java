@@ -7,8 +7,11 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,8 +72,13 @@ public class ManageCategoriesController extends BaseController{
     }    
     
     @RequestMapping(value="/admin/editCategory.html", method=RequestMethod.POST)
-    public String editCategory(@ModelAttribute Category category) throws ApplicationException, SystemException {
+    public String editCategory(@ModelAttribute @Valid Category category, BindingResult bindingResult, Model model) throws ApplicationException, SystemException {
     	
+        if (bindingResult.hasErrors()) {
+            logger.info("Validation errors found");
+            return "editCategory";
+        } 
+        
     	try {
 			eStoreAdminService.updateCategory(category);
 		} catch (Exception e) {
@@ -89,8 +97,13 @@ public class ManageCategoriesController extends BaseController{
     }   
     
     @RequestMapping(value="/admin/addCategory.html", method=RequestMethod.POST)
-    public String addCategory(@ModelAttribute Category category) {
+    public String addCategory(@ModelAttribute @Valid Category category, BindingResult bindingResult, Model model) {
     	
+        if (bindingResult.hasErrors()) {
+            logger.info("Validation errors found");
+            return "addCategory";
+        } 
+        
     	try {
 			eStoreAdminService.addCategory(category);
 		} catch (ApplicationException e) {
@@ -119,8 +132,8 @@ public class ManageCategoriesController extends BaseController{
 //        return eStoreAdminService.updateCategory(category);
 //    }       
 //    
-//    @RequestMapping(value = "/admin/category/delete", method = RequestMethod.GET)
-//    public @ResponseBody Boolean deleteCategory(String categoryId) throws ApplicationException, SystemException {
-//        return eStoreAdminService.deleteCategory(Long.valueOf(categoryId));
-//    }   	
+    @RequestMapping(value = "/admin/category/delete", method = RequestMethod.DELETE)
+    public @ResponseBody Boolean deleteCategory(String categoryId) throws ApplicationException, SystemException {
+        return eStoreAdminService.deleteCategory(Long.valueOf(categoryId));
+    }   	
 }

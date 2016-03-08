@@ -3,6 +3,8 @@
  */
 package com.rsinc.webretail.b2c.estore.business.model;
 
+import javax.validation.constraints.Size;
+
 /**
  * @author Roshan Titus
  *
@@ -10,8 +12,14 @@ package com.rsinc.webretail.b2c.estore.business.model;
 public class Product {
 
 	private Long productId;
+	
+	@Size(min=2, max=30) 
 	private String productName;
+	
+	@Size(min=2, max=300) 
 	private String productDescription;
+	
+	
 	private Integer quantity;
 	private Double unitPrice;
 	private Category category;

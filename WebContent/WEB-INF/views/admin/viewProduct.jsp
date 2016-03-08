@@ -18,7 +18,10 @@
                 <div class="form-group">
                     <label class="col-md-3 col-xs-12 control-label">Product Name</label>
                     <div class="col-md-6 col-xs-12">                                                                                                                                                        
-                        <form:input path="productName" type="text" class="form-control"/>                                                    
+                        <form:input path="productName" type="text" class="form-control"/>        
+	                    <div class="has-error">
+	                        <form:errors path="productName" class="help-inline"/>
+	                    </div>                                                                    
                     </div>
                 </div>
 
@@ -26,6 +29,9 @@
                     <label class="col-md-3 col-xs-12 control-label">Description</label>
                     <div class="col-md-6 col-xs-12">                                    
                         <form:textarea path="productDescription" class="block"></form:textarea>
+	                    <div class="has-error">
+	                        <form:errors path="productDescription" class="help-inline"/>
+	                    </div>                          
                     </div>
                 </div>
                 
@@ -35,6 +41,9 @@
                         <form:select path="category.categoryId" class="form-control select" data-style="btn-success">
 				            <form:options items="${categoryList}" itemLabel="categoryName" itemValue="categoryId" />
 				        </form:select>
+	                    <div class="has-error">
+	                        <form:errors path="category.categoryId" class="help-inline"/>
+	                    </div>  				        
                     </div>
                 </div>                
 
@@ -44,14 +53,20 @@
                 <div class="form-group">
                     <label class="col-md-2 col-xs-12 control-label">Quantity</label>
                     <div class="col-md-6 col-xs-12">                                                                                                                                                        
-                        <form:input path="quantity" type="text" class="form-control"/>                                                    
+                        <form:input path="quantity" type="text" class="form-control"/>       
+	                    <div class="has-error">
+	                        <form:errors path="quantity" class="help-inline"/>
+	                    </div>                                                                       
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label class="col-md-2 col-xs-12 control-label">Price</label>
                     <div class="col-md-6 col-xs-12">                                                                                                                                                        
-                        <form:input path="unitPrice" type="text" class="form-control"/>                                                    
+                        <form:input path="unitPrice" type="text" class="form-control"/>   
+	                    <div class="has-error">
+	                        <form:errors path="unitPrice" class="help-inline"/>
+	                    </div>                                                                           
                     </div>
                 </div>
                 

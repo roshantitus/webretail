@@ -7,8 +7,11 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,8 +72,13 @@ public class ManageProductsController extends BaseController {
     }    
     
     @RequestMapping(value="/admin/editProduct.html", method=RequestMethod.POST)
-    public String editProduct(@ModelAttribute Product product) throws ApplicationException, SystemException {
+    public String editProduct(@ModelAttribute @Valid Product product, BindingResult bindingResult, Model model) throws ApplicationException, SystemException {
     	
+        if (bindingResult.hasErrors()) {
+            logger.info("Validation errors found");
+            return "editProduct";
+        } 
+        
     	try {
 			eStoreAdminService.updateProduct(product);
 		} catch (Exception e) {
@@ -90,8 +98,13 @@ public class ManageProductsController extends BaseController {
     }   
     
     @RequestMapping(value="/admin/addProduct.html", method=RequestMethod.POST)
-    public String addProduct(@ModelAttribute Product product) {
+    public String addProduct(@ModelAttribute @Valid Product product, BindingResult bindingResult, Model model) {
     	
+        if (bindingResult.hasErrors()) {
+            logger.info("Validation errors found");
+            return "addProduct";
+        }    	
+        
     	try {
 			eStoreAdminService.addProduct(product);
 		} catch (ApplicationException e) {
@@ -119,8 +132,8 @@ public class ManageProductsController extends BaseController {
 //        return eStoreAdminService.updateProduct(product);
 //    }       
 //    
-//    @RequestMapping(value = "/admin/product/delete", method = RequestMethod.GET)
-//    public @ResponseBody Boolean deleteProduct(String productId) throws ApplicationException, SystemException {
-//        return eStoreAdminService.deleteProduct(Long.valueOf(productId));
-//    }	
+    @RequestMapping(value = "/admin/product/delete", method = RequestMethod.DELETE)
+    public @ResponseBody Boolean deleteProduct(String productId) throws ApplicationException, SystemException {
+        return eStoreAdminService.deleteProduct(Long.valueOf(productId));
+    }	
 }

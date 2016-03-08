@@ -1,3 +1,20 @@
+function doDelete(type, params){
+	
+	$http({
+        method: 'DELETE',
+        url: type + '/delete',
+        params: params
+     }).success(function(data){
+    	 
+    	 alert("Succesfully deleted");
+
+    }).error(function(){
+        alert("Failed to delete the records");
+    });
+
+}
+
+
 function DataTableController(type, list, colDefs) {
 	
     return function($scope, $http) {
@@ -64,7 +81,7 @@ function DataTableController(type, list, colDefs) {
 		          filterOptions: $scope.filterOptions,
 		          showSelectionCheckbox: true,
 		          selectWithCheckboxOnly: true,
-		          multiSelect: false,
+		          multiSelect: true,
 		          columnDefs: colDefs
 		      };
 		  }

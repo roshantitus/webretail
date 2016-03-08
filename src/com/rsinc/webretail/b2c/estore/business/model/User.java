@@ -5,6 +5,14 @@ package com.rsinc.webretail.b2c.estore.business.model;
 
 import java.util.Calendar;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * @author Roshan Titus
  *
@@ -12,14 +20,27 @@ import java.util.Calendar;
 public class User {
 
 	private Long userId;
+	
+	@Size(min=2, max=30) 
 	private String firstName;
+	
 	private String middleName;
+	
+	@Size(min=2, max=30) 
 	private String lastName;
+	
+	@NotEmpty @Email
 	private String email;
+		
 	private String homePhoneNumber;
 	private String businessPhoneNumber;
 	private String cellPhoneNumber;
+	
+	@NotEmpty
 	private String gender;
+	
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+    @Past @NotNull
 	private Calendar dateOfBirth;
 	
 	public User() {
