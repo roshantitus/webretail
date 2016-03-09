@@ -113,8 +113,9 @@ public class EStoreAdminServiceTest {
 	@Test
 	public void testProducts()
 	{
-		try {
-			Product newProduct = getNewProduct();
+		try {			
+			
+			Product newProduct = getNewProduct(eStoreAdminService.addCategory(getNewCategory()));
 			
 			//Add product
 			Long productId = eStoreAdminService.addProduct(newProduct);
@@ -135,7 +136,8 @@ public class EStoreAdminServiceTest {
 			assertEquals(productList.size(), 1);
 			
 			//Update product
-			Product productToUpdate = getProductWithChanges();
+			
+			Product productToUpdate = getProductWithChanges(eStoreAdminService.addCategory(getCategoryWithChanges()));
 			productToUpdate.setProductId(productId);
 			assertTrue(eStoreAdminService.updateProduct(productToUpdate));
 			
@@ -167,21 +169,29 @@ public class EStoreAdminServiceTest {
 		}		
 	}		
 	
-	private Product getNewProduct() {
+	private Product getNewProduct(Long categoryId) {
 		Product product = new Product();
 		product.setProductName("Mojo");
 		product.setProductDescription("About finding yor mojo");
 		product.setQuantity(20);
 		product.setUnitPrice(395.75);
+		
+		Category category = new Category();
+		category.setCategoryId(categoryId);
+		product.setCategory(category);
 		return product;
 	}	
 	
-	private Product getProductWithChanges() {
+	private Product getProductWithChanges(Long categoryId) {
 		Product product = new Product();
 		product.setProductName("SCEA study guide");
 		product.setProductDescription("SCEA certification study guide");
 		product.setQuantity(50);
-		product.setUnitPrice(500.00);		
+		product.setUnitPrice(500.00);	
+		
+		Category category = new Category();
+		category.setCategoryId(categoryId);
+		product.setCategory(category);		
 		return product;
 	}	
 	
