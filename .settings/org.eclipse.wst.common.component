@@ -5,6 +5,9 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/resources"/>
+        <dependent-module archiveName="webretail-commons.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/webretail-commons/webretail-commons">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="webretail"/>
         <property name="java-output-path" value="/webretail/build/classes"/>
     </wb-module>

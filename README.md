@@ -1,18 +1,18 @@
-# Webretail (Under development)
-**webretail** is a complete, open source, B2B, e-commerce shopping cart solution in Java/J2EE.
+# webretail-admin (Under development)
+**webretail-admin** is the admin module for the open source e-commerce shopping cart [webretail](https://github.com/susankoruthu/webretail "webretail").
 
 
 ## Features
 
-Webretail is an "out of the box" shopping cart solution. You simply install, add products and you're ready to start accepting orders.
+webretail-admin is an "out of the box" shopping cart solution. You simply install, add products and you're ready to start accepting orders.
 
 Features includes:
 
 - Open Source
-- Unlimited Categories
-- Unlimited Products
-- Multi-Language
-- Multi-Currency
+- Manage Unlimited Categories
+- Manage Unlimited Products
+- Manage Multi-Languages
+- Manage Multi-Currency
 - Product Reviews
 - Product Ratings
 - Order Management
@@ -20,25 +20,25 @@ Features includes:
 - Sales Reports
 - Error Logging
 
-## Running Webretail locally
+## Running webretail-admin locally
 
 
-> git https://github.com/roshantitus/webretail.git
+> git https://github.com/roshantitus/webretail-admin.git
 > 
 mvn jetty:run
 
 
-You can then access the shopping cart here: http://localhost:8080/webretail/
+You can then access the shopping cart here: http://localhost:8080/webretail-admin/
 
-## In case you find a bug/suggested improvement for webretail
+## In case you find a bug/suggested improvement for webretail-admin
 
 Our issue tracker is available here: 
 
 ```
-https://github.com/roshantitus/webretail/issues
+https://github.com/roshantitus/webretail-admin/issues
 ```
 
-## Working with Webretail in Eclipse/STS
+## Working with webretail-admin in Eclipse/STS
 
 ### Pre requisites:
 The following items should be installed in your system:
@@ -56,7 +56,7 @@ If m2e is not there, just follow the install process here: http://eclipse.org/m2
 1) In the command line
 
 ```
-git clone https://github.com/roshantitus/webretail.git
+git clone https://github.com/roshantitus/webretail-admin.git
 ```
 
 2) Inside Eclipse

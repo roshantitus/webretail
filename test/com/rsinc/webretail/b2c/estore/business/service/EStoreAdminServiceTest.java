@@ -13,9 +13,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-
-
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -24,8 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.rsinc.webretail.b2c.estore.business.model.Category;
 import com.rsinc.webretail.b2c.estore.business.model.Order;
 import com.rsinc.webretail.b2c.estore.business.model.Product;
-import com.rsinc.webretail.b2c.estore.business.model.User;
-import com.rsinc.webretail.b2c.estore.common.config.AppConfig;
+import com.rsinc.webretail.b2c.estore.common.config.AdminAppConfig;
 import com.rsinc.webretail.b2c.estore.common.exception.application.RecordNotFoundException;
 import com.rsinc.webretail.b2c.estore.data.entity.enums.OrderStatus;
 
@@ -34,7 +30,7 @@ import com.rsinc.webretail.b2c.estore.data.entity.enums.OrderStatus;
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes={AppConfig.class})
+@ContextConfiguration(classes={AdminAppConfig.class})
 public class EStoreAdminServiceTest {
 	
 

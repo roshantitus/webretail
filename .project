@@ -3,6 +3,7 @@
 	<name>webretail</name>
 	<comment></comment>
 	<projects>
+		<project>webretail-commons</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

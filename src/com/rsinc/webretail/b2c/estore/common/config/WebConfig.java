@@ -28,8 +28,8 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
  */
 @EnableWebMvc
 @Configuration
-@Import(AppConfig.class)
-@ComponentScan(basePackages = { "com.rsinc.webretail.b2c.estore.web.controller", "com.rsinc.webretail.b2c.estore.common.logging" })
+@Import(AdminAppConfig.class)
+@ComponentScan(basePackages = { "com.rsinc.webretail.b2c.estore.web.controller"})
 public class WebConfig  extends WebMvcConfigurerAdapter{
 
 	//Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory 

@@ -16,8 +16,5 @@ import com.rsinc.webretail.b2c.estore.business.service.EStoreUserService;
 @Transactional
 public class EStoreUserServiceImpl extends BaseEStoreServiceImpl implements EStoreUserService {
 
-//	@Inject
-//	private UserEntityManager userEntityManager;
-	
 	
 }
