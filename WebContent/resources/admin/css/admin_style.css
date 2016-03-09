@@ -14,3 +14,11 @@
 .spacer {
 	padding-bottom: 10px;
 }
+
+.has-error{
+	font-weight: bold;
+	color: red;
+}
+.help-inline{
+	
+}

@@ -53,7 +53,8 @@
                             <li><a href="categoryList.html"><span class="fa fa-heart"></span> Preferences</a></li>                            
                             <li><a href="localeList.html"><span class="fa fa-cogs"></span> Languages</a></li>
                             <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Currency</a></li>                            
-                            <li><a href="categoryList.html"><span class="fa fa-list-ul"></span> Site Information</a></li>                            
+                            <li><a href="categoryList.html"><span class="fa fa-list-ul"></span> Site Information</a></li>           
+                            <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Error Logs</a></li>                                             
                         </ul>
                     </li>                        
                     <li class="xn-openable">
@@ -63,7 +64,6 @@
                         	<li><a href="categoryList.html"><span class="fa fa-heart"></span> Products Viewed Report</a></li> 
                         	<li><a href="categoryList.html"><span class="fa fa-heart"></span> Products Purchased List</a></li>
                             <li><a href="categoryList.html"><span class="fa fa-heart"></span> Customer Actvity</a></li>
-                            <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Error Logs</a></li>
                             <li><a href="visitorList.html"><span class="fa fa-list-ul"></span> Visitors</a></li>                            
                         </ul>
                     </li>                                
