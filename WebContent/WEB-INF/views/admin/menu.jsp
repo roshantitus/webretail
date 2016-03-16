@@ -31,7 +31,7 @@
                             <li><a href="categoryList.html"><span class="fa fa-cogs"></span> Catagories</a></li>
                             <li><a href="productList.html"><span class="fa fa-list-ul"></span> Products</a></li>
                             <li><a href="userList.html"><span class="fa fa-user"></span> Customers</a></li>                            
-                            <li><a href="categoryList.html"><span class="fa fa-list-ul"></span> Reviews</a></li>
+                            <li><a href="categoryList.html"><span class="fa fa-list-ul"></span> Reviews</a></li>  
                         </ul>
                     </li>
                     <li class="xn-openable">
@@ -49,11 +49,17 @@
                     </li>         
                 	<li class="xn-openable">
                         <a href="#"><span class="fa fa-cogs"></span> <span class="xn-text">System</span></a>                        
-                        <ul>
+                        <ul>                            
+                            <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Tasks</a></li> 
+                            <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Mailbox</a></li>   
                             <li><a href="categoryList.html"><span class="fa fa-heart"></span> Preferences</a></li>                            
                             <li><a href="localeList.html"><span class="fa fa-cogs"></span> Languages</a></li>
                             <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Currency</a></li>                            
-                            <li><a href="categoryList.html"><span class="fa fa-list-ul"></span> Site Information</a></li>           
+                            <li><a href="categoryList.html"><span class="fa fa-list-ul"></span> Site Information</a></li>       
+                            <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Tasks</a></li>  
+                            <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Mailbox</a></li>   
+                            <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Search</a></li> 
+                            <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Address Book</a></li>                                                               
                             <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Error Logs</a></li>                                             
                         </ul>
                     </li>                        
