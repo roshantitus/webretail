@@ -22,6 +22,8 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
+import com.rsinc.webretail.b2c.estore.web.interceptor.LoggingInterceptor;
+
 /**
  * @author Roshan Titus
  *
@@ -91,6 +93,6 @@ public class WebConfig  extends WebMvcConfigurerAdapter{
 		LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
 		interceptor.setParamName("locale");
 		registry.addInterceptor(interceptor);
+        registry.addInterceptor(new LoggingInterceptor());
     }    
-
 }
