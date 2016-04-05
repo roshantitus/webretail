@@ -72,7 +72,7 @@ public class ManageProductsController extends BaseController {
     }    
     
     @RequestMapping(value="/admin/editProduct.html", method=RequestMethod.POST)
-    public String editProduct(@ModelAttribute @Valid ProductBean product, BindingResult bindingResult, Model model) throws ApplicationException, SystemException {
+    public String editProduct(@ModelAttribute("product") @Valid ProductBean product, BindingResult bindingResult, Model model) throws ApplicationException, SystemException {
     	
         if (bindingResult.hasErrors()) {
             logger.info("Validation errors found");
@@ -98,7 +98,7 @@ public class ManageProductsController extends BaseController {
     }   
     
     @RequestMapping(value="/admin/addProduct.html", method=RequestMethod.POST)
-    public String addProduct(@ModelAttribute @Valid ProductBean product, BindingResult bindingResult, Model model) {
+    public String addProduct(@ModelAttribute("product") @Valid ProductBean product, BindingResult bindingResult, Model model) {
     	
         if (bindingResult.hasErrors()) {
             logger.info("Validation errors found");

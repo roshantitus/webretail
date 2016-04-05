@@ -71,10 +71,10 @@ public class ManageCategoriesController extends BaseController{
     }    
     
     @RequestMapping(value="/admin/editCategory.html", method=RequestMethod.POST)
-    public String editCategory(@ModelAttribute @Valid CategoryBean category, BindingResult bindingResult, Model model) throws ApplicationException, SystemException {
+    public String editCategory(@ModelAttribute("category") @Valid CategoryBean category, BindingResult bindingResult, Model model) throws ApplicationException, SystemException {
     	
         if (bindingResult.hasErrors()) {
-            logger.info("Validation errors found");
+            logger.info("Validation errors found " + bindingResult.getAllErrors());
             return "editCategory";
         } 
         
@@ -96,7 +96,7 @@ public class ManageCategoriesController extends BaseController{
     }   
     
     @RequestMapping(value="/admin/addCategory.html", method=RequestMethod.POST)
-    public String addCategory(@ModelAttribute @Valid CategoryBean category, BindingResult bindingResult, Model model) {
+    public String addCategory(@ModelAttribute("category") @Valid CategoryBean category, BindingResult bindingResult, Model model) {
     	
         if (bindingResult.hasErrors()) {
             logger.info("Validation errors found");
