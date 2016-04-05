@@ -7,10 +7,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.rsinc.webretail.b2c.estore.business.model.Category;
-import com.rsinc.webretail.b2c.estore.business.model.Order;
-import com.rsinc.webretail.b2c.estore.business.model.Product;
-import com.rsinc.webretail.b2c.estore.business.model.User;
+import com.rsinc.webretail.b2c.estore.business.domain.entity.CategoryBean;
+import com.rsinc.webretail.b2c.estore.business.domain.entity.OrderBean;
+import com.rsinc.webretail.b2c.estore.business.domain.entity.ProductBean;
+import com.rsinc.webretail.b2c.estore.business.domain.entity.UserBean;
 import com.rsinc.webretail.b2c.estore.common.exception.application.ApplicationException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.SystemException;
 import com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria;
@@ -45,7 +45,7 @@ public interface EStoreAdminService extends EStoreService{
 	 * @throws ApplicationException
 	 * @throws SystemException
 	 */
-	List<User> getAllUsers() throws ApplicationException, SystemException;
+	List<UserBean> getAllUsers() throws ApplicationException, SystemException;
 
 	/**
 	 * 
@@ -54,19 +54,19 @@ public interface EStoreAdminService extends EStoreService{
 	 * @throws ApplicationException
 	 * @throws SystemException
 	 */
-	List<User> getAllUsers(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;
+	List<UserBean> getAllUsers(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;
 	
 	/**
 	 * @param valueOf
 	 * @return
 	 */
-	User getUser(Long userId) throws ApplicationException, SystemException;
+	UserBean getUser(Long userId) throws ApplicationException, SystemException;
 
 	/**
 	 * @param user
 	 * @return
 	 */
-	Boolean updateUser(User user) throws ApplicationException, SystemException;
+	Boolean updateUser(UserBean user) throws ApplicationException, SystemException;
 
 	/**
 	 * @param valueOf
@@ -109,7 +109,7 @@ public interface EStoreAdminService extends EStoreService{
 	 * @throws ApplicationException
 	 * @throws SystemException
 	 */
-	List<Category> getAllCategories() throws ApplicationException, SystemException;
+	List<CategoryBean> getAllCategories() throws ApplicationException, SystemException;
 	
 	/**
 	 * 
@@ -118,25 +118,25 @@ public interface EStoreAdminService extends EStoreService{
 	 * @throws ApplicationException
 	 * @throws SystemException
 	 */
-	List<Category> getAllCategories(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;
+	List<CategoryBean> getAllCategories(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;
 	
 	/**
 	 * @param category
 	 * @return
 	 */
-	Long addCategory(Category category) throws ApplicationException, SystemException;
+	Long addCategory(CategoryBean category) throws ApplicationException, SystemException;
 
 	/**
 	 * @param valueOf
 	 * @return
 	 */
-	Category getCategory(Long categoryId) throws ApplicationException, SystemException;
+	CategoryBean getCategory(Long categoryId) throws ApplicationException, SystemException;
 
 	/**
 	 * @param category
 	 * @return
 	 */
-	Boolean updateCategory(Category category) throws ApplicationException, SystemException;
+	Boolean updateCategory(CategoryBean category) throws ApplicationException, SystemException;
 
 	/**
 	 * @param valueOf
@@ -164,7 +164,7 @@ public interface EStoreAdminService extends EStoreService{
 	/**
 	 * @return
 	 */
-	List<Product> getAllProducts() throws ApplicationException, SystemException;
+	List<ProductBean> getAllProducts() throws ApplicationException, SystemException;
 
 	/**
 	 * 
@@ -173,25 +173,25 @@ public interface EStoreAdminService extends EStoreService{
 	 * @throws ApplicationException
 	 * @throws SystemException
 	 */
-	List<Product> getAllProducts(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;
+	List<ProductBean> getAllProducts(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;
 	
 	/**
 	 * @param product
 	 * @return
 	 */
-	Long addProduct(Product product) throws ApplicationException, SystemException;
+	Long addProduct(ProductBean product) throws ApplicationException, SystemException;
 
 	/**
 	 * @param valueOf
 	 * @return
 	 */
-	Product getProduct(Long productId) throws ApplicationException, SystemException;
+	ProductBean getProduct(Long productId) throws ApplicationException, SystemException;
 
 	/**
 	 * @param product
 	 * @return
 	 */
-	Boolean updateProduct(Product product) throws ApplicationException, SystemException;
+	Boolean updateProduct(ProductBean product) throws ApplicationException, SystemException;
 
 	/**
 	 * @param valueOf
@@ -219,7 +219,7 @@ public interface EStoreAdminService extends EStoreService{
 	/**
 	 * @return
 	 */
-	List<Order> getAllOrders() throws ApplicationException, SystemException ;
+	List<OrderBean> getAllOrders() throws ApplicationException, SystemException ;
 
 	/**
 	 * 
@@ -228,27 +228,27 @@ public interface EStoreAdminService extends EStoreService{
 	 * @throws ApplicationException
 	 * @throws SystemException
 	 */
-	List<Order> getAllOrders(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException ;
+	List<OrderBean> getAllOrders(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException ;
 	
 	/**
 	 * @param order
 	 * @return
 	 */
-	Long addOrder(Order order) throws ApplicationException,
+	Long addOrder(OrderBean order) throws ApplicationException,
 	SystemException ;
 
 	/**
 	 * @param valueOf
 	 * @return
 	 */
-	Order getOrder(Long valueOf) throws ApplicationException,
+	OrderBean getOrder(Long valueOf) throws ApplicationException,
 	SystemException ;
 
 	/**
 	 * @param order
 	 * @return
 	 */
-	Boolean updateOrder(Order order) throws ApplicationException,
+	Boolean updateOrder(OrderBean order) throws ApplicationException,
 	SystemException ;
 
 	/**
@@ -264,7 +264,7 @@ public interface EStoreAdminService extends EStoreService{
 	 * @throws ApplicationException
 	 * @throws SystemException
 	 */
-	List<Order> getAllPendingOrders() throws ApplicationException,
+	List<OrderBean> getAllPendingOrders() throws ApplicationException,
 	SystemException ;
 
 	/**
@@ -273,7 +273,7 @@ public interface EStoreAdminService extends EStoreService{
 	 * @throws ApplicationException
 	 * @throws SystemException
 	 */
-	List<Order> getAllInProgressOrders() throws ApplicationException,
+	List<OrderBean> getAllInProgressOrders() throws ApplicationException,
 	SystemException ;
 	
 	/**
@@ -282,7 +282,7 @@ public interface EStoreAdminService extends EStoreService{
 	 * @throws ApplicationException
 	 * @throws SystemException
 	 */
-	List<Order> getAllShippedOrders() throws ApplicationException,
+	List<OrderBean> getAllShippedOrders() throws ApplicationException,
 	SystemException ;
 	
 	/**
@@ -291,7 +291,7 @@ public interface EStoreAdminService extends EStoreService{
 	 * @throws ApplicationException
 	 * @throws SystemException
 	 */
-	List<Order> getAllDeliveredOrders() throws ApplicationException,
+	List<OrderBean> getAllDeliveredOrders() throws ApplicationException,
 	SystemException ;
 	
 	/**
@@ -300,7 +300,7 @@ public interface EStoreAdminService extends EStoreService{
 	 * @throws ApplicationException
 	 * @throws SystemException
 	 */
-	List<Order> getAllReturnedOrders() throws ApplicationException,
+	List<OrderBean> getAllReturnedOrders() throws ApplicationException,
 	SystemException ;
 
 	/**
@@ -327,7 +327,7 @@ public interface EStoreAdminService extends EStoreService{
 	 * @throws ApplicationException 
 	 * @throws SystemException 
 	 */
-	List<Order> getAllPendingOrders(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;
+	List<OrderBean> getAllPendingOrders(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;
 
 	/**
 	 * @param resultLoadCriteria
@@ -335,7 +335,7 @@ public interface EStoreAdminService extends EStoreService{
 	 * @throws SystemException 
 	 * @throws ApplicationException 
 	 */
-	List<Order> getAllShippedOrders(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;
+	List<OrderBean> getAllShippedOrders(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;
 
 	/**
 	 * @param resultLoadCriteria
@@ -343,5 +343,5 @@ public interface EStoreAdminService extends EStoreService{
 	 * @throws SystemException 
 	 * @throws ApplicationException 
 	 */
-	List<Order> getAllReturnedOrders(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;	
+	List<OrderBean> getAllReturnedOrders(ResultLoadCriteria resultLoadCriteria) throws ApplicationException, SystemException;	
 }

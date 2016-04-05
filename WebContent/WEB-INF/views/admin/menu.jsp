@@ -28,9 +28,8 @@
                     <li class="xn-openable">
                         <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">Catalog</span></a>
                         <ul>
-                            <li><a href="categoryList.html"><span class="fa fa-cogs"></span> Catagories</a></li>
-                            <li><a href="productList.html"><span class="fa fa-list-ul"></span> Products</a></li>
-                            <li><a href="userList.html"><span class="fa fa-user"></span> Customers</a></li>                            
+                            <li><a href="categoryList.html"><span class="fa fa-cogs"></span> Categories</a></li>
+                            <li><a href="productList.html"><span class="fa fa-list-ul"></span> Products</a></li>                            
                             <li><a href="categoryList.html"><span class="fa fa-list-ul"></span> Reviews</a></li>  
                         </ul>
                     </li>
@@ -50,16 +49,21 @@
                 	<li class="xn-openable">
                         <a href="#"><span class="fa fa-cogs"></span> <span class="xn-text">System</span></a>                        
                         <ul>                            
-                            <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Tasks</a></li> 
-                            <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Mailbox</a></li>   
-                            <li><a href="categoryList.html"><span class="fa fa-heart"></span> Preferences</a></li>                            
                             <li><a href="localeList.html"><span class="fa fa-cogs"></span> Languages</a></li>
-                            <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Currency</a></li>                            
+                            <li><a href="currencyList.html"><span class="fa fa-square-o"></span> Currencies</a></li>    
+                            <li><a href="countryList.html"><span class="fa fa-cogs"></span> Countries</a></li>
+                            <li><a href="stateList.html"><span class="fa fa-square-o"></span> States</a></li> 
+                            <li><a href="cityList.html"><span class="fa fa-cogs"></span> Cities</a></li>
+                            <li><a href="userList.html"><span class="fa fa-user"></span> Users</a></li>                            
+                            <li><a href="roleList.html"><span class="fa fa-square-o"></span> Roles</a></li>      
+                            <li><a href="shippingCompanyList.html"><span class="fa fa-square-o"></span> Shipping Companies</a></li>  
+                            <li><a href="bankList.html"><span class="fa fa-square-o"></span> Banks</a></li>  
+                            <li><a href="paymentGatewayList.html"><span class="fa fa-square-o"></span> Payment Gateways</a></li>                                                                                                                                     
                             <li><a href="categoryList.html"><span class="fa fa-list-ul"></span> Site Information</a></li>       
-                            <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Tasks</a></li>  
-                            <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Mailbox</a></li>   
+                            <li><a href="taskList.html"><span class="fa fa-square-o"></span> Tasks</a></li>  
+                            <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Mailbox</a></li>                          
                             <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Search</a></li> 
-                            <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Address Book</a></li>                                                               
+                            <li><a href="contactList.html"><span class="fa fa-square-o"></span> Address Book</a></li>                                                               
                             <li><a href="categoryList.html"><span class="fa fa-square-o"></span> Error Logs</a></li>                                             
                         </ul>
                     </li>                        
@@ -69,6 +73,7 @@
                         	<li><a href="orderList.html"><span class="fa fa-heart"></span> Order History</a></li>   
                         	<li><a href="categoryList.html"><span class="fa fa-heart"></span> Products Viewed Report</a></li> 
                         	<li><a href="categoryList.html"><span class="fa fa-heart"></span> Products Purchased List</a></li>
+                        	<li><a href="categoryList.html"><span class="fa fa-heart"></span> Wishlist Products List</a></li>
                             <li><a href="categoryList.html"><span class="fa fa-heart"></span> Customer Actvity</a></li>
                             <li><a href="visitorList.html"><span class="fa fa-list-ul"></span> Visitors</a></li>                            
                         </ul>

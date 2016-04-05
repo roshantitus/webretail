@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.rsinc.webretail.b2c.estore.business.model.Product;
+import com.rsinc.webretail.b2c.estore.business.domain.entity.ProductBean;
 import com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService;
 import com.rsinc.webretail.b2c.estore.common.exception.application.ApplicationException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.SystemException;
@@ -49,7 +49,7 @@ public class ManageProductsController extends BaseController {
 	
 	//REST APIS	
     @RequestMapping(value = "/admin/product/list/all/{pageSize}/{page}", method = RequestMethod.GET)
-    public @ResponseBody List<Product> getAllProducts(@PathVariable String pageSize, @PathVariable String page) throws ApplicationException, SystemException {
+    public @ResponseBody List<ProductBean> getAllProducts(@PathVariable String pageSize, @PathVariable String page) throws ApplicationException, SystemException {
     	ResultLoadCriteria resultLoadCriteria = new ResultLoadCriteria();
     	Integer first = (Integer.valueOf(page) - 1) * Integer.valueOf(pageSize);
     	resultLoadCriteria.setFirst(first);
@@ -72,7 +72,7 @@ public class ManageProductsController extends BaseController {
     }    
     
     @RequestMapping(value="/admin/editProduct.html", method=RequestMethod.POST)
-    public String editProduct(@ModelAttribute @Valid Product product, BindingResult bindingResult, Model model) throws ApplicationException, SystemException {
+    public String editProduct(@ModelAttribute @Valid ProductBean product, BindingResult bindingResult, Model model) throws ApplicationException, SystemException {
     	
         if (bindingResult.hasErrors()) {
             logger.info("Validation errors found");
@@ -93,12 +93,12 @@ public class ManageProductsController extends BaseController {
     	
     	ModelAndView modelAndView = new ModelAndView("addProduct");
     	modelAndView.addObject("categoryList", eStoreAdminService.getAllCategories());
-    	modelAndView.addObject("product", new Product());
+    	modelAndView.addObject("product", new ProductBean());
         return modelAndView;    	
     }   
     
     @RequestMapping(value="/admin/addProduct.html", method=RequestMethod.POST)
-    public String addProduct(@ModelAttribute @Valid Product product, BindingResult bindingResult, Model model) {
+    public String addProduct(@ModelAttribute @Valid ProductBean product, BindingResult bindingResult, Model model) {
     	
         if (bindingResult.hasErrors()) {
             logger.info("Validation errors found");
@@ -118,17 +118,17 @@ public class ManageProductsController extends BaseController {
     }     
     
 //    @RequestMapping(value = "/admin/product/add", method = RequestMethod.POST)
-//    public @ResponseBody Long addProduct(Product product) throws ApplicationException, SystemException {
+//    public @ResponseBody Long addProduct(ProductBean product) throws ApplicationException, SystemException {
 //        return eStoreAdminService.addProduct(product);
 //    }	
 //    
 //    @RequestMapping(value = "/admin/product/view", method = RequestMethod.GET)
-//    public @ResponseBody Product viewProduct(String productId) throws ApplicationException, SystemException {
+//    public @ResponseBody ProductBean viewProduct(String productId) throws ApplicationException, SystemException {
 //        return eStoreAdminService.getProduct(Long.valueOf(productId));
 //    }    
 //    
 //    @RequestMapping(value = "/admin/product/edit", method = RequestMethod.POST)
-//    public @ResponseBody Boolean editProduct(Product product) throws ApplicationException, SystemException {
+//    public @ResponseBody Boolean editProduct(ProductBean product) throws ApplicationException, SystemException {
 //        return eStoreAdminService.updateProduct(product);
 //    }       
 //    

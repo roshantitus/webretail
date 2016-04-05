@@ -10,20 +10,16 @@ import org.springframework.beans.BeansException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.rsinc.webretail.b2c.estore.business.model.Category;
-import com.rsinc.webretail.b2c.estore.business.model.Order;
-import com.rsinc.webretail.b2c.estore.business.model.Product;
-import com.rsinc.webretail.b2c.estore.business.model.User;
+import com.rsinc.webretail.b2c.estore.business.domain.entity.CategoryBean;
+import com.rsinc.webretail.b2c.estore.business.domain.entity.OrderBean;
+import com.rsinc.webretail.b2c.estore.business.domain.entity.ProductBean;
+import com.rsinc.webretail.b2c.estore.business.domain.entity.UserBean;
+import com.rsinc.webretail.b2c.estore.business.domain.entity.enums.OrderStatus;
 import com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService;
 import com.rsinc.webretail.b2c.estore.common.exception.application.ApplicationException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.SystemException;
 import com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria;
 import com.rsinc.webretail.b2c.estore.common.util.BeanUtils;
-import com.rsinc.webretail.b2c.estore.data.entity.CategoryBean;
-import com.rsinc.webretail.b2c.estore.data.entity.OrderBean;
-import com.rsinc.webretail.b2c.estore.data.entity.ProductBean;
-import com.rsinc.webretail.b2c.estore.data.entity.UserBean;
-import com.rsinc.webretail.b2c.estore.data.entity.enums.OrderStatus;
 
 /**
  * @author Roshan Titus
@@ -57,42 +53,41 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllUsers(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
 	 */
 	@Override
-	public List<User> getAllUsers(ResultLoadCriteria resultLoadCriteria)
+	public List<UserBean> getAllUsers(ResultLoadCriteria resultLoadCriteria)
 			throws ApplicationException, SystemException {
 		
-		return convertToUserDTOList(getUserEntityManager().findAll(resultLoadCriteria));
+		return getUserEntityManager().findAll(resultLoadCriteria);
 	}	
 
 	/* (non-Javadoc)
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllUsers()
 	 */
 	@Override
-	public List<User> getAllUsers() throws ApplicationException, SystemException{
+	public List<UserBean> getAllUsers() throws ApplicationException, SystemException{
 
-		return convertToUserDTOList(getUserEntityManager().findAll());
+		return getUserEntityManager().findAll();
 	}
 
 	/* (non-Javadoc)
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getUser(java.lang.Long)
 	 */
 	@Override
-	public User getUser(Long userId) throws ApplicationException,
+	public UserBean getUser(Long userId) throws ApplicationException,
 			SystemException {
 		
-		return convertToDTO(getUserEntityManager().loadById(userId));
+		return getUserEntityManager().loadById(userId);
 	}
 
 	/* (non-Javadoc)
-	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#updateUser(com.rsinc.webretail.b2c.estore.business.model.User)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#updateUser(com.rsinc.webretail.b2c.estore.business.model.UserBean)
 	 */
 	@Override
-	public Boolean updateUser(User user) throws ApplicationException,
+	public Boolean updateUser(UserBean user) throws ApplicationException,
 			SystemException {
 		Boolean success = null;
 		try {
-			UserBean userBean = convertToEntity(user);
 			UserBean userBeanFromDB = getUserEntityManager().loadById(user.getUserId());
-			BeanUtils.copyProperties(userBean, userBeanFromDB);
+			BeanUtils.copyProperties(user, userBeanFromDB);
 			getUserEntityManager().update(userBeanFromDB);
 			success = true;
 		} catch (BeansException e) {
@@ -161,9 +156,9 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllCategories(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
 	 */
 	@Override
-	public List<Category> getAllCategories(ResultLoadCriteria resultLoadCriteria)
+	public List<CategoryBean> getAllCategories(ResultLoadCriteria resultLoadCriteria)
 			throws ApplicationException, SystemException {
-		return convertToCategoryDTOList(getCategoryEntityManager().findAll(resultLoadCriteria));
+		return getCategoryEntityManager().findAll(resultLoadCriteria);
 	}
 	
 	/*
@@ -171,19 +166,18 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreService#getAllCategories()
 	 */
 	@Override
-	public List<Category> getAllCategories()  throws ApplicationException, SystemException{
-		return convertToCategoryDTOList(getCategoryEntityManager().findAll());
+	public List<CategoryBean> getAllCategories()  throws ApplicationException, SystemException{
+		return getCategoryEntityManager().findAll();
 	}	
 
 	/* (non-Javadoc)
-	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#addCategory(com.rsinc.webretail.b2c.estore.business.model.Category)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#addCategory(com.rsinc.webretail.b2c.estore.business.model.CategoryBean)
 	 */
 	@Override
-	public Long addCategory(Category category) throws ApplicationException,
+	public Long addCategory(CategoryBean categoryBean) throws ApplicationException,
 			SystemException {
 		
 		try {
-			CategoryBean categoryBean = convertToEntity(category);
 			getCategoryEntityManager().create(categoryBean);
 			return categoryBean.getCategoryId();
 			
@@ -198,24 +192,23 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getCategory(java.lang.Long)
 	 */
 	@Override
-	public Category getCategory(Long categoryId) throws ApplicationException,
+	public CategoryBean getCategory(Long categoryId) throws ApplicationException,
 			SystemException {
 		
-		return convertToDTO(getCategoryEntityManager().loadById(categoryId));
+		return getCategoryEntityManager().loadById(categoryId);
 	}
 
 	/* (non-Javadoc)
-	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#updateCategory(com.rsinc.webretail.b2c.estore.business.model.Category)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#updateCategory(com.rsinc.webretail.b2c.estore.business.model.CategoryBean)
 	 */
 	@Override
-	public Boolean updateCategory(Category category)
+	public Boolean updateCategory(CategoryBean category)
 			throws ApplicationException, SystemException {
 		
 		Boolean success = null;
 		try {
-			CategoryBean categoryBean = convertToEntity(category);
 			CategoryBean categoryBeanFromDB = getCategoryEntityManager().loadById(category.getCategoryId());
-			BeanUtils.copyProperties(categoryBean, categoryBeanFromDB);
+			BeanUtils.copyProperties(category, categoryBeanFromDB);
 			getCategoryEntityManager().update(categoryBeanFromDB);
 			success = true;
 		} catch (BeansException e) {
@@ -263,29 +256,28 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllProducts(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
 	 */
 	@Override
-	public List<Product> getAllProducts(ResultLoadCriteria resultLoadCriteria)
+	public List<ProductBean> getAllProducts(ResultLoadCriteria resultLoadCriteria)
 			throws ApplicationException, SystemException {
 		
-		return convertToProductDTOList(getProductEntityManager().findAll(resultLoadCriteria));
+		return getProductEntityManager().findAll(resultLoadCriteria);
 	}	
 
 	/* (non-Javadoc)
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllProducts()
 	 */
 	@Override
-	public List<Product> getAllProducts() throws ApplicationException,
+	public List<ProductBean> getAllProducts() throws ApplicationException,
 			SystemException {
-		return convertToProductDTOList(getProductEntityManager().findAll());
+		return getProductEntityManager().findAll();
 	}
 
 	/* (non-Javadoc)
-	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#addProduct(com.rsinc.webretail.b2c.estore.business.model.Product)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#addProduct(com.rsinc.webretail.b2c.estore.business.model.ProductBean)
 	 */
 	@Override
-	public Long addProduct(Product product) throws ApplicationException,
+	public Long addProduct(ProductBean productBean) throws ApplicationException,
 			SystemException {
 		try {
-			ProductBean productBean = convertToEntity(product);
 			getProductEntityManager().create(productBean);
 			return productBean.getProductId();
 			
@@ -300,22 +292,21 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getProduct(java.lang.Long)
 	 */
 	@Override
-	public Product getProduct(Long productId) throws ApplicationException,
+	public ProductBean getProduct(Long productId) throws ApplicationException,
 			SystemException {
-		return convertToDTO(getProductEntityManager().loadById(productId));
+		return getProductEntityManager().loadById(productId);
 	}
 
 	/* (non-Javadoc)
-	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#updateProduct(com.rsinc.webretail.b2c.estore.business.model.Product)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#updateProduct(com.rsinc.webretail.b2c.estore.business.model.ProductBean)
 	 */
 	@Override
-	public Boolean updateProduct(Product product) throws ApplicationException,
+	public Boolean updateProduct(ProductBean product) throws ApplicationException,
 			SystemException {
 		Boolean success = null;
 		try {
-			ProductBean productBean = convertToEntity(product);
 			ProductBean productBeanFromDB = getProductEntityManager().loadById(product.getProductId());
-			BeanUtils.copyProperties(productBean, productBeanFromDB);
+			BeanUtils.copyProperties(product, productBeanFromDB);
 			getProductEntityManager().update(productBeanFromDB);
 			success = true;
 		} catch (BeansException e) {
@@ -362,10 +353,10 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllOrders(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
 	 */
 	@Override
-	public List<Order> getAllOrders(ResultLoadCriteria resultLoadCriteria)
+	public List<OrderBean> getAllOrders(ResultLoadCriteria resultLoadCriteria)
 			throws ApplicationException, SystemException {
 		
-		return convertToOrderDTOList(getOrderEntityManager().findAll(resultLoadCriteria));
+		return getOrderEntityManager().findAll(resultLoadCriteria);
 	}
 
 	
@@ -373,18 +364,17 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllOrders()
 	 */
 	@Override
-	public List<Order> getAllOrders()  throws ApplicationException,
+	public List<OrderBean> getAllOrders()  throws ApplicationException,
 	SystemException {
-		return convertToOrderDTOList(getOrderEntityManager().findAll());
+		return getOrderEntityManager().findAll();
 	}
 
 	/* (non-Javadoc)
-	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#addOrder(com.rsinc.webretail.b2c.estore.business.model.Order)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#addOrder(com.rsinc.webretail.b2c.estore.business.model.OrderBean)
 	 */
 	@Override
-	public Long addOrder(Order order)  throws ApplicationException, SystemException {
+	public Long addOrder(OrderBean orderBean)  throws ApplicationException, SystemException {
 		try {
-			OrderBean orderBean = convertToEntity(order);
 			getOrderEntityManager().create(orderBean);
 			return orderBean.getOrderId();
 			
@@ -398,22 +388,21 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getOrder(java.lang.Long)
 	 */
 	@Override
-	public Order getOrder(Long orderId)  throws ApplicationException,
+	public OrderBean getOrder(Long orderId)  throws ApplicationException,
 	SystemException {
-		return convertToDTO(getOrderEntityManager().loadById(orderId));
+		return getOrderEntityManager().loadById(orderId);
 	}
 
 	/* (non-Javadoc)
-	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#updateOrder(com.rsinc.webretail.b2c.estore.business.model.Order)
+	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#updateOrder(com.rsinc.webretail.b2c.estore.business.model.OrderBean)
 	 */
 	@Override
-	public Boolean updateOrder(Order order)  throws ApplicationException,
+	public Boolean updateOrder(OrderBean order)  throws ApplicationException,
 	SystemException {
 		Boolean success = null;
 		try {
-			OrderBean orderBean = convertToEntity(order);
 			OrderBean orderBeanFromDB = getOrderEntityManager().loadById(order.getOrderId());
-			BeanUtils.copyProperties(orderBean, orderBeanFromDB);
+			BeanUtils.copyProperties(order, orderBeanFromDB);
 			getOrderEntityManager().update(orderBeanFromDB);
 			success = true;
 		} catch (BeansException e) {
@@ -442,24 +431,24 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getPendingOrders()
 	 */
 	@Override
-	public List<Order> getAllPendingOrders()  throws ApplicationException,
+	public List<OrderBean> getAllPendingOrders()  throws ApplicationException,
 	SystemException {
 		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
 		orderStatusList.add(OrderStatus.NEW);
 		orderStatusList.add(OrderStatus.PAYMENT_RECIEVED);
-		return convertToOrderDTOList(getOrderEntityManager().findOrdersByStatus(orderStatusList));
+		return getOrderEntityManager().findOrdersByStatus(orderStatusList);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllPendingOrders(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
 	 */
 	@Override
-	public List<Order> getAllPendingOrders(ResultLoadCriteria resultLoadCriteria) throws ApplicationException,
+	public List<OrderBean> getAllPendingOrders(ResultLoadCriteria resultLoadCriteria) throws ApplicationException,
 	SystemException {
 		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
 		orderStatusList.add(OrderStatus.NEW);
 		orderStatusList.add(OrderStatus.PAYMENT_RECIEVED);
-		return convertToOrderDTOList(getOrderEntityManager().findOrdersByStatus(resultLoadCriteria, orderStatusList));
+		return getOrderEntityManager().findOrdersByStatus(resultLoadCriteria, orderStatusList);
 	}
 
 	
@@ -467,69 +456,69 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllInProgressOrders()
 	 */
 	@Override
-	public List<Order> getAllInProgressOrders() throws ApplicationException,
+	public List<OrderBean> getAllInProgressOrders() throws ApplicationException,
 			SystemException {
 		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
 		orderStatusList.add(OrderStatus.PROCESSING);
-		return convertToOrderDTOList(getOrderEntityManager().findOrdersByStatus(orderStatusList));
+		return getOrderEntityManager().findOrdersByStatus(orderStatusList);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllShippedOrders()
 	 */
 	@Override
-	public List<Order> getAllShippedOrders() throws ApplicationException,
+	public List<OrderBean> getAllShippedOrders() throws ApplicationException,
 			SystemException {
 		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
 		orderStatusList.add(OrderStatus.SHIPPED);
-		return convertToOrderDTOList(getOrderEntityManager().findOrdersByStatus(orderStatusList));
+		return getOrderEntityManager().findOrdersByStatus(orderStatusList);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllDeliveredOrders()
 	 */
 	@Override
-	public List<Order> getAllDeliveredOrders() throws ApplicationException,
+	public List<OrderBean> getAllDeliveredOrders() throws ApplicationException,
 			SystemException {
 		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
 		orderStatusList.add(OrderStatus.DELIVERED);
-		return convertToOrderDTOList(getOrderEntityManager().findOrdersByStatus(orderStatusList));
+		return getOrderEntityManager().findOrdersByStatus(orderStatusList);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllReturnedOrders()
 	 */
 	@Override
-	public List<Order> getAllReturnedOrders() throws ApplicationException,
+	public List<OrderBean> getAllReturnedOrders() throws ApplicationException,
 			SystemException {
 		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
 		orderStatusList.add(OrderStatus.RETURNED);
-		return convertToOrderDTOList(getOrderEntityManager().findOrdersByStatus(orderStatusList));
+		return getOrderEntityManager().findOrdersByStatus(orderStatusList);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllShippedOrders(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
 	 */
 	@Override
-	public List<Order> getAllShippedOrders(ResultLoadCriteria resultLoadCriteria) throws ApplicationException,
+	public List<OrderBean> getAllShippedOrders(ResultLoadCriteria resultLoadCriteria) throws ApplicationException,
 	SystemException {
 		
 		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
 		orderStatusList.add(OrderStatus.SHIPPED);
-		return convertToOrderDTOList(getOrderEntityManager().findOrdersByStatus(resultLoadCriteria, orderStatusList));
+		return getOrderEntityManager().findOrdersByStatus(resultLoadCriteria, orderStatusList);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService#getAllReturnedOrders(com.rsinc.webretail.b2c.estore.common.paging.ResultLoadCriteria)
 	 */
 	@Override
-	public List<Order> getAllReturnedOrders(
+	public List<OrderBean> getAllReturnedOrders(
 			ResultLoadCriteria resultLoadCriteria) throws ApplicationException,
 			SystemException {
 		
 		List<OrderStatus> orderStatusList = new ArrayList<OrderStatus>();
 		orderStatusList.add(OrderStatus.RETURNED);
-		return convertToOrderDTOList(getOrderEntityManager().findOrdersByStatus(resultLoadCriteria, orderStatusList));
+		return getOrderEntityManager().findOrdersByStatus(resultLoadCriteria, orderStatusList);
 	}
 	
 	/* (non-Javadoc)
@@ -565,10 +554,5 @@ public class EStoreAdminServiceImpl extends BaseEStoreServiceImpl implements ESt
 		orderStatusList.add(OrderStatus.PAYMENT_RECIEVED);
 		return getOrderEntityManager().findOrderCountByStatus(orderStatusList);
 	}
-
-
-
-
-
 
 }

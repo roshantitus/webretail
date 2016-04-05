@@ -19,8 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.rsinc.webretail.b2c.estore.business.model.Category;
-import com.rsinc.webretail.b2c.estore.business.model.Category;
+import com.rsinc.webretail.b2c.estore.business.domain.entity.CategoryBean;
 import com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService;
 import com.rsinc.webretail.b2c.estore.common.exception.application.ApplicationException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.SystemException;
@@ -50,7 +49,7 @@ public class ManageCategoriesController extends BaseController{
 	
 	//REST APIS
     @RequestMapping(value = "/admin/category/list/all/{pageSize}/{page}", method = RequestMethod.GET)
-    public @ResponseBody List<Category> getAllCategories(@PathVariable String pageSize, @PathVariable String page) throws ApplicationException, SystemException {
+    public @ResponseBody List<CategoryBean> getAllCategories(@PathVariable String pageSize, @PathVariable String page) throws ApplicationException, SystemException {
     	ResultLoadCriteria resultLoadCriteria = new ResultLoadCriteria();
     	Integer first = (Integer.valueOf(page) - 1) * Integer.valueOf(pageSize);
     	resultLoadCriteria.setFirst(first);
@@ -72,7 +71,7 @@ public class ManageCategoriesController extends BaseController{
     }    
     
     @RequestMapping(value="/admin/editCategory.html", method=RequestMethod.POST)
-    public String editCategory(@ModelAttribute @Valid Category category, BindingResult bindingResult, Model model) throws ApplicationException, SystemException {
+    public String editCategory(@ModelAttribute @Valid CategoryBean category, BindingResult bindingResult, Model model) throws ApplicationException, SystemException {
     	
         if (bindingResult.hasErrors()) {
             logger.info("Validation errors found");
@@ -92,12 +91,12 @@ public class ManageCategoriesController extends BaseController{
     public ModelAndView showAddCategoryForm() {
     	
     	ModelAndView modelAndView = new ModelAndView("addCategory");
-    	modelAndView.addObject("category", new Category());
+    	modelAndView.addObject("category", new CategoryBean());
         return modelAndView;    	
     }   
     
     @RequestMapping(value="/admin/addCategory.html", method=RequestMethod.POST)
-    public String addCategory(@ModelAttribute @Valid Category category, BindingResult bindingResult, Model model) {
+    public String addCategory(@ModelAttribute @Valid CategoryBean category, BindingResult bindingResult, Model model) {
     	
         if (bindingResult.hasErrors()) {
             logger.info("Validation errors found");
@@ -118,17 +117,17 @@ public class ManageCategoriesController extends BaseController{
         
 //    
 //    @RequestMapping(value = "/admin/category/add", method = RequestMethod.POST)
-//    public @ResponseBody Long addCategory(Category category) throws ApplicationException, SystemException {
+//    public @ResponseBody Long addCategory(CategoryBean category) throws ApplicationException, SystemException {
 //        return eStoreAdminService.addCategory(category);
 //    }	
 //    
 //    @RequestMapping(value = "/admin/category/view", method = RequestMethod.GET)
-//    public @ResponseBody Category viewCategory(String categoryId) throws ApplicationException, SystemException {
+//    public @ResponseBody CategoryBean viewCategory(String categoryId) throws ApplicationException, SystemException {
 //        return eStoreAdminService.getCategory(Long.valueOf(categoryId));
 //    }    
 //    
 //    @RequestMapping(value = "/admin/category/edit", method = RequestMethod.POST)
-//    public @ResponseBody Boolean editCategory(Category category) throws ApplicationException, SystemException {
+//    public @ResponseBody Boolean editCategory(CategoryBean category) throws ApplicationException, SystemException {
 //        return eStoreAdminService.updateCategory(category);
 //    }       
 //    

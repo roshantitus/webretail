@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rsinc.webretail.b2c.estore.business.model.Order;
+import com.rsinc.webretail.b2c.estore.business.domain.entity.OrderBean;
 import com.rsinc.webretail.b2c.estore.business.service.EStoreAdminService;
 import com.rsinc.webretail.b2c.estore.common.exception.application.ApplicationException;
 import com.rsinc.webretail.b2c.estore.common.exception.system.SystemException;
@@ -43,7 +43,7 @@ public class ManageOrdersController extends BaseController {
     }
     
     @RequestMapping(value = "/admin/order/list/all/{pageSize}/{page}", method = RequestMethod.GET)
-    public @ResponseBody List<Order> getAllOrders(@PathVariable String pageSize, @PathVariable String page) throws ApplicationException, SystemException {
+    public @ResponseBody List<OrderBean> getAllOrders(@PathVariable String pageSize, @PathVariable String page) throws ApplicationException, SystemException {
         return eStoreAdminService.getAllOrders(getResultLoadCriteria(pageSize, page));
     }
 
@@ -78,7 +78,7 @@ public class ManageOrdersController extends BaseController {
     }    
     
     @RequestMapping(value = "/admin/order/list/pending/{pageSize}/{page}", method = RequestMethod.GET)
-    public @ResponseBody List<Order> getAllPendingOrders(@PathVariable String pageSize, @PathVariable String page) throws ApplicationException, SystemException {
+    public @ResponseBody List<OrderBean> getAllPendingOrders(@PathVariable String pageSize, @PathVariable String page) throws ApplicationException, SystemException {
         return eStoreAdminService.getAllPendingOrders(getResultLoadCriteria(pageSize, page));
     }
     
@@ -94,7 +94,7 @@ public class ManageOrdersController extends BaseController {
     }         
     
     @RequestMapping(value = "/admin/order/list/shipped/{pageSize}/{page}", method = RequestMethod.GET)
-    public @ResponseBody List<Order> getAllShippedOrders(@PathVariable String pageSize, @PathVariable String page) throws ApplicationException, SystemException {
+    public @ResponseBody List<OrderBean> getAllShippedOrders(@PathVariable String pageSize, @PathVariable String page) throws ApplicationException, SystemException {
         return eStoreAdminService.getAllShippedOrders(getResultLoadCriteria(pageSize, page));
     }
     
@@ -110,7 +110,7 @@ public class ManageOrdersController extends BaseController {
     }     
      
     @RequestMapping(value = "/admin/order/list/returned/{pageSize}/{page}", method = RequestMethod.GET)
-    public @ResponseBody List<Order> getAllReturnedOrders(@PathVariable String pageSize, @PathVariable String page) throws ApplicationException, SystemException {
+    public @ResponseBody List<OrderBean> getAllReturnedOrders(@PathVariable String pageSize, @PathVariable String page) throws ApplicationException, SystemException {
         return eStoreAdminService.getAllReturnedOrders(getResultLoadCriteria(pageSize, page));
     }    
 
@@ -121,17 +121,17 @@ public class ManageOrdersController extends BaseController {
     
     
     @RequestMapping(value = "/admin/order/view", method = RequestMethod.GET)
-    public @ResponseBody Order viewOrder(String productId) throws ApplicationException, SystemException {
+    public @ResponseBody OrderBean viewOrder(String productId) throws ApplicationException, SystemException {
         return eStoreAdminService.getOrder(Long.valueOf(productId));
     }    
      
     @RequestMapping(value = "/admin/order/add", method = RequestMethod.POST)
-    public @ResponseBody Long addOrder(Order order) throws ApplicationException, SystemException {
+    public @ResponseBody Long addOrder(OrderBean order) throws ApplicationException, SystemException {
         return eStoreAdminService.addOrder(order);
     }	
         
     @RequestMapping(value = "/admin/order/edit", method = RequestMethod.POST)
-    public @ResponseBody Boolean editOrder(Order order) throws ApplicationException, SystemException {
+    public @ResponseBody Boolean editOrder(OrderBean order) throws ApplicationException, SystemException {
         return eStoreAdminService.updateOrder(order);
     }       
     

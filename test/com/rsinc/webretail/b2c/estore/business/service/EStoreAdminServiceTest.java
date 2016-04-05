@@ -18,12 +18,12 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.rsinc.webretail.b2c.estore.business.model.Category;
-import com.rsinc.webretail.b2c.estore.business.model.Order;
-import com.rsinc.webretail.b2c.estore.business.model.Product;
+import com.rsinc.webretail.b2c.estore.business.domain.entity.CategoryBean;
+import com.rsinc.webretail.b2c.estore.business.domain.entity.OrderBean;
+import com.rsinc.webretail.b2c.estore.business.domain.entity.ProductBean;
+import com.rsinc.webretail.b2c.estore.business.domain.entity.enums.OrderStatus;
 import com.rsinc.webretail.b2c.estore.common.config.AdminAppConfig;
 import com.rsinc.webretail.b2c.estore.common.exception.application.RecordNotFoundException;
-import com.rsinc.webretail.b2c.estore.data.entity.enums.OrderStatus;
 
 /**
  * @author Roshan Titus
@@ -43,13 +43,13 @@ public class EStoreAdminServiceTest {
 	public void testCategories()
 	{
 		try {
-			Category newCategory = getNewCategory();
+			CategoryBean newCategory = getNewCategory();
 			
 			//Add category
 			Long categoryId = eStoreAdminService.addCategory(newCategory);
 			
 			//Get category by id
-			Category categoryFromDB = eStoreAdminService.getCategory(categoryId);
+			CategoryBean categoryFromDB = eStoreAdminService.getCategory(categoryId);
 			
 			assertNotNull(categoryFromDB);
 			assertNotNull(categoryFromDB.getCategoryId());
@@ -60,15 +60,15 @@ public class EStoreAdminServiceTest {
 			assertEquals(newCategory.getCategoryDescription(), categoryFromDB.getCategoryDescription());
 			
 			//fetch all categories
-			List<Category> categoryList = eStoreAdminService.getAllCategories();
+			List<CategoryBean> categoryList = eStoreAdminService.getAllCategories();
 			assertEquals(categoryList.size(), 1);
 			
 			//Update category
-			Category categoryToUpdate = getCategoryWithChanges();
+			CategoryBean categoryToUpdate = getCategoryWithChanges();
 			categoryToUpdate.setCategoryId(categoryId);
 			assertTrue(eStoreAdminService.updateCategory(categoryToUpdate));
 			
-			Category updatedCategoryFromDB = eStoreAdminService.getCategory(categoryId);
+			CategoryBean updatedCategoryFromDB = eStoreAdminService.getCategory(categoryId);
 			
 			assertNotNull(updatedCategoryFromDB);
 			assertNotNull(updatedCategoryFromDB.getCategoryName());
@@ -76,13 +76,13 @@ public class EStoreAdminServiceTest {
 			assertNotNull(updatedCategoryFromDB.getCategoryDescription());
 			assertEquals(updatedCategoryFromDB.getCategoryDescription(), categoryToUpdate.getCategoryDescription());		
 			
-			//delete Category
+			//delete CategoryBean
 			assertTrue(eStoreAdminService.deleteCategory(categoryId));
 			
 			
 			try {
 				eStoreAdminService.getCategory(categoryId);
-				fail("Category should have been deleted");
+				fail("CategoryBean should have been deleted");
 			} catch (RecordNotFoundException e) {
 				
 			}
@@ -96,15 +96,15 @@ public class EStoreAdminServiceTest {
 		}		
 	}	
 	
-	private Category getNewCategory() {
-		Category category = new Category();
+	private CategoryBean getNewCategory() {
+		CategoryBean category = new CategoryBean();
 		category.setCategoryName("Books");
 		category.setCategoryDescription("Collection of classic and non-classic books");
 		return category;
 	}	
 	
-	private Category getCategoryWithChanges() {
-		Category category = new Category();
+	private CategoryBean getCategoryWithChanges() {
+		CategoryBean category = new CategoryBean();
 		category.setCategoryName("Science Fiction Books");
 		category.setCategoryDescription("Collection of sci-fi books");
 		return category;
@@ -115,13 +115,13 @@ public class EStoreAdminServiceTest {
 	{
 		try {			
 			
-			Product newProduct = getNewProduct(eStoreAdminService.addCategory(getNewCategory()));
+			ProductBean newProduct = getNewProduct(eStoreAdminService.addCategory(getNewCategory()));
 			
 			//Add product
 			Long productId = eStoreAdminService.addProduct(newProduct);
 			
 			//Get product by id
-			Product productFromDB = eStoreAdminService.getProduct(productId);
+			ProductBean productFromDB = eStoreAdminService.getProduct(productId);
 			
 			assertNotNull(productFromDB);
 			assertNotNull(productFromDB.getProductId());
@@ -132,16 +132,16 @@ public class EStoreAdminServiceTest {
 			assertEquals(newProduct.getProductDescription(), productFromDB.getProductDescription());
 			
 			//fetch all categories
-			List<Product> productList = eStoreAdminService.getAllProducts();
+			List<ProductBean> productList = eStoreAdminService.getAllProducts();
 			assertEquals(productList.size(), 1);
 			
 			//Update product
 			
-			Product productToUpdate = getProductWithChanges(eStoreAdminService.addCategory(getCategoryWithChanges()));
+			ProductBean productToUpdate = getProductWithChanges(eStoreAdminService.addCategory(getCategoryWithChanges()));
 			productToUpdate.setProductId(productId);
 			assertTrue(eStoreAdminService.updateProduct(productToUpdate));
 			
-			Product updatedProductFromDB = eStoreAdminService.getProduct(productId);
+			ProductBean updatedProductFromDB = eStoreAdminService.getProduct(productId);
 			
 			assertNotNull(updatedProductFromDB);
 			assertNotNull(updatedProductFromDB.getProductName());
@@ -149,13 +149,13 @@ public class EStoreAdminServiceTest {
 			assertNotNull(updatedProductFromDB.getProductDescription());
 			assertEquals(updatedProductFromDB.getProductDescription(), productToUpdate.getProductDescription());		
 			
-			//delete Product
+			//delete ProductBean
 			assertTrue(eStoreAdminService.deleteProduct(productId));
 			
 			
 			try {
 				eStoreAdminService.getProduct(productId);
-				fail("Product should have been deleted");
+				fail("ProductBean should have been deleted");
 			} catch (RecordNotFoundException e) {
 				
 			}
@@ -169,27 +169,27 @@ public class EStoreAdminServiceTest {
 		}		
 	}		
 	
-	private Product getNewProduct(Long categoryId) {
-		Product product = new Product();
+	private ProductBean getNewProduct(Long categoryId) {
+		ProductBean product = new ProductBean();
 		product.setProductName("Mojo");
 		product.setProductDescription("About finding yor mojo");
 		product.setQuantity(20);
 		product.setUnitPrice(395.75);
 		
-		Category category = new Category();
+		CategoryBean category = new CategoryBean();
 		category.setCategoryId(categoryId);
 		product.setCategory(category);
 		return product;
 	}	
 	
-	private Product getProductWithChanges(Long categoryId) {
-		Product product = new Product();
+	private ProductBean getProductWithChanges(Long categoryId) {
+		ProductBean product = new ProductBean();
 		product.setProductName("SCEA study guide");
 		product.setProductDescription("SCEA certification study guide");
 		product.setQuantity(50);
 		product.setUnitPrice(500.00);	
 		
-		Category category = new Category();
+		CategoryBean category = new CategoryBean();
 		category.setCategoryId(categoryId);
 		product.setCategory(category);		
 		return product;
@@ -199,13 +199,13 @@ public class EStoreAdminServiceTest {
 	public void testOrders()
 	{
 		try {
-			Order newOrder = getNewOrder();
+			OrderBean newOrder = getNewOrder();
 			
 			//Add order
 			Long orderId = eStoreAdminService.addOrder(newOrder);
 			
 			//Get order by id
-			Order orderFromDB = eStoreAdminService.getOrder(orderId);
+			OrderBean orderFromDB = eStoreAdminService.getOrder(orderId);
 			
 			assertNotNull(orderFromDB);
 			assertNotNull(orderFromDB.getOrderId());
@@ -216,15 +216,15 @@ public class EStoreAdminServiceTest {
 			assertTrue(orderFromDB.getOrderDate().equals(newOrder.getOrderDate()));
 			
 			//fetch all categories
-			List<Order> orderList = eStoreAdminService.getAllOrders();
+			List<OrderBean> orderList = eStoreAdminService.getAllOrders();
 			assertEquals(orderList.size(), 1);
 			
 			//Update order
-			Order orderToUpdate = getOrderWithChanges();
+			OrderBean orderToUpdate = getOrderWithChanges();
 			orderToUpdate.setOrderId(orderId);
 			assertTrue(eStoreAdminService.updateOrder(orderToUpdate));
 			
-			Order updatedOrderFromDB = eStoreAdminService.getOrder(orderId);
+			OrderBean updatedOrderFromDB = eStoreAdminService.getOrder(orderId);
 			
 			assertNotNull(updatedOrderFromDB);
 			assertNotNull(updatedOrderFromDB.getOrderStatus());
@@ -232,13 +232,13 @@ public class EStoreAdminServiceTest {
 			assertNotNull(updatedOrderFromDB.getOrderDate());
 			assertEquals(updatedOrderFromDB.getOrderDate(), orderToUpdate.getOrderDate());		
 			
-			//delete Order
+			//delete OrderBean
 			assertTrue(eStoreAdminService.deleteOrder(orderId));
 			
 			
 			try {
 				eStoreAdminService.getOrder(orderId);
-				fail("Order should have been deleted");
+				fail("OrderBean should have been deleted");
 			} catch (RecordNotFoundException e) {
 				
 			}
@@ -252,17 +252,17 @@ public class EStoreAdminServiceTest {
 		}		
 	}		
 	
-	private Order getNewOrder() {
-		Order order = new Order();
+	private OrderBean getNewOrder() {
+		OrderBean order = new OrderBean();
 		order.setOrderDate(Calendar.getInstance());
-		order.setOrderStatus(OrderStatus.NEW.toString());
+		order.setOrderStatus(OrderStatus.NEW);
 		return order;
 	}	
 	
-	private Order getOrderWithChanges() {
-		Order order = new Order();
+	private OrderBean getOrderWithChanges() {
+		OrderBean order = new OrderBean();
 		order.setOrderDate(Calendar.getInstance());
-		order.setOrderStatus(OrderStatus.PROCESSING.toString());
+		order.setOrderStatus(OrderStatus.PROCESSING);
 		return order;
 	}		
 		
