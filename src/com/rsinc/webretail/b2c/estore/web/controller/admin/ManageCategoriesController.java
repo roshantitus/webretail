@@ -66,6 +66,7 @@ public class ManageCategoriesController extends BaseController{
     public ModelAndView showEditCategoryForm(String categoryId) throws ApplicationException, SystemException {
     	
     	ModelAndView modelAndView = new ModelAndView("editCategory");
+    	modelAndView.addObject("categoryList", eStoreAdminService.getAllCategories());
     	modelAndView.addObject("category", eStoreAdminService.getCategory(Long.valueOf(categoryId)));
         return modelAndView;
     }    
@@ -88,9 +89,10 @@ public class ManageCategoriesController extends BaseController{
     }     
     
     @RequestMapping(value="/admin/addCategory.html", method=RequestMethod.GET)
-    public ModelAndView showAddCategoryForm() {
+    public ModelAndView showAddCategoryForm() throws ApplicationException, SystemException {
     	
     	ModelAndView modelAndView = new ModelAndView("addCategory");
+    	modelAndView.addObject("categoryList", eStoreAdminService.getAllCategories());
     	modelAndView.addObject("category", new CategoryBean());
         return modelAndView;    	
     }   
@@ -99,7 +101,7 @@ public class ManageCategoriesController extends BaseController{
     public String addCategory(@ModelAttribute("category") @Valid CategoryBean category, BindingResult bindingResult, Model model) {
     	
         if (bindingResult.hasErrors()) {
-            logger.info("Validation errors found");
+            logger.info("Validation errors found " + bindingResult.getAllErrors());
             return "addCategory";
         } 
         

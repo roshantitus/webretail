@@ -16,6 +16,20 @@
                 </div>
                 
                 <div class="form-group">
+                    <label class="col-md-3 col-xs-12 control-label">Parent Category</label>
+                    <div class="col-md-6 col-xs-12">                                    
+                        <form:select path="parentCategory" class="form-control select" data-style="btn-success">
+						    <c:forEach var="item" items="${categoryList}">
+						        <form:option value="${item}"><c:out value="${item.categoryName}"/></form:option>
+						    </c:forEach>                        				            
+				        </form:select>
+	                    <div class="has-error">
+	                        <form:errors path="parentCategory" class="help-inline"/>
+	                    </div>  				        
+                    </div>
+                </div> 
+                                
+                <div class="form-group">
                     <label class="col-md-3 col-xs-12 control-label">Category Name</label>
                     <div class="col-md-6 col-xs-12">                                                                                                                                                        
                         <form:input path="categoryName" type="text" class="form-control"/>      
@@ -34,6 +48,16 @@
 	                    </div>                        
                     </div>
                 </div>
+                
+                <div class="form-group">
+                    <label class="col-md-3 col-xs-12 control-label">Sort Order</label>
+                    <div class="col-md-6 col-xs-12">                                                                                                                                                        
+                        <form:input path="sortOrder" type="text" class="form-control"/>      
+	                    <div class="has-error">
+	                        <form:errors path="sortOrder" class="help-inline"/>
+	                    </div>                                                                      
+                    </div>
+                </div>                
 
             </div>
             <div class="tab-pane" id="tab-second">
